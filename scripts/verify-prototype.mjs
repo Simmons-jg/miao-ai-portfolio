@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
-const outDir = path.join(root, "docs", "design-references", "clone-lab-prototype");
+const outDir = path.join(root, "docs", "design-references", "miao-ai-portfolio-prototype");
 const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const url = process.argv[2] || "http://127.0.0.1:4180/";
 

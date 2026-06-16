@@ -1,27 +1,19 @@
 {
-  "name": "ai-website-clone-template",
-  "version": "0.3.1",
+  "name": "miao-ai-portfolio",
+  "version": "0.1.0",
   "private": true,
-  "description": "Clone any website into a clean, modern Next.js codebase using AI coding agents",
-  "author": "JCodesMore",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template.git"
-  },
-  "homepage": "https://github.com/JCodesMore/ai-website-cloner-template",
-  "bugs": {
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template/issues"
-  },
+  "description": "Bilingual scroll-driven portfolio for AI product, AIGC direction, and algorithm collaboration.",
+  "author": "Guo Jiawen",
+  "license": "UNLICENSED",
   "keywords": [
-    "claude-code",
-    "website-clone",
-    "reverse-engineering",
+    "portfolio",
+    "aigc",
+    "ai-product",
+    "creative-direction",
+    "scroll-driven",
+    "threejs",
     "nextjs",
-    "ai",
-    "template",
-    "tailwindcss",
-    "shadcn-ui"
+    "tailwindcss"
   ],
   "engines": {
     "node": ">=24"
