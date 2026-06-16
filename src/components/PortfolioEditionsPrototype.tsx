@@ -3,7 +3,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -19,53 +18,51 @@ type Chapter = {
   signal: string;
 };
 
-const productId = "019e8c7e-2bc4-7f40-892d-72a6e03debb0";
-
 const copy = {
   en: {
     brand: "Guo Jiawen / Miao",
-    role: "AI product / AIGC direction / visual systems",
+    role: "AI product / AIGC direction / visual storytelling",
     nav: ["Work", "Product", "Method", "Contact"],
     lang: "中文",
-    heroTitle: "Building systems that think, create, and evolve.",
+    heroTitle: "Hi, I am Miao. I direct AI into things you can see, click, and feel.",
     heroBody:
-      "A bilingual portfolio for AI product and AIGC roles, built to show visual taste, product judgment, and dynamic systems thinking.",
-    primary: "Enter work",
-    secondary: "Product slot",
+      "A personal site for public works, product prototypes, visual experiments, and the way I think with AI.",
+    primary: "Enter works",
+    secondary: "About Miao",
     index: "Chapters",
-    stage: "Real-time portfolio system",
-    productTitle: "Active product interface",
-    productSubtitle: "Reserved runtime slot",
-    productHint: "Future modules can mount here without flattening the portfolio into a gallery.",
-    worksTitle: "Evidence channel",
+    stage: "Interactive personal site",
+    productTitle: "AI product lab",
+    productSubtitle: "Prototype in progress",
+    productHint: "Private product identifiers stay private. This layer only shows the public idea, interaction route, and demo surface.",
+    worksTitle: "Works channel",
     worksLead:
-      "Public works move as a proof system: visual worlds, product-facing demos, interaction experiments, and generated image systems are sequenced by role fit.",
+      "Click or scroll through public works as a moving channel: visual worlds, demos, experiments, and image systems.",
     methodTitle: "Operating rhythm",
-    contactTitle: "Role argument",
+    contactTitle: "About Miao",
     contactBody:
-      "The site makes the role fit visible before the resume is opened: visual direction, product sense, AI-native workflow, and enough technical literacy to collaborate well.",
+      "I am interested in AI products that still have authorship: clearer interfaces, stronger images, better stories, and workflows that creators can actually use.",
   },
   zh: {
     brand: "郭嘉雯 / Miao喵渺淼妙",
-    role: "AI 产品 / AIGC 编导 / 视觉系统",
+    role: "AI 产品 / AIGC 编导 / 视觉叙事",
     nav: ["作品", "产品", "方法", "联系"],
     lang: "EN",
-    heroTitle: "构建会思考、创作与进化的系统。",
+    heroTitle: "我是 Miao，把 AI 变成可以被看见、点击和感受到的作品。",
     heroBody:
-      "一个面向 AI 产品与 AIGC 岗位的双语作品集，用动态视觉展示审美、产品判断和系统思维。",
+      "这是一个个人网站，放公开作品、产品原型、视觉实验，以及我如何用 AI 思考和创作。",
     primary: "进入作品",
-    secondary: "产品接口",
+    secondary: "关于 Miao",
     index: "章节",
-    stage: "实时作品集系统",
-    productTitle: "正在开发的产品接口",
-    productSubtitle: "预留运行时槽位",
-    productHint: "后续产品可以接入这里，而不是把作品集压成普通图片墙。",
-    worksTitle: "作品证据通道",
-    worksLead: "公开作品会作为证据系统移动：视觉世界、产品 Demo、交互实验和生成图像系统会按岗位能力被重新编排。",
+    stage: "互动个人网站",
+    productTitle: "AI 产品实验室",
+    productSubtitle: "原型开发中",
+    productHint: "内部产品标识不在网页展示。这里保留公开的产品想法、交互路线和 Demo 表面。",
+    worksTitle: "作品频道",
+    worksLead: "点击或滚动进入公开作品：视觉世界、产品 Demo、交互实验和生成图像系统会像频道一样移动。",
     methodTitle: "工作节奏",
-    contactTitle: "岗位论证",
+    contactTitle: "关于 Miao",
     contactBody:
-      "网站先让岗位匹配变得可见，再让简历补充事实：视觉导演、产品 sense、AI 原生工作流，以及能与技术团队协作的理解力。",
+      "我关心的是有作者感的 AI 产品：更清晰的界面、更强的图像、更好的故事，以及创作者真的能使用的工作流。",
   },
 } as const;
 
@@ -73,26 +70,26 @@ const chapters: Chapter[] = [
   {
     id: "direction",
     code: "I",
-    nav: { en: "Direction OS", zh: "编导系统" },
-    title: { en: "From creator instinct to production logic.", zh: "从创作者直觉到生产逻辑。" },
-    line: { en: "AIGC direction is a system, not a prompt.", zh: "AIGC 编导不是写提示词，而是搭系统。" },
+    nav: { en: "About", zh: "关于" },
+    title: { en: "I make AI feel directed, not accidental.", zh: "我让 AI 作品看起来像被导演过，而不是偶然生成。" },
+    line: { en: "Images, interfaces, and stories all need rhythm.", zh: "图像、界面和故事都需要节奏。" },
     body: {
-      en: "I turn briefs, references, shot logic, prompt routes, review criteria, and delivery constraints into repeatable creative operations.",
-      zh: "我把 brief、参考、镜头逻辑、提示词路线、审片标准和交付约束整理成可复用的创作流程。",
+      en: "My work sits between creative direction, AI product thinking, and visual systems. I care about what the model makes, but also why it should exist.",
+      zh: "我的工作在创意编导、AI 产品思维和视觉系统之间。我关心模型生成了什么，也关心它为什么值得存在。",
     },
-    signal: "BRIEF / SCENE / ROUTE",
+    signal: "IMAGE / PRODUCT / STORY",
   },
   {
     id: "product",
     code: "II",
-    nav: { en: "Product Slot", zh: "产品接口" },
-    title: { en: "A product surface for creative AI decisions.", zh: "承载创意 AI 决策的产品界面。" },
-    line: { en: "The current build keeps a live module open.", zh: "当前开发中的产品会在这里保留模块入口。" },
+    nav: { en: "Lab", zh: "实验室" },
+    title: { en: "AI products should feel usable before they feel clever.", zh: "AI 产品先要好用，再谈聪明。" },
+    line: { en: "The product layer is a lab for creator-facing AI tools.", zh: "产品层是面向创作者的 AI 工具实验室。" },
     body: {
-      en: `Product ${productId} is reserved for runtime logs, routing states, review queues, and future AI modules.`,
-      zh: `产品 ${productId} 会承载运行日志、路线状态、审核队列和后续 AI 模块。`,
+      en: "The current prototype is kept private while it is being shaped. The public site shows the interaction idea and how the experience should feel.",
+      zh: "当前原型在开发阶段保持私密。网站只展示公开的交互想法，以及这个体验应该呈现出的感觉。",
     },
-    signal: "STATE / ENDPOINT / QUEUE",
+    signal: "IDEA / DEMO / FLOW",
   },
   {
     id: "judgment",
@@ -110,13 +107,13 @@ const chapters: Chapter[] = [
     id: "works",
     code: "IV",
     nav: { en: "Works", zh: "作品" },
-    title: { en: "Works become a cinematic evidence wall.", zh: "作品成为电影化证据墙。" },
-    line: { en: "The archive should feel alive because the process is alive.", zh: "档案要有生命力，因为过程本身是动态的。" },
+    title: { en: "A moving channel of public works.", zh: "一个会移动的公开作品频道。" },
+    line: { en: "The archive should invite touch, not ask people to read a wall.", zh: "作品集应该引导人点击，而不是逼人读一堵墙。" },
     body: {
-      en: "The archive focuses on public visual worlds, interaction experiments, image systems, and product-facing demos that can be inspected directly.",
-      zh: "档案只聚焦可公开、可检查的视觉世界、交互实验、图像系统和产品 Demo。",
+      en: "This is where the site becomes closer to a gallery toy: hover, click, enter, and inspect the pieces directly.",
+      zh: "这里更接近一个可以玩的作品入口：悬停、点击、进入，然后直接查看作品。",
     },
-    signal: "CASE / METHOD / OUTCOME",
+    signal: "CLICK / ENTER / VIEW",
   },
   {
     id: "method",
@@ -133,14 +130,14 @@ const chapters: Chapter[] = [
   {
     id: "contact",
     code: "VI",
-    nav: { en: "Fit", zh: "匹配" },
-    title: { en: "A portfolio for the hybrid role.", zh: "为复合岗位而设计的作品集。" },
-    line: { en: "Director taste, product sense, AI-native workflow.", zh: "编导审美、产品 sense、AI 原生工作流。" },
+    nav: { en: "Contact", zh: "联系" },
+    title: { en: "A personal site first. A resume second.", zh: "先是个人网站，然后才是简历入口。" },
+    line: { en: "Taste, product sense, and AI-native practice live in the same person.", zh: "审美、产品感和 AI 原生实践，应该在同一个人身上合起来。" },
     body: {
-      en: "Recruiters should understand the role fit before they finish the page. The details can then prove it.",
-      zh: "面试官应该在读完页面前就理解岗位匹配，细节再继续证明。",
+      en: "If the page gives you a clear feeling of how I think, the resume can fill in the facts afterward.",
+      zh: "如果这个网页先让你感受到我是怎么思考的，简历再负责补充事实就够了。",
     },
-    signal: "DIRECTION / PRODUCT / SYSTEM",
+    signal: "MIAO / WORK / CONTACT",
   },
 ];
 
@@ -223,50 +220,50 @@ const productModules = [
   {
     id: "input",
     code: "01",
-    en: "Input Schema",
-    zh: "输入结构",
-    stateEn: "brief normalized",
-    stateZh: "Brief 已清洗",
-    detailEn: "Turns briefs, audiences, constraints, and reference logic into a reusable product input.",
-    detailZh: "把 brief、目标受众、限制条件和参考逻辑整理成可复用的产品输入。",
-    metricsEn: ["schema", "audience", "constraints"],
-    metricsZh: ["结构", "受众", "限制"],
+    en: "Brief to Mood",
+    zh: "Brief 到情绪",
+    stateEn: "creator intent",
+    stateZh: "创作者意图",
+    detailEn: "A product surface for turning rough ideas into visual mood, audience, and story direction.",
+    detailZh: "把粗糙想法转成视觉情绪、受众和叙事方向的产品界面。",
+    metricsEn: ["intent", "mood", "audience"],
+    metricsZh: ["意图", "情绪", "受众"],
   },
   {
     id: "route",
     code: "02",
-    en: "Creative Route",
-    zh: "创意路由",
-    stateEn: "director intent mapped",
-    stateZh: "导演意图已映射",
-    detailEn: "Splits a creative goal into shot language, style route, prompt layers, and model choice.",
-    detailZh: "把创意目标拆成镜头语言、风格路线、提示词层级和模型选择。",
-    metricsEn: ["shots", "style", "model"],
-    metricsZh: ["镜头", "风格", "模型"],
+    en: "Reference Mixer",
+    zh: "参考混合器",
+    stateEn: "style route",
+    stateZh: "风格路线",
+    detailEn: "A way to compare references, extract taste signals, and make a repeatable style route.",
+    detailZh: "比较参考、提取审美信号，并形成可复用风格路线。",
+    metricsEn: ["reference", "taste", "route"],
+    metricsZh: ["参考", "审美", "路线"],
   },
   {
     id: "review",
     code: "03",
-    en: "Output Review",
-    zh: "输出审核",
-    stateEn: "taste aligned",
-    stateZh: "审美已对齐",
-    detailEn: "Reviews visual consistency, product clarity, mood, and handoff fit before output ships.",
-    detailZh: "在交付前审核视觉一致性、产品清晰度、情绪和交接适配度。",
-    metricsEn: ["quality", "clarity", "handoff"],
-    metricsZh: ["质量", "清晰", "交接"],
+    en: "Shot Review",
+    zh: "镜头审片",
+    stateEn: "visual judgment",
+    stateZh: "视觉判断",
+    detailEn: "A review layer for composition, continuity, mood, and whether the output still feels intentional.",
+    detailZh: "用来判断构图、连续性、情绪，以及生成结果是否仍然有作者感。",
+    metricsEn: ["frame", "mood", "intent"],
+    metricsZh: ["构图", "情绪", "作者感"],
   },
   {
     id: "ship",
     code: "04",
-    en: "Delivery Slot",
-    zh: "交付接口",
-    stateEn: "module ready",
-    stateZh: "模块待接入",
-    detailEn: "Keeps API slots, queues, runtime logs, and future agent modules ready for the next product layer.",
-    detailZh: "为 API 槽位、队列、运行日志和后续 agent 模块保留接入位置。",
-    metricsEn: ["API", "queue", "logs"],
-    metricsZh: ["API", "队列", "日志"],
+    en: "Demo Room",
+    zh: "Demo 房间",
+    stateEn: "public preview",
+    stateZh: "公开预览",
+    detailEn: "A future page for playable demos, case notes, and product experiments when they are ready to show.",
+    detailZh: "后续用于放可玩的 Demo、案例笔记和成熟产品实验的页面。",
+    metricsEn: ["demo", "case", "preview"],
+    metricsZh: ["Demo", "案例", "预览"],
   },
 ];
 
@@ -277,10 +274,10 @@ const heroModules = [
     code: "02",
     en: "Product",
     zh: "产品",
-    lineEn: "AI-native product interface and runtime slot.",
-    lineZh: "AI 原生产品构想与运行时接口。",
-    metaEn: "API / queue / review",
-    metaZh: "接口 / 队列 / 审核",
+    lineEn: "Creator-facing AI product experiments.",
+    lineZh: "面向创作者的 AI 产品实验。",
+    metaEn: "mood / route / demo",
+    metaZh: "情绪 / 路线 / Demo",
   },
   {
     id: "works",
@@ -785,7 +782,7 @@ export function PortfolioEditionsPrototype() {
             <p>{c.heroBody}</p>
             <div className="hero-actions">
               <a href="#works">{c.primary}</a>
-              <a href="#product">{c.secondary}</a>
+              <a href="#direction">{c.secondary}</a>
             </div>
           </div>
           <div className="proof-strip" data-reveal>
@@ -833,34 +830,44 @@ export function PortfolioEditionsPrototype() {
         </div>
       </section>
 
-      {chapters.map((chapter, index) => (
-        <section
-          id={chapter.id}
-          className={`chapter-scene ${chapter.id === "product" ? "product-scene" : ""} ${
-            chapter.id === "works" ? "works-scene" : ""
-          }`}
-          data-chapter
-          data-scene-index={index}
-          key={chapter.id}
-        >
-          <div className="chapter-kicker" data-reveal>
-            <span>{chapter.code}</span>
-            <b>{chapter.nav[locale]}</b>
-          </div>
-          <article data-reveal>
-            <h2>{chapter.title[locale]}</h2>
-            <p className="chapter-line">{chapter.line[locale]}</p>
-            <p>{chapter.body[locale]}</p>
-          </article>
-          <ScenePanel
-            locale={locale}
-            chapter={chapter}
-            index={index}
-            activeProductModule={activeProductModule}
-            onProductModuleChange={setActiveProductModule}
-          />
-        </section>
-      ))}
+      {chapters.map((chapter, index) =>
+        chapter.id === "works" ? (
+          <section
+            id={chapter.id}
+            className="chapter-scene works-scene works-portal-scene"
+            data-chapter
+            data-scene-index={index}
+            key={chapter.id}
+          >
+            <WorkTimeChannel locale={locale} />
+          </section>
+        ) : (
+          <section
+            id={chapter.id}
+            className={`chapter-scene ${chapter.id === "product" ? "product-scene" : ""}`}
+            data-chapter
+            data-scene-index={index}
+            key={chapter.id}
+          >
+            <div className="chapter-kicker" data-reveal>
+              <span>{chapter.code}</span>
+              <b>{chapter.nav[locale]}</b>
+            </div>
+            <article data-reveal>
+              <h2>{chapter.title[locale]}</h2>
+              <p className="chapter-line">{chapter.line[locale]}</p>
+              <p>{chapter.body[locale]}</p>
+            </article>
+            <ScenePanel
+              locale={locale}
+              chapter={chapter}
+              index={index}
+              activeProductModule={activeProductModule}
+              onProductModuleChange={setActiveProductModule}
+            />
+          </section>
+        ),
+      )}
     </main>
   );
 }
@@ -907,7 +914,7 @@ function ScenePanel({
           <b>{locale === "zh" ? "正在运行" : "running"}</b>
         </div>
         <strong>{copy[locale].productTitle}</strong>
-        <code>{productId}</code>
+        <code>{locale === "zh" ? "私密原型 / 后续公开 Demo" : "private prototype / public demo later"}</code>
 
         <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
           {productModules.map((module, moduleIndex) => (
@@ -968,48 +975,7 @@ function ScenePanel({
   }
 
   if (chapter.id === "works") {
-    return (
-      <div className="works-panel" data-evidence-channel data-reveal>
-        <div className="works-panel-head">
-          <span>{copy[locale].worksTitle}</span>
-          <p>{copy[locale].worksLead}</p>
-        </div>
-        <div className="evidence-track" data-evidence-track>
-        {works.map((work) => (
-          <a
-            href={work.image}
-            className="evidence-card"
-            data-evidence-card
-            key={work.id}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={locale === "zh" ? work.zh : work.en}
-          >
-            <figure className="evidence-media">
-              <Image
-                src={work.image}
-                alt={locale === "zh" ? work.zh : work.en}
-                fill
-                sizes="(max-width: 820px) 92vw, 42vw"
-                priority={work.id === "01"}
-              />
-              <figcaption>{locale === "zh" ? work.roleZh : work.roleEn}</figcaption>
-            </figure>
-            <div className="evidence-copy">
-              <i>{work.id}</i>
-              <strong>{locale === "zh" ? work.zh : work.en}</strong>
-              <small>{locale === "zh" ? work.detailZh : work.detailEn}</small>
-              <span>
-                {(locale === "zh" ? work.tagsZh : work.tagsEn).map((tag) => (
-                  <b key={tag}>{tag}</b>
-                ))}
-              </span>
-            </div>
-          </a>
-        ))}
-        </div>
-      </div>
-    );
+    return <WorkTimeChannel locale={locale} />;
   }
 
   if (chapter.id === "method") {
@@ -1053,6 +1019,306 @@ function ScenePanel({
         <i />
         <i />
         <i />
+      </div>
+    </div>
+  );
+}
+
+function WorkTimeChannel({ locale }: { locale: Locale }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const channelControlRef = useRef<null | ((index: number) => void)>(null);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+  const activeWork = works[activeWorkIndex] ?? works[0];
+  const tags = locale === "zh" ? activeWork.tagsZh : activeWork.tagsEn;
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const canvas = canvasRef.current;
+    if (!root || !canvas) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x050604, 0.075);
+
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
+    camera.position.set(0, 0.15, 8.2);
+
+    const tunnel = new THREE.Group();
+    scene.add(tunnel);
+
+    const textureLoader = new THREE.TextureLoader();
+    const plateGeometry = new THREE.PlaneGeometry(3.05, 4.12, 12, 12);
+    const frameGeometry = new THREE.PlaneGeometry(3.32, 4.42, 1, 1);
+    const railGeometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-3.8, -2.5, -1.2),
+      new THREE.Vector3(-2.2, -1.7, -4.2),
+      new THREE.Vector3(-0.2, -0.7, -7.3),
+      new THREE.Vector3(2.6, 0.3, -10.8),
+      new THREE.Vector3(4.1, 1.1, -13.5),
+    ]);
+    const railMaterial = new THREE.LineBasicMaterial({
+      color: 0xb7ff25,
+      transparent: true,
+      opacity: 0.24,
+    });
+    const rail = new THREE.Line(railGeometry, railMaterial);
+    scene.add(rail);
+
+    const nodes = works.map((work, index) => {
+      const group = new THREE.Group();
+      group.userData.phase = index * 1.21;
+
+      const frameMaterial = new THREE.MeshBasicMaterial({
+        color: index % 2 === 0 ? 0xb7ff25 : 0xf1dfbb,
+        transparent: true,
+        opacity: 0.18,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
+      const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+      frame.position.z = -0.04;
+      group.add(frame);
+
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x2a2c23,
+        transparent: true,
+        opacity: 0.7,
+        side: THREE.DoubleSide,
+      });
+      const plate = new THREE.Mesh(plateGeometry, material);
+      group.add(plate);
+
+      textureLoader.load(
+        work.image,
+        (texture) => {
+          texture.colorSpace = THREE.SRGBColorSpace;
+          texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+          material.color.set(0xffffff);
+          material.map = texture;
+          material.needsUpdate = true;
+          root.classList.add("channel-ready");
+        },
+        undefined,
+        () => {
+          material.color.set(0x222418);
+          material.needsUpdate = true;
+        },
+      );
+
+      tunnel.add(group);
+      return { frameMaterial, group, material };
+    });
+
+    const motion = {
+      progress: 0,
+      target: 0,
+      pointerX: 0,
+      pointerY: 0,
+      smoothX: 0,
+      smoothY: 0,
+    };
+    let activeRef = 0;
+    let animationFrame = 0;
+
+    const setActive = (index: number) => {
+      if (activeRef === index) return;
+      activeRef = index;
+      setActiveWorkIndex(index);
+    };
+
+    channelControlRef.current = (index: number) => {
+      const next = THREE.MathUtils.clamp(index, 0, works.length - 1);
+      motion.target = works.length > 1 ? next / (works.length - 1) : 0;
+      setActive(next);
+    };
+
+    const resize = () => {
+      const box = root.querySelector<HTMLElement>(".time-channel-stage");
+      const width = Math.max(320, box?.clientWidth ?? root.clientWidth);
+      const height = Math.max(420, box?.clientHeight ?? 560);
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      const rect = root.getBoundingClientRect();
+      motion.pointerX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      motion.pointerY = -(((event.clientY - rect.top) / rect.height - 0.5) * 2);
+    };
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: root,
+      start: "top 72%",
+      end: "bottom 28%",
+      scrub: reduceMotion ? false : 0.7,
+      onUpdate: (self) => {
+        motion.target = self.progress;
+        setActive(Math.round(self.progress * (works.length - 1)));
+      },
+    });
+
+    const clock = new THREE.Clock();
+    const render = () => {
+      const delta = Math.min(clock.getDelta(), 0.05);
+      const elapsed = clock.elapsedTime;
+      const targetEase = reduceMotion ? 0.22 : 0.08;
+      motion.progress = THREE.MathUtils.lerp(motion.progress, motion.target, targetEase);
+      motion.smoothX = THREE.MathUtils.lerp(motion.smoothX, motion.pointerX, delta * 2.2);
+      motion.smoothY = THREE.MathUtils.lerp(motion.smoothY, motion.pointerY, delta * 2.2);
+
+      const travel = motion.progress * (works.length - 1);
+      const cameraZ = 8.2 + Math.sin(elapsed * 0.32) * 0.1;
+      camera.position.set(motion.smoothX * 0.42, 0.18 + motion.smoothY * 0.18, cameraZ);
+      camera.lookAt(motion.smoothX * 0.18, motion.smoothY * 0.08, -4.2);
+
+      nodes.forEach((node, index) => {
+        const rel = index - travel;
+        const depth = Math.abs(rel);
+        const focus = THREE.MathUtils.clamp(1 - depth * 0.52, 0, 1);
+        const phase = node.group.userData.phase as number;
+
+        node.group.position.set(
+          rel * 1.65 + Math.sin(index * 1.4) * 0.24,
+          Math.sin(index * 0.82 + elapsed * 0.16) * 0.34 - depth * 0.05,
+          -0.82 - depth * 2.45 - Math.max(0, rel) * 0.35,
+        );
+        node.group.rotation.set(
+          motion.smoothY * 0.055 + Math.sin(elapsed * 0.42 + phase) * 0.018,
+          -rel * 0.16 + motion.smoothX * 0.075,
+          Math.sin(elapsed * 0.25 + phase) * 0.016,
+        );
+        const scale = 0.7 + focus * 0.34;
+        node.group.scale.setScalar(scale);
+        node.material.opacity = 0.26 + focus * 0.74;
+        node.frameMaterial.opacity = 0.08 + focus * 0.48;
+      });
+
+      rail.rotation.y = -0.08 + motion.smoothX * 0.04;
+      rail.rotation.x = motion.smoothY * 0.02;
+      railMaterial.opacity = 0.15 + Math.sin(elapsed * 0.7) * 0.035;
+
+      renderer.render(scene, camera);
+      animationFrame = window.requestAnimationFrame(render);
+    };
+
+    resize();
+    root.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("resize", resize);
+    render();
+
+    return () => {
+      channelControlRef.current = null;
+      scrollTrigger.kill();
+      window.cancelAnimationFrame(animationFrame);
+      root.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("resize", resize);
+      plateGeometry.dispose();
+      frameGeometry.dispose();
+      railGeometry.dispose();
+      railMaterial.dispose();
+      nodes.forEach((node) => {
+        node.material.map?.dispose();
+        node.material.dispose();
+        node.frameMaterial.dispose();
+      });
+      renderer.dispose();
+    };
+  }, []);
+
+  const focusWork = (index: number) => {
+    channelControlRef.current?.(index);
+    setActiveWorkIndex(index);
+  };
+
+  const enterWork = (index: number) => {
+    focusWork(index);
+    rootRef.current?.querySelector(".time-channel-stage")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  return (
+    <div className="works-panel time-channel-panel" ref={rootRef} data-reveal>
+      <div className="work-portal-entry">
+        <strong aria-hidden="true">WORKS</strong>
+        <div className="work-card-fan" aria-label={locale === "zh" ? "精选作品入口" : "Selected work entry"}>
+          {works.slice(0, 5).map((work, index) => (
+            <button
+              type="button"
+              className={index === activeWorkIndex ? "active" : ""}
+              style={{ backgroundImage: `url(${work.image})` }}
+              key={work.id}
+              onClick={() => enterWork(index)}
+              onMouseEnter={() => focusWork(index)}
+            >
+              <span>{work.id}</span>
+              <b>{locale === "zh" ? work.zh : work.en}</b>
+            </button>
+          ))}
+        </div>
+        <div className="work-portal-copy">
+          <p>{locale === "zh" ? "进入 Miao 的公开作品频道" : "Enter Miao's public work channel"}</p>
+          <small>{locale === "zh" ? "视觉世界 / 产品 Demo / 交互实验" : "visual worlds / product demos / interaction experiments"}</small>
+          <button type="button" onClick={() => enterWork(activeWorkIndex)}>
+            {locale === "zh" ? "打开频道" : "Open channel"}
+          </button>
+        </div>
+      </div>
+
+      <div className="time-channel-body">
+        <div className="time-channel-copy" aria-live="polite">
+          <i>{activeWork.id}</i>
+          <strong>{locale === "zh" ? activeWork.zh : activeWork.en}</strong>
+          <small>{locale === "zh" ? activeWork.roleZh : activeWork.roleEn}</small>
+          <p>{locale === "zh" ? activeWork.detailZh : activeWork.detailEn}</p>
+          <span>
+            {tags.map((tag) => (
+              <b key={tag}>{tag}</b>
+            ))}
+          </span>
+          <a href={activeWork.image} target="_blank" rel="noreferrer">
+            {locale === "zh" ? "打开原图" : "Open source image"}
+          </a>
+        </div>
+
+        <div className="time-channel-stage" aria-label={locale === "zh" ? "3D 作品时间通道" : "3D work time channel"}>
+          <canvas ref={canvasRef} className="time-channel-canvas" />
+          <div className="time-channel-hud" aria-hidden="true">
+            <span>THREE.JS / SCROLL DEPTH</span>
+            <b>{String(activeWorkIndex + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")}</b>
+          </div>
+          <div className="time-channel-depth" aria-hidden="true">
+            {works.map((work, index) => (
+              <i key={work.id} className={index === activeWorkIndex ? "active" : ""} />
+            ))}
+          </div>
+        </div>
+
+        <div className="time-channel-index" aria-label={locale === "zh" ? "选择作品" : "Select work"}>
+          {works.map((work, index) => (
+            <button
+              type="button"
+              className={index === activeWorkIndex ? "active" : ""}
+              key={work.id}
+              onClick={() => focusWork(index)}
+              onMouseEnter={() => focusWork(index)}
+            >
+              <span>{work.id}</span>
+              <strong>{locale === "zh" ? work.zh : work.en}</strong>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
