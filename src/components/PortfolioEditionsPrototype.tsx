@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -36,8 +37,9 @@ const copy = {
     productTitle: "Active product interface",
     productSubtitle: "Reserved runtime slot",
     productHint: "Future modules can mount here without flattening the portfolio into a gallery.",
-    worksTitle: "Evidence wall",
-    worksLead: "Films, AI product demos, commercial AIGC visuals, and creator campaigns are framed as evidence trails rather than decorative thumbnails.",
+    worksTitle: "Evidence channel",
+    worksLead:
+      "Original works move as a proof system: film pipeline, product storytelling, creator campaigns, and generated worlds are sequenced by role fit.",
     methodTitle: "Operating rhythm",
     contactTitle: "Role argument",
     contactBody:
@@ -58,8 +60,8 @@ const copy = {
     productTitle: "正在开发的产品接口",
     productSubtitle: "预留运行时槽位",
     productHint: "后续产品可以接入这里，而不是把作品集压成普通图片墙。",
-    worksTitle: "作品证据墙",
-    worksLead: "影像、产品 Demo、商业 AIGC 视觉和内容商单会被组织成证据链，而不是装饰性的图片墙。",
+    worksTitle: "作品证据通道",
+    worksLead: "原始作品会作为证据系统移动：影像管线、产品叙事、内容商单和生成世界会按岗位能力被重新编排。",
     methodTitle: "工作节奏",
     contactTitle: "岗位论证",
     contactBody:
@@ -147,37 +149,128 @@ const works = [
     id: "01",
     en: "Feature Film AIGC Pipeline",
     zh: "院线电影 AIGC 管线",
+    roleEn: "AI director / pipeline reviewer",
+    roleZh: "AI 编导 / 管线审片",
     detailEn: "AI rendering, shot compositing, scene consistency, and delivery review.",
     detailZh: "AI 渲染、镜头合成、场景一致性和交付审核。",
     image: "/portfolio-assets/work-05.png",
+    tagsEn: ["film", "scene logic", "delivery"],
+    tagsZh: ["影像", "场景逻辑", "交付"],
   },
   {
     id: "02",
     en: "Concert Visual Delivery",
     zh: "演唱会 AIGC 视觉",
+    roleEn: "prompt engineering / visual QC",
+    roleZh: "提示词工程 / 视觉质检",
     detailEn: "Prompt engineering, generation, quality control, and stage-ready output.",
     detailZh: "提示词工程、AI 生成、质量控制和舞台交付。",
     image: "/portfolio-assets/work-03.jpg",
+    tagsEn: ["stage", "generation", "QC"],
+    tagsZh: ["舞台", "生成", "质检"],
   },
   {
     id: "03",
     en: "AI Product Campaigns",
     zh: "AI 产品创意商单",
+    roleEn: "product storytelling / demo design",
+    roleZh: "产品叙事 / Demo 设计",
     detailEn: "WorkBuddy, Tabbit, creator scripts, product demos, and audience hooks.",
     detailZh: "WorkBuddy、Tabbit、创意脚本、产品 Demo 和传播钩子。",
     image: "/portfolio-assets/work-01.png",
+    tagsEn: ["agent", "browser", "content"],
+    tagsZh: ["Agent", "浏览器", "内容"],
   },
   {
     id: "04",
+    en: "Character System Tests",
+    zh: "人物系统测试",
+    roleEn: "style continuity / character review",
+    roleZh: "风格延续 / 人物审片",
+    detailEn: "Character consistency, costume logic, mood, and image-system control.",
+    detailZh: "人物一致性、服装逻辑、情绪和图像系统控制。",
+    image: "/portfolio-assets/work-02.png",
+    tagsEn: ["character", "style", "control"],
+    tagsZh: ["人物", "风格", "控制"],
+  },
+  {
+    id: "05",
     en: "Original AI Worlds",
     zh: "原创 AI 世界观",
+    roleEn: "worldbuilding / visual direction",
+    roleZh: "世界观 / 视觉导演",
     detailEn: "Character systems, surreal scenes, horror texture, and cinematic mood boards.",
     detailZh: "人物系统、超现实场景、恐怖质感和电影化 moodboard。",
     image: "/portfolio-assets/work-04.png",
+    tagsEn: ["world", "mood", "cinema"],
+    tagsZh: ["世界", "情绪", "电影感"],
+  },
+  {
+    id: "06",
+    en: "Horror Texture Studies",
+    zh: "恐怖质感实验",
+    roleEn: "genre control / texture evaluation",
+    roleZh: "类型控制 / 质感评估",
+    detailEn: "Atmosphere, material texture, tension, and model-output boundary testing.",
+    detailZh: "氛围、材质、张力和模型输出边界测试。",
+    image: "/portfolio-assets/work-06.png",
+    tagsEn: ["genre", "texture", "boundary"],
+    tagsZh: ["类型", "质感", "边界"],
   },
 ];
 
-const method = ["Observe", "Script", "Prototype", "Evaluate", "Ship"];
+const method = ["Observe", "Script", "Generate", "Evaluate", "Ship"];
+
+const productModules = [
+  {
+    id: "input",
+    code: "01",
+    en: "Input Schema",
+    zh: "输入结构",
+    stateEn: "brief normalized",
+    stateZh: "Brief 已清洗",
+    detailEn: "Turns briefs, audiences, constraints, and reference logic into a reusable product input.",
+    detailZh: "把 brief、目标受众、限制条件和参考逻辑整理成可复用的产品输入。",
+    metricsEn: ["schema", "audience", "constraints"],
+    metricsZh: ["结构", "受众", "限制"],
+  },
+  {
+    id: "route",
+    code: "02",
+    en: "Creative Route",
+    zh: "创意路由",
+    stateEn: "director intent mapped",
+    stateZh: "导演意图已映射",
+    detailEn: "Splits a creative goal into shot language, style route, prompt layers, and model choice.",
+    detailZh: "把创意目标拆成镜头语言、风格路线、提示词层级和模型选择。",
+    metricsEn: ["shots", "style", "model"],
+    metricsZh: ["镜头", "风格", "模型"],
+  },
+  {
+    id: "review",
+    code: "03",
+    en: "Model Review",
+    zh: "模型评估",
+    stateEn: "taste scored",
+    stateZh: "审美评分中",
+    detailEn: "Reviews consistency, narrative integrity, latency, cost, and controllability before output ships.",
+    detailZh: "在交付前审核一致性、叙事完整度、延迟、成本和可控性。",
+    metricsEn: ["quality", "cost", "control"],
+    metricsZh: ["质量", "成本", "控制"],
+  },
+  {
+    id: "ship",
+    code: "04",
+    en: "Delivery Slot",
+    zh: "交付接口",
+    stateEn: "module ready",
+    stateZh: "模块待接入",
+    detailEn: "Keeps API slots, queues, runtime logs, and future agent modules ready for the next product layer.",
+    detailZh: "为 API 槽位、队列、运行日志和后续 agent 模块保留接入位置。",
+    metricsEn: ["API", "queue", "logs"],
+    metricsZh: ["API", "队列", "日志"],
+  },
+];
 
 const proofPoints = [
   { en: "25+ AI shorts", zh: "25+ 部 AI 短剧" },
@@ -216,6 +309,7 @@ const socialLinks = [
 export function PortfolioEditionsPrototype() {
   const [locale, setLocale] = useState<Locale>("zh");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeProductModule, setActiveProductModule] = useState(0);
   const rootRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -247,6 +341,8 @@ export function PortfolioEditionsPrototype() {
       gsap.ticker.add(lenisRaf);
       gsap.ticker.lagSmoothing(0);
     }
+
+    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 900);
 
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>("[data-chapter]");
@@ -293,9 +389,56 @@ export function PortfolioEditionsPrototype() {
           scrub: 0.8,
         },
       });
+
+      if (!reduceMotion) {
+        const channels = gsap.utils.toArray<HTMLElement>("[data-evidence-channel]");
+
+        channels.forEach((channel) => {
+          if (window.matchMedia("(max-width: 820px)").matches) return;
+
+          const track = channel.querySelector<HTMLElement>("[data-evidence-track]");
+          if (!track) return;
+
+          const getDistance = () => Math.max(0, track.scrollWidth - channel.clientWidth);
+
+          gsap.to(track, {
+            x: () => -getDistance(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: channel,
+              start: "top top",
+              end: () => `+=${getDistance() + window.innerHeight * 0.42}`,
+              pin: true,
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          gsap.utils.toArray<HTMLElement>("[data-evidence-card]", channel).forEach((card, cardIndex) => {
+            gsap.fromTo(
+              card,
+              { y: cardIndex % 2 === 0 ? 34 : 82, rotateY: cardIndex % 2 === 0 ? -7 : 7, autoAlpha: 0.54 },
+              {
+                y: 0,
+                rotateY: 0,
+                autoAlpha: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: channel,
+                  start: "top top",
+                  end: () => `+=${getDistance() + window.innerHeight * 0.42}`,
+                  scrub: 1,
+                },
+              },
+            );
+          });
+        });
+      }
     }, rootRef);
 
     return () => {
+      window.clearTimeout(refreshTimer);
       ctx.revert();
       if (lenis) {
         gsap.ticker.remove(lenisRaf);
@@ -461,6 +604,19 @@ export function PortfolioEditionsPrototype() {
     rootRef.current?.style.setProperty("--scene-index", String(activeIndex));
   }, [activeIndex]);
 
+  useEffect(() => {
+    if (activeChapter.id !== "product") return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      setActiveProductModule((current) => (current + 1) % productModules.length);
+    }, 2600);
+
+    return () => window.clearInterval(timer);
+  }, [activeChapter.id]);
+
   const progress = useMemo(() => `${((activeIndex + 1) / chapters.length) * 100}%`, [activeIndex]);
 
   return (
@@ -538,7 +694,15 @@ export function PortfolioEditionsPrototype() {
       </section>
 
       {chapters.map((chapter, index) => (
-        <section id={chapter.id} className="chapter-scene" data-chapter data-scene-index={index} key={chapter.id}>
+        <section
+          id={chapter.id}
+          className={`chapter-scene ${chapter.id === "product" ? "product-scene" : ""} ${
+            chapter.id === "works" ? "works-scene" : ""
+          }`}
+          data-chapter
+          data-scene-index={index}
+          key={chapter.id}
+        >
           <div className="chapter-kicker" data-reveal>
             <span>{chapter.code}</span>
             <b>{chapter.nav[locale]}</b>
@@ -548,24 +712,75 @@ export function PortfolioEditionsPrototype() {
             <p className="chapter-line">{chapter.line[locale]}</p>
             <p>{chapter.body[locale]}</p>
           </article>
-          <ScenePanel locale={locale} chapter={chapter} index={index} />
+          <ScenePanel
+            locale={locale}
+            chapter={chapter}
+            index={index}
+            activeProductModule={activeProductModule}
+            onProductModuleChange={setActiveProductModule}
+          />
         </section>
       ))}
     </main>
   );
 }
 
-function ScenePanel({ locale, chapter, index }: { locale: Locale; chapter: Chapter; index: number }) {
+function ScenePanel({
+  locale,
+  chapter,
+  index,
+  activeProductModule,
+  onProductModuleChange,
+}: {
+  locale: Locale;
+  chapter: Chapter;
+  index: number;
+  activeProductModule: number;
+  onProductModuleChange: (index: number) => void;
+}) {
   if (chapter.id === "product") {
+    const activeModule = productModules[activeProductModule] ?? productModules[0];
+    const activeMetrics = locale === "zh" ? activeModule.metricsZh : activeModule.metricsEn;
+
     return (
-      <div className="scene-panel product-panel" data-reveal>
-        <span>{copy[locale].productSubtitle}</span>
+      <div className="scene-panel product-panel product-console" data-reveal>
+        <div className="product-console-head">
+          <span>{copy[locale].productSubtitle}</span>
+          <b>{locale === "zh" ? "正在运行" : "running"}</b>
+        </div>
         <strong>{copy[locale].productTitle}</strong>
         <code>{productId}</code>
-        <div className="port-grid">
-          {["Input schema", "Route planner", "Review queue", "API slot"].map((item) => (
-            <b key={item}>{locale === "zh" ? translatePort(item) : item}</b>
+
+        <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
+          {productModules.map((module, moduleIndex) => (
+            <button
+              type="button"
+              className={moduleIndex === activeProductModule ? "active" : ""}
+              key={module.id}
+              role="tab"
+              aria-selected={moduleIndex === activeProductModule}
+              onClick={() => onProductModuleChange(moduleIndex)}
+              onMouseEnter={() => onProductModuleChange(moduleIndex)}
+            >
+              <span>{module.code}</span>
+              <strong>{locale === "zh" ? module.zh : module.en}</strong>
+              <small>{locale === "zh" ? module.stateZh : module.stateEn}</small>
+            </button>
           ))}
+        </div>
+
+        <div className="product-runtime" role="tabpanel">
+          <span>{locale === "zh" ? activeModule.zh : activeModule.en}</span>
+          <p>{locale === "zh" ? activeModule.detailZh : activeModule.detailEn}</p>
+          <div>
+            {activeMetrics.map((metric) => (
+              <b key={metric}>{metric}</b>
+            ))}
+          </div>
+        </div>
+
+        <div className="product-livebar" aria-hidden="true">
+          <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
         </div>
         <p>{copy[locale].productHint}</p>
       </div>
@@ -574,19 +789,45 @@ function ScenePanel({ locale, chapter, index }: { locale: Locale; chapter: Chapt
 
   if (chapter.id === "works") {
     return (
-      <div className="scene-panel works-panel" data-reveal>
-        <span>{copy[locale].worksTitle}</span>
-        <p>{copy[locale].worksLead}</p>
+      <div className="works-panel" data-evidence-channel data-reveal>
+        <div className="works-panel-head">
+          <span>{copy[locale].worksTitle}</span>
+          <p>{copy[locale].worksLead}</p>
+        </div>
+        <div className="evidence-track" data-evidence-track>
         {works.map((work) => (
-          <a href="#contact" className="work-entry" key={work.id}>
-            <img src={work.image} alt="" loading="lazy" />
-            <i>{work.id}</i>
-            <span>
+          <a
+            href={work.image}
+            className="evidence-card"
+            data-evidence-card
+            key={work.id}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={locale === "zh" ? work.zh : work.en}
+          >
+            <figure className="evidence-media">
+              <Image
+                src={work.image}
+                alt={locale === "zh" ? work.zh : work.en}
+                fill
+                sizes="(max-width: 820px) 92vw, 42vw"
+                priority={work.id === "01"}
+              />
+              <figcaption>{locale === "zh" ? work.roleZh : work.roleEn}</figcaption>
+            </figure>
+            <div className="evidence-copy">
+              <i>{work.id}</i>
               <strong>{locale === "zh" ? work.zh : work.en}</strong>
               <small>{locale === "zh" ? work.detailZh : work.detailEn}</small>
-            </span>
+              <span>
+                {(locale === "zh" ? work.tagsZh : work.tagsEn).map((tag) => (
+                  <b key={tag}>{tag}</b>
+                ))}
+              </span>
+            </div>
           </a>
         ))}
+        </div>
       </div>
     );
   }
@@ -644,21 +885,11 @@ function SocialDock() {
   );
 }
 
-function translatePort(value: string) {
-  const map: Record<string, string> = {
-    "Input schema": "输入结构",
-    "Route planner": "路线规划",
-    "Review queue": "审核队列",
-    "API slot": "API 槽位",
-  };
-  return map[value] ?? value;
-}
-
 function translateMethod(value: string) {
   const map: Record<string, string> = {
     Observe: "观察",
     Script: "编剧",
-    Prototype: "原型",
+    Generate: "生成",
     Evaluate: "评估",
     Ship: "交付",
   };
