@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Direction Portfolio",
-  description: "A bilingual scroll-driven portfolio for AI direction, AI product systems, and algorithm collaboration.",
+  title: "Guo Jiawen / Miao Portfolio",
+  description: "A bilingual scroll-driven portfolio for AI product, AIGC direction, visual systems, and public creative work.",
 };
 
 export default function RootLayout({

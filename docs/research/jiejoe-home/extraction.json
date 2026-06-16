@@ -1,0 +1,2422 @@
+{
+  "desktop": {
+    "title": "HOME - JIEJOE | 视觉设计者",
+    "url": "https://www.jiejoe.com/home",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "scrollHeight": 11519,
+    "text": "LOADING CONTACT BE WILD! CREATIVE! AND COOL! - SCROLL CAREFULLY, IT'S SMOOTH - 小 · 心 · 地 · 滑 ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :) PORTRAIT PORTRAIT PORTRAIT PORTRAIT WHAT SKILLS DO I HAVE I'M A GRAPHIC DESIGNER 爱做一些奇奇怪怪的设计 01 I'M A VIDEO EDITOR 爱剪一些莫名其妙的视频 02 I'M A UX DESIGNER 爱做一些不拘一格的交互 03 FULL OF CREATIVITY ABLE TO IMAGINE READY TO CREATE VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST 视 觉 至 上 P O R T F O L I O JIEJOE的剪辑和设计作品 JIEJOE'S EDITING AND DESIGN WORKS VIDEOS VIDEOS HOLD 01 Nolan's Rhapsody + 诺兰狂想曲 + 2023.10 02 In Nolan We Ttrust + 诺兰电影混剪 + 2023.8 03 Bleach Bankai Mashup + 死神千年血战卍解宣传片 + 2023.7 04 Memento Trailer + 记忆碎片倒叙预告 + 2023.2 05 The Sci-Fi Chowder + 科幻片多元混剪 + 2023.1 06 Tenet Trailer + 信条宣传片 + 2022.12 PHOTOS GET MORE PHOTOS OF JIEJOE 2019 - 2024 CONTACT ME Emailjie_joe@qq.com WeChatJIEJOE-Visual WhatsApp19102850697 HOME VIDEOS PHOTOS CONTACT",
+    "sections": [
+      {
+        "selector": "#home",
+        "element": {
+          "tag": "div",
+          "id": "home",
+          "cls": "",
+          "text": "be wild!creative!and cool! - Scroll carefully, it's smooth - 小 · 心 · 地 · 滑 ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :) portraitportraitportraitportrait what skillsdo i have i'm agraphic",
+          "top": 0,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "w": 1440,
+            "h": 11519
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "1440px",
+            "height": "11519.4px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_about",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_about",
+          "text": "ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :)",
+          "top": 1170,
+          "box": {
+            "x": 0,
+            "y": 1170,
+            "w": 1440,
+            "h": 233
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 93.6px",
+            "width": "1440px",
+            "height": "232.609px",
+            "display": "flex",
+            "position": "static",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".home_skills",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_skills",
+          "text": "what skillsdo i have i'm agraphicdesigner爱做一些奇奇怪怪的设计01i'm avideoeditor爱剪一些莫名其妙的视频02i'm aUXdesigner爱做一些不拘一格的交互03",
+          "top": 2486,
+          "box": {
+            "x": 0,
+            "y": 2486,
+            "w": 1440,
+            "h": 2443
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "padding": "90px 0px 0px",
+            "width": "1440px",
+            "height": "2353.19px",
+            "display": "flex",
+            "position": "static",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_videotitle",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_videotitle",
+          "text": "videosvideosHOLD",
+          "top": 7506,
+          "box": {
+            "x": 0,
+            "y": 7506,
+            "w": 1440,
+            "h": 360
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 90px",
+            "width": "1440px",
+            "height": "360px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_videos",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_videos",
+          "text": "01Nolan's Rhapsody+ 诺兰狂想曲 +2023.1002In Nolan We Ttrust+ 诺兰电影混剪 +2023.803Bleach Bankai Mashup+ 死神千年血战卍解宣传片 +2023.704Memento Trailer+ 记忆碎片倒叙预告 +2023.205The Sci-Fi Chowder+ 科幻片多元混剪 +2023.106Tenet Trailer+ 信条宣传片 +2022.12",
+          "top": 7956,
+          "box": {
+            "x": 0,
+            "y": 7956,
+            "w": 1440,
+            "h": 1620
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "1440px",
+            "height": "1620px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_photos",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_photos",
+          "text": "PHOTOSget more photos of jiejoe 2019 - 2024",
+          "top": 9576,
+          "box": {
+            "x": 0,
+            "y": 9576,
+            "w": 1440,
+            "h": 1080
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 180px",
+            "width": "1440px",
+            "height": "1080px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".menubox_logo",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "menubox_logo",
+          "text": "",
+          "top": 27,
+          "box": {
+            "x": 72,
+            "y": 27,
+            "w": 72,
+            "h": 72
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "72px",
+            "height": "72px",
+            "display": "flex",
+            "position": "fixed",
+            "top": "63px",
+            "right": "1296px",
+            "bottom": "765px",
+            "left": "72px",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -36)",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".menubox_navigation",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "menubox_navigation",
+          "text": "CONTACT",
+          "top": 41,
+          "box": {
+            "x": 1148,
+            "y": 41,
+            "w": 220,
+            "h": 44
+          },
+          "styles": {
+            "fontSize": "18px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "220px",
+            "height": "43.5938px",
+            "display": "flex",
+            "position": "fixed",
+            "top": "63px",
+            "right": "72px",
+            "bottom": "793.406px",
+            "left": "1148px",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -21.7969)",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      }
+    ],
+    "assets": {
+      "images": [
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/blurball.604ed5ec.webp",
+          "alt": "blurball",
+          "width": 1500,
+          "height": 1500,
+          "parent": "home_welcome_background"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/blurball.604ed5ec.webp",
+          "alt": "blurball",
+          "width": 1500,
+          "height": 1500,
+          "parent": "home_welcome_background"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/portrait_bone.28ec5d86.svg",
+          "alt": "portrait_bone",
+          "width": 150,
+          "height": 150,
+          "parent": "hpm_imgbox"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/portrait.32917811.svg",
+          "alt": "portrait",
+          "width": 150,
+          "height": 150,
+          "parent": "hpm_imgbox hpm_imgbox_bottom"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/horse.8f00d96f.svg",
+          "alt": "horse",
+          "width": 87,
+          "height": 150,
+          "parent": "home_idea_container"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/brain.615f1874.svg",
+          "alt": "brain",
+          "width": 85,
+          "height": 150,
+          "parent": "home_idea_container"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_0.44ee3d97.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_1.c9aecb9f.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_2.b2cce97c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_3.a1844064.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_4.04a46bf9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_5.2c838755.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_6.feafac54.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_7.b8443daf.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_8.ce1494d5.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_9.2e09dd5c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_10.41664a88.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_11.74734cab.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_12.ae066b5e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_13.a855a0f7.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_14.f4a84ceb.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_15.0805a2a9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_16.4f427417.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_17.0df281fd.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_18.31e63f81.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_19.4d51f805.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_20.6a90f266.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_21.80298b6e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_22.fa2f0511.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_23.9c54a60b.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_24.80e25371.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_0.44ee3d97.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_1.c9aecb9f.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_2.b2cce97c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_3.a1844064.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_4.04a46bf9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_5.2c838755.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_6.feafac54.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_7.b8443daf.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_8.ce1494d5.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_9.2e09dd5c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_10.41664a88.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_11.74734cab.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_12.ae066b5e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_13.a855a0f7.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_14.f4a84ceb.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_15.0805a2a9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_16.4f427417.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_17.0df281fd.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_18.31e63f81.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_19.4d51f805.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_20.6a90f266.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_21.80298b6e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_22.fa2f0511.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_23.9c54a60b.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_24.80e25371.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "",
+          "alt": "cover",
+          "width": 0,
+          "height": 0,
+          "parent": "home_videos_card"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_5.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate1"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_4.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate2"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_3.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate3"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_2.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate4"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_1.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate5"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_email.c560b1a6.svg",
+          "alt": "email",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_address.6dede179.svg",
+          "alt": "address",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_qq.256d3151.svg",
+          "alt": "qq",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_wechat.096b5d17.svg",
+          "alt": "wechat",
+          "width": 512,
+          "height": 512,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/email.png",
+          "alt": "email",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/wechat.png",
+          "alt": "wechat",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/whatsapp.png",
+          "alt": "whatsapp",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        }
+      ],
+      "backgroundImages": [
+        {
+          "el": "div.loading_greenblock",
+          "bg": "url(\"https://www.jiejoe.com/img/loading_block.3c7dab8c.svg\")"
+        },
+        {
+          "el": "div.menubox_menu",
+          "bg": "linear-gradient(0deg, rgba(0, 0, 0, 0) 52.2px, rgb(221, 221, 221) 54px), linear-gradient(90deg, rgba(0, 0, 0, 0) 52.2px, rgb(221, 221, 221) 54px)"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0), rgba(0, 0, 0, 0))"
+        },
+        {
+          "el": "div.home_works_line",
+          "bg": "linear-gradient(rgb(23, 247, 0), rgba(0, 0, 0, 0))"
+        }
+      ],
+      "svgCount": 20,
+      "canvasCount": 2,
+      "videoCount": 0,
+      "fonts": [
+        "\"Noto Sans SC\"",
+        "eng",
+        "zh"
+      ]
+    },
+    "nav": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 21.6px 0px 0px",
+          "height": "21.6px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 21.6px 0px 0px",
+          "height": "21.6px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "height": "21.6px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "menubox_navigation",
+        "text": "CONTACT",
+        "top": 41,
+        "box": {
+          "x": 1148,
+          "y": 41,
+          "w": 220,
+          "h": 44
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "220px",
+          "height": "43.5938px",
+          "display": "flex",
+          "position": "fixed",
+          "top": "63px",
+          "right": "72px",
+          "bottom": "793.406px",
+          "left": "1148px",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -21.7969)",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 0)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "01Nolan's Rhapsody+ 诺兰狂想曲 +2023.10",
+        "top": 7956,
+        "box": {
+          "x": 72,
+          "y": 7956,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "02In Nolan We Ttrust+ 诺兰电影混剪 +2023.8",
+        "top": 8226,
+        "box": {
+          "x": 72,
+          "y": 8226,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "03Bleach Bankai Mashup+ 死神千年血战卍解宣传片 +2023.7",
+        "top": 8496,
+        "box": {
+          "x": 72,
+          "y": 8496,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "04Memento Trailer+ 记忆碎片倒叙预告 +2023.2",
+        "top": 8766,
+        "box": {
+          "x": 72,
+          "y": 8766,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "05The Sci-Fi Chowder+ 科幻片多元混剪 +2023.1",
+        "top": 9036,
+        "box": {
+          "x": 72,
+          "y": 9036,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "06Tenet Trailer+ 信条宣传片 +2022.12",
+        "top": 9306,
+        "box": {
+          "x": 72,
+          "y": 9306,
+          "w": 1296,
+          "h": 270
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "padding": "0px 0px 0px 72px",
+          "width": "1296px",
+          "height": "270px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 11472,
+        "box": {
+          "x": 1260,
+          "y": 11472,
+          "w": 22,
+          "h": 22
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 21.6px 0px 0px",
+          "width": "21.5938px",
+          "height": "21.5938px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 11472,
+        "box": {
+          "x": 1303,
+          "y": 11472,
+          "w": 22,
+          "h": 22
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 21.6px 0px 0px",
+          "width": "21.5938px",
+          "height": "21.5938px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 11472,
+        "box": {
+          "x": 1346,
+          "y": 11472,
+          "w": 22,
+          "h": 22
+        },
+        "styles": {
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "21.5938px",
+          "height": "21.5938px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      }
+    ]
+  },
+  "mobile": {
+    "title": "HOME - JIEJOE | 视觉设计者",
+    "url": "https://www.jiejoe.com/home",
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "scrollHeight": 6223,
+    "text": "LOADING CONTACT BE WILD! CREATIVE! AND COOL! - SCROLL CAREFULLY, IT'S SMOOTH - 小 · 心 · 地 · 滑 ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :) PORTRAIT PORTRAIT PORTRAIT PORTRAIT WHAT SKILLS DO I HAVE I'M A GRAPHIC DESIGNER 爱做一些奇奇怪怪的设计 01 I'M A VIDEO EDITOR 爱剪一些莫名其妙的视频 02 I'M A UX DESIGNER 爱做一些不拘一格的交互 03 FULL OF CREATIVITY ABLE TO IMAGINE READY TO CREATE VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST VISUAL FIRST 视 觉 至 上 P O R T F O L I O JIEJOE的剪辑和设计作品 JIEJOE'S EDITING AND DESIGN WORKS VIDEOS VIDEOS HOLD 01 Nolan's Rhapsody + 诺兰狂想曲 + 2023.10 02 In Nolan We Ttrust + 诺兰电影混剪 + 2023.8 03 Bleach Bankai Mashup + 死神千年血战卍解宣传片 + 2023.7 04 Memento Trailer + 记忆碎片倒叙预告 + 2023.2 05 The Sci-Fi Chowder + 科幻片多元混剪 + 2023.1 06 Tenet Trailer + 信条宣传片 + 2022.12 PHOTOS GET MORE PHOTOS OF JIEJOE 2019 - 2024 CONTACT ME Emailjie_joe@qq.com WeChatJIEJOE-Visual WhatsApp19102850697 HOME VIDEOS PHOTOS CONTACT",
+    "sections": [
+      {
+        "selector": "#home",
+        "element": {
+          "tag": "div",
+          "id": "home",
+          "cls": "",
+          "text": "be wild!creative!and cool! - Scroll carefully, it's smooth - 小 · 心 · 地 · 滑 ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :) portraitportraitportraitportrait what skillsdo i have i'm agraphic",
+          "top": 0,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "w": 390,
+            "h": 6223
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "390px",
+            "height": "6222.69px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_about",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_about",
+          "text": "ABOUT ME Hello, this is JIEJOE, a visual designer Let's do some cool things :)",
+          "top": 971,
+          "box": {
+            "x": 0,
+            "y": 971,
+            "w": 390,
+            "h": 82
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 32.916px",
+            "width": "390px",
+            "height": "82.2656px",
+            "display": "flex",
+            "position": "static",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".home_skills",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_skills",
+          "text": "what skillsdo i have i'm agraphicdesigner爱做一些奇奇怪怪的设计01i'm avideoeditor爱剪一些莫名其妙的视频02i'm aUXdesigner爱做一些不拘一格的交互03",
+          "top": 1550,
+          "box": {
+            "x": 0,
+            "y": 1550,
+            "w": 390,
+            "h": 1872
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "padding": "42.2px 0px 0px",
+            "width": "390px",
+            "height": "1829.94px",
+            "display": "flex",
+            "position": "static",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_videotitle",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_videotitle",
+          "text": "videosvideosHOLD",
+          "top": 4557,
+          "box": {
+            "x": 0,
+            "y": 4557,
+            "w": 390,
+            "h": 169
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 42.2px",
+            "width": "390px",
+            "height": "168.797px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_videos",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_videos",
+          "text": "01Nolan's Rhapsody+ 诺兰狂想曲 +2023.1002In Nolan We Ttrust+ 诺兰电影混剪 +2023.803Bleach Bankai Mashup+ 死神千年血战卍解宣传片 +2023.704Memento Trailer+ 记忆碎片倒叙预告 +2023.205The Sci-Fi Chowder+ 科幻片多元混剪 +2023.106Tenet Trailer+ 信条宣传片 +2022.12",
+          "top": 4768,
+          "box": {
+            "x": 0,
+            "y": 4768,
+            "w": 390,
+            "h": 608
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "390px",
+            "height": "607.594px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "hidden"
+          }
+        }
+      },
+      {
+        "selector": ".home_photos",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "home_photos",
+          "text": "PHOTOSget more photos of jiejoe 2019 - 2024",
+          "top": 5376,
+          "box": {
+            "x": 0,
+            "y": 5376,
+            "w": 390,
+            "h": 506
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "margin": "0px 0px 84.4px",
+            "width": "390px",
+            "height": "506.391px",
+            "display": "flex",
+            "position": "relative",
+            "opacity": "1",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".menubox_logo",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "menubox_logo",
+          "text": "",
+          "top": 13,
+          "box": {
+            "x": 34,
+            "y": 13,
+            "w": 34,
+            "h": 34
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "33.75px",
+            "height": "33.75px",
+            "display": "flex",
+            "position": "fixed",
+            "top": "29.54px",
+            "right": "322.5px",
+            "bottom": "780.719px",
+            "left": "33.76px",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -16.875)",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      },
+      {
+        "selector": ".menubox_navigation",
+        "element": {
+          "tag": "div",
+          "id": "",
+          "cls": "menubox_navigation",
+          "text": "CONTACT",
+          "top": 19,
+          "box": {
+            "x": 253,
+            "y": 19,
+            "w": 103,
+            "h": 21
+          },
+          "styles": {
+            "fontSize": "8.44px",
+            "fontWeight": "400",
+            "fontFamily": "\"Noto Sans SC\"",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+            "width": "103.266px",
+            "height": "20.5625px",
+            "display": "flex",
+            "position": "fixed",
+            "top": "29.54px",
+            "right": "33.76px",
+            "bottom": "793.906px",
+            "left": "252.984px",
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -10.2812)",
+            "transition": "all",
+            "border": "0px none rgb(0, 0, 0)",
+            "overflow": "visible"
+          }
+        }
+      }
+    ],
+    "assets": {
+      "images": [
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/logo_house.73e212ca.svg",
+          "alt": "logo_house",
+          "width": 94,
+          "height": 150,
+          "parent": "menubox_menu_backg"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/blurball.604ed5ec.webp",
+          "alt": "blurball",
+          "width": 1500,
+          "height": 1500,
+          "parent": "home_welcome_background"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/blurball.604ed5ec.webp",
+          "alt": "blurball",
+          "width": 1500,
+          "height": 1500,
+          "parent": "home_welcome_background"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/portrait_bone.28ec5d86.svg",
+          "alt": "portrait_bone",
+          "width": 150,
+          "height": 150,
+          "parent": "hpm_imgbox"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/portrait.32917811.svg",
+          "alt": "portrait",
+          "width": 150,
+          "height": 150,
+          "parent": "hpm_imgbox hpm_imgbox_bottom"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/horse.8f00d96f.svg",
+          "alt": "horse",
+          "width": 87,
+          "height": 150,
+          "parent": "home_idea_container"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/brain.615f1874.svg",
+          "alt": "brain",
+          "width": 85,
+          "height": 150,
+          "parent": "home_idea_container"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_0.44ee3d97.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_1.c9aecb9f.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_2.b2cce97c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_3.a1844064.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_4.04a46bf9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_5.2c838755.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_6.feafac54.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_7.b8443daf.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_8.ce1494d5.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_9.2e09dd5c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_10.41664a88.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_11.74734cab.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_12.ae066b5e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_13.a855a0f7.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_14.f4a84ceb.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_15.0805a2a9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_16.4f427417.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_17.0df281fd.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_18.31e63f81.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_19.4d51f805.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_20.6a90f266.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_21.80298b6e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_22.fa2f0511.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_23.9c54a60b.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_24.80e25371.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_0.44ee3d97.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_1.c9aecb9f.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_2.b2cce97c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_3.a1844064.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_4.04a46bf9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_5.2c838755.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_6.feafac54.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_7.b8443daf.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_8.ce1494d5.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_9.2e09dd5c.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_10.41664a88.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_11.74734cab.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_12.ae066b5e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_13.a855a0f7.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_14.f4a84ceb.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_15.0805a2a9.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_16.4f427417.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_17.0df281fd.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_18.31e63f81.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_19.4d51f805.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_20.6a90f266.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_21.80298b6e.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_22.fa2f0511.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_23.9c54a60b.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/video_title_24.80e25371.webp",
+          "alt": "frame",
+          "width": 1920,
+          "height": 1080,
+          "parent": "hvf_frame_img"
+        },
+        {
+          "src": "",
+          "alt": "cover",
+          "width": 0,
+          "height": 0,
+          "parent": "home_videos_card"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_5.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate1"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_4.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate2"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_3.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate3"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_2.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate4"
+        },
+        {
+          "src": "https://cdn.jiejoe.com/photos/photo_1.webp",
+          "alt": "plate",
+          "width": 1260,
+          "height": 1800,
+          "parent": "hpp_plate hpp_plate5"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_email.c560b1a6.svg",
+          "alt": "email",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_address.6dede179.svg",
+          "alt": "address",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_qq.256d3151.svg",
+          "alt": "qq",
+          "width": 150,
+          "height": 150,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/img/icon_wechat.096b5d17.svg",
+          "alt": "wechat",
+          "width": 512,
+          "height": 512,
+          "parent": "home_contact_text"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/email.png",
+          "alt": "email",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/wechat.png",
+          "alt": "wechat",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        },
+        {
+          "src": "https://www.jiejoe.com/QR/whatsapp.png",
+          "alt": "whatsapp",
+          "width": 400,
+          "height": 400,
+          "parent": "hbm_message"
+        }
+      ],
+      "backgroundImages": [
+        {
+          "el": "div.loading_greenblock",
+          "bg": "url(\"https://www.jiejoe.com/img/loading_block.3c7dab8c.svg\")"
+        },
+        {
+          "el": "div.menubox_menu",
+          "bg": "linear-gradient(0deg, rgba(0, 0, 0, 0) 24.476px, rgb(221, 221, 221) 25.32px), linear-gradient(90deg, rgba(0, 0, 0, 0) 24.476px, rgb(221, 221, 221) 25.32px)"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0))"
+        },
+        {
+          "el": "div.",
+          "bg": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(23, 247, 0), rgba(0, 0, 0, 0))"
+        },
+        {
+          "el": "div.home_works_line",
+          "bg": "linear-gradient(rgb(23, 247, 0), rgba(0, 0, 0, 0))"
+        }
+      ],
+      "svgCount": 20,
+      "canvasCount": 2,
+      "videoCount": 0,
+      "fonts": [
+        "\"Noto Sans SC\"",
+        "eng",
+        "zh"
+      ]
+    },
+    "nav": [
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 10.128px 0px 0px",
+          "height": "15.192px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 10.128px 0px 0px",
+          "height": "15.192px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 0,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "height": "15.192px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "menubox_navigation",
+        "text": "CONTACT",
+        "top": 19,
+        "box": {
+          "x": 253,
+          "y": 19,
+          "w": 103,
+          "h": 21
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "103.266px",
+          "height": "20.5625px",
+          "display": "flex",
+          "position": "fixed",
+          "top": "29.54px",
+          "right": "33.76px",
+          "bottom": "793.906px",
+          "left": "252.984px",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -10.2812)",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 0)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "01Nolan's Rhapsody+ 诺兰狂想曲 +2023.10",
+        "top": 4768,
+        "box": {
+          "x": 20,
+          "y": 4768,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "02In Nolan We Ttrust+ 诺兰电影混剪 +2023.8",
+        "top": 4869,
+        "box": {
+          "x": 20,
+          "y": 4869,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "03Bleach Bankai Mashup+ 死神千年血战卍解宣传片 +2023.7",
+        "top": 4970,
+        "box": {
+          "x": 20,
+          "y": 4970,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "04Memento Trailer+ 记忆碎片倒叙预告 +2023.2",
+        "top": 5072,
+        "box": {
+          "x": 20,
+          "y": 5072,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "05The Sci-Fi Chowder+ 科幻片多元混剪 +2023.1",
+        "top": 5173,
+        "box": {
+          "x": 20,
+          "y": 5173,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "div",
+        "id": "",
+        "cls": "home_videos_video",
+        "text": "06Tenet Trailer+ 信条宣传片 +2022.12",
+        "top": 5274,
+        "box": {
+          "x": 20,
+          "y": 5274,
+          "w": 351,
+          "h": 101
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "351px",
+          "height": "101.266px",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": "0",
+          "opacity": "1",
+          "transition": "all",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 6205,
+        "box": {
+          "x": 326,
+          "y": 6205,
+          "w": 8,
+          "h": 8
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 10.128px 0px 0px",
+          "width": "8.09375px",
+          "height": "8.09375px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 6205,
+        "box": {
+          "x": 344,
+          "y": 6205,
+          "w": 8,
+          "h": 8
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "margin": "0px 10.128px 0px 0px",
+          "width": "8.09375px",
+          "height": "8.09375px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "cls": "",
+        "text": "",
+        "top": 6205,
+        "box": {
+          "x": 362,
+          "y": 6205,
+          "w": 8,
+          "h": 8
+        },
+        "styles": {
+          "fontSize": "8.44px",
+          "fontWeight": "400",
+          "fontFamily": "\"Noto Sans SC\"",
+          "color": "rgb(0, 0, 238)",
+          "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+          "width": "8.09375px",
+          "height": "8.09375px",
+          "display": "block",
+          "position": "static",
+          "opacity": "1",
+          "transition": "all",
+          "border": "0px none rgb(0, 0, 238)",
+          "overflow": "visible"
+        }
+      }
+    ]
+  }
+}

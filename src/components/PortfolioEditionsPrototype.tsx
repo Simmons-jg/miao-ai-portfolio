@@ -24,12 +24,12 @@ const productId = "019e8c7e-2bc4-7f40-892d-72a6e03debb0";
 const copy = {
   en: {
     brand: "Guo Jiawen / Miao",
-    role: "AI product / AIGC direction / algorithm collaboration",
+    role: "AI product / AIGC direction / visual systems",
     nav: ["Work", "Product", "Method", "Contact"],
     lang: "中文",
     heroTitle: "Building systems that think, create, and evolve.",
     heroBody:
-      "A bilingual portfolio for AI product roles where creative direction, product judgment, and model evaluation need to work as one system.",
+      "A bilingual portfolio for AI product and AIGC roles, built to show visual taste, product judgment, and dynamic systems thinking.",
     primary: "Enter work",
     secondary: "Product slot",
     index: "Chapters",
@@ -39,20 +39,20 @@ const copy = {
     productHint: "Future modules can mount here without flattening the portfolio into a gallery.",
     worksTitle: "Evidence channel",
     worksLead:
-      "Original works move as a proof system: film pipeline, product storytelling, creator campaigns, and generated worlds are sequenced by role fit.",
+      "Public works move as a proof system: visual worlds, product-facing demos, interaction experiments, and generated image systems are sequenced by role fit.",
     methodTitle: "Operating rhythm",
     contactTitle: "Role argument",
     contactBody:
-      "The site is designed to prove one thing quickly: creative direction, AI product thinking, and algorithmic evaluation can live in one person.",
+      "The site makes the role fit visible before the resume is opened: visual direction, product sense, AI-native workflow, and enough technical literacy to collaborate well.",
   },
   zh: {
     brand: "郭嘉雯 / Miao喵渺淼妙",
-    role: "AI 产品 / AIGC 创作 / 算法协作",
+    role: "AI 产品 / AIGC 编导 / 视觉系统",
     nav: ["作品", "产品", "方法", "联系"],
     lang: "EN",
     heroTitle: "构建会思考、创作与进化的系统。",
     heroBody:
-      "一个面向 AI 产品与 AIGC 创作岗位的双语作品集，用作品证明编导审美、产品判断和模型评估可以集中在同一个人身上。",
+      "一个面向 AI 产品与 AIGC 岗位的双语作品集，用动态视觉展示审美、产品判断和系统思维。",
     primary: "进入作品",
     secondary: "产品接口",
     index: "章节",
@@ -61,11 +61,11 @@ const copy = {
     productSubtitle: "预留运行时槽位",
     productHint: "后续产品可以接入这里，而不是把作品集压成普通图片墙。",
     worksTitle: "作品证据通道",
-    worksLead: "原始作品会作为证据系统移动：影像管线、产品叙事、内容商单和生成世界会按岗位能力被重新编排。",
+    worksLead: "公开作品会作为证据系统移动：视觉世界、产品 Demo、交互实验和生成图像系统会按岗位能力被重新编排。",
     methodTitle: "工作节奏",
     contactTitle: "岗位论证",
     contactBody:
-      "这个网站要快速证明一件事：AI 编导、AI 产品和算法评估可以集中在同一个人身上。",
+      "网站先让岗位匹配变得可见，再让简历补充事实：视觉导演、产品 sense、AI 原生工作流，以及能与技术团队协作的理解力。",
   },
 } as const;
 
@@ -95,16 +95,16 @@ const chapters: Chapter[] = [
     signal: "STATE / ENDPOINT / QUEUE",
   },
   {
-    id: "algorithm",
+    id: "judgment",
     code: "III",
-    nav: { en: "Evaluation", zh: "算法评估" },
-    title: { en: "Taste becomes a review protocol.", zh: "审美变成审核协议。" },
-    line: { en: "Model output needs a director and an evaluator.", zh: "模型输出既需要导演，也需要评估者。" },
+    nav: { en: "Taste Protocol", zh: "审美协议" },
+    title: { en: "Taste becomes a visible system.", zh: "审美变成可见系统。" },
+    line: { en: "AI output still needs taste, rhythm, and restraint.", zh: "AI 输出仍然需要审美、节奏和克制。" },
     body: {
-      en: "Lens language, consistency, narrative integrity, latency, cost, and controllability become the loop that keeps generated work from drifting.",
-      zh: "镜头语言、一致性、叙事完整性、延迟、成本和可控性构成反馈闭环，让生成式作品不漂移。",
+      en: "Composition, continuity, mood, interaction clarity, and finish become a review system for AI-native work.",
+      zh: "构图、连续性、情绪、交互清晰度和完成度，构成 AI 原生作品的审核系统。",
     },
-    signal: "QUALITY / COST / CONTROL",
+    signal: "TASTE / RHYTHM / CONTROL",
   },
   {
     id: "works",
@@ -113,8 +113,8 @@ const chapters: Chapter[] = [
     title: { en: "Works become a cinematic evidence wall.", zh: "作品成为电影化证据墙。" },
     line: { en: "The archive should feel alive because the process is alive.", zh: "档案要有生命力，因为过程本身是动态的。" },
     body: {
-      en: "The portfolio holds feature-film AIGC work, overseas AI shorts, concert visuals, product campaigns, and product demos in one narrative structure.",
-      zh: "作品集会把院线电影 AIGC、海外 AI 短剧、演唱会视觉、产品商单和产品 Demo 放进同一套叙事结构。",
+      en: "The archive focuses on public visual worlds, interaction experiments, image systems, and product-facing demos that can be inspected directly.",
+      zh: "档案只聚焦可公开、可检查的视觉世界、交互实验、图像系统和产品 Demo。",
     },
     signal: "CASE / METHOD / OUTCOME",
   },
@@ -122,11 +122,11 @@ const chapters: Chapter[] = [
     id: "method",
     code: "V",
     nav: { en: "Method", zh: "方法" },
-    title: { en: "Observe, script, generate, evaluate, ship.", zh: "观察、编剧、生成、评估、交付。" },
+    title: { en: "Observe, script, generate, review, ship.", zh: "观察、编剧、生成、审核、交付。" },
     line: { en: "A process should move, not read like a list.", zh: "方法不应该像清单，而应该像流程一样移动。" },
     body: {
-      en: "The page exposes how a messy creative or product question becomes a working demo, a production workflow, and a defensible model brief.",
-      zh: "页面会展示一个混乱的创意或产品问题如何变成可运行 Demo、生产工作流和可辩护的模型需求。",
+      en: "The page shows how a messy creative or product question becomes a visual route, a prototype, and a shipped artifact.",
+      zh: "页面会展示一个混乱的创意或产品问题如何变成视觉路线、可运行原型和可交付作品。",
     },
     signal: "OBSERVE / FRAME / SHIP",
   },
@@ -135,51 +135,51 @@ const chapters: Chapter[] = [
     code: "VI",
     nav: { en: "Fit", zh: "匹配" },
     title: { en: "A portfolio for the hybrid role.", zh: "为复合岗位而设计的作品集。" },
-    line: { en: "Director taste, product sense, algorithm literacy.", zh: "编导审美、产品 sense、算法理解。" },
+    line: { en: "Director taste, product sense, AI-native workflow.", zh: "编导审美、产品 sense、AI 原生工作流。" },
     body: {
       en: "Recruiters should understand the role fit before they finish the page. The details can then prove it.",
       zh: "面试官应该在读完页面前就理解岗位匹配，细节再继续证明。",
     },
-    signal: "DIRECTION / PRODUCT / ALGORITHM",
+    signal: "DIRECTION / PRODUCT / SYSTEM",
   },
 ];
 
 const works = [
   {
     id: "01",
-    en: "Feature Film AIGC Pipeline",
-    zh: "院线电影 AIGC 管线",
-    roleEn: "AI director / pipeline reviewer",
-    roleZh: "AI 编导 / 管线审片",
-    detailEn: "AI rendering, shot compositing, scene consistency, and delivery review.",
-    detailZh: "AI 渲染、镜头合成、场景一致性和交付审核。",
+    en: "Cinematic Composition Study",
+    zh: "影像构图实验",
+    roleEn: "visual direction / composition review",
+    roleZh: "视觉导演 / 构图审核",
+    detailEn: "Lighting, atmosphere, scene logic, and frame-level visual judgment.",
+    detailZh: "光线、氛围、场景逻辑和单帧级视觉判断。",
     image: "/portfolio-assets/work-05.png",
-    tagsEn: ["film", "scene logic", "delivery"],
-    tagsZh: ["影像", "场景逻辑", "交付"],
+    tagsEn: ["image", "scene logic", "taste"],
+    tagsZh: ["影像", "场景逻辑", "审美"],
   },
   {
     id: "02",
-    en: "Concert Visual Delivery",
-    zh: "演唱会 AIGC 视觉",
-    roleEn: "prompt engineering / visual QC",
-    roleZh: "提示词工程 / 视觉质检",
-    detailEn: "Prompt engineering, generation, quality control, and stage-ready output.",
-    detailZh: "提示词工程、AI 生成、质量控制和舞台交付。",
+    en: "Large-screen Motion Study",
+    zh: "大屏动态视觉实验",
+    roleEn: "motion mood / visual QC",
+    roleZh: "动态情绪 / 视觉质检",
+    detailEn: "Scale, rhythm, contrast, texture, and screen-ready visual tension.",
+    detailZh: "尺度、节奏、对比、质感和适配大屏的视觉张力。",
     image: "/portfolio-assets/work-03.jpg",
-    tagsEn: ["stage", "generation", "QC"],
-    tagsZh: ["舞台", "生成", "质检"],
+    tagsEn: ["scale", "motion", "QC"],
+    tagsZh: ["尺度", "动态", "质检"],
   },
   {
     id: "03",
-    en: "AI Product Campaigns",
-    zh: "AI 产品创意商单",
+    en: "AI Product Demo Lab",
+    zh: "AI 产品 Demo 实验室",
     roleEn: "product storytelling / demo design",
     roleZh: "产品叙事 / Demo 设计",
-    detailEn: "WorkBuddy, Tabbit, creator scripts, product demos, and audience hooks.",
-    detailZh: "WorkBuddy、Tabbit、创意脚本、产品 Demo 和传播钩子。",
+    detailEn: "Product hooks, creator scripts, prototype surfaces, and audience-readable demos.",
+    detailZh: "产品钩子、创意脚本、原型界面和受众能看懂的 Demo。",
     image: "/portfolio-assets/work-01.png",
-    tagsEn: ["agent", "browser", "content"],
-    tagsZh: ["Agent", "浏览器", "内容"],
+    tagsEn: ["product", "demo", "content"],
+    tagsZh: ["产品", "Demo", "内容"],
   },
   {
     id: "04",
@@ -209,17 +209,15 @@ const works = [
     id: "06",
     en: "Horror Texture Studies",
     zh: "恐怖质感实验",
-    roleEn: "genre control / texture evaluation",
-    roleZh: "类型控制 / 质感评估",
-    detailEn: "Atmosphere, material texture, tension, and model-output boundary testing.",
-    detailZh: "氛围、材质、张力和模型输出边界测试。",
+    roleEn: "genre control / texture review",
+    roleZh: "类型控制 / 质感审核",
+    detailEn: "Atmosphere, material texture, tension, and generated-image boundary testing.",
+    detailZh: "氛围、材质、张力和生成图像边界测试。",
     image: "/portfolio-assets/work-06.png",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
   },
 ];
-
-const method = ["Observe", "Script", "Generate", "Evaluate", "Ship"];
 
 const productModules = [
   {
@@ -249,14 +247,14 @@ const productModules = [
   {
     id: "review",
     code: "03",
-    en: "Model Review",
-    zh: "模型评估",
-    stateEn: "taste scored",
-    stateZh: "审美评分中",
-    detailEn: "Reviews consistency, narrative integrity, latency, cost, and controllability before output ships.",
-    detailZh: "在交付前审核一致性、叙事完整度、延迟、成本和可控性。",
-    metricsEn: ["quality", "cost", "control"],
-    metricsZh: ["质量", "成本", "控制"],
+    en: "Output Review",
+    zh: "输出审核",
+    stateEn: "taste aligned",
+    stateZh: "审美已对齐",
+    detailEn: "Reviews visual consistency, product clarity, mood, and handoff fit before output ships.",
+    detailZh: "在交付前审核视觉一致性、产品清晰度、情绪和交接适配度。",
+    metricsEn: ["quality", "clarity", "handoff"],
+    metricsZh: ["质量", "清晰", "交接"],
   },
   {
     id: "ship",
@@ -272,11 +270,129 @@ const productModules = [
   },
 ];
 
+const heroModules = [
+  {
+    id: "product",
+    href: "#product",
+    code: "02",
+    en: "Product",
+    zh: "产品",
+    lineEn: "AI-native product interface and runtime slot.",
+    lineZh: "AI 原生产品构想与运行时接口。",
+    metaEn: "API / queue / review",
+    metaZh: "接口 / 队列 / 审核",
+  },
+  {
+    id: "works",
+    href: "#works",
+    code: "04",
+    en: "Work",
+    zh: "作品",
+    lineEn: "Public visuals, interaction experiments, product demos.",
+    lineZh: "公开视觉、交互实验、产品 Demo。",
+    metaEn: "evidence archive",
+    metaZh: "证据档案",
+  },
+  {
+    id: "method",
+    href: "#method",
+    code: "05",
+    en: "Method",
+    zh: "方法",
+    lineEn: "From brief to visual system to interactive prototype.",
+    lineZh: "从 brief 到视觉系统，再到交互原型。",
+    metaEn: "observe / generate / ship",
+    metaZh: "观察 / 生成 / 交付",
+  },
+];
+
+const tasteSignals = [
+  {
+    code: "IMAGE",
+    en: "Framing, light, atmosphere, and continuity become the first layer of proof.",
+    zh: "构图、光线、氛围和连续性，是第一层证据。",
+    metricEn: "visual taste",
+    metricZh: "审美判断",
+  },
+  {
+    code: "SYSTEM",
+    en: "A reference can become a reusable style route, not a one-off prompt.",
+    zh: "参考可以被整理成可复用的风格路线，而不是一次性提示词。",
+    metricEn: "repeatable route",
+    metricZh: "可复用路线",
+  },
+  {
+    code: "PRODUCT",
+    en: "AI tools are translated into demos, decisions, and product-facing surfaces.",
+    zh: "AI 工具会被翻译成 Demo、决策和面向产品的界面。",
+    metricEn: "demo thinking",
+    metricZh: "Demo 思维",
+  },
+  {
+    code: "PROFILE",
+    en: "The resume stays available as context, while this page carries the first visual argument.",
+    zh: "简历保留为事实背景，网页负责先完成审美论证。",
+    metricEn: "resume layer",
+    metricZh: "简历层",
+  },
+];
+
+const tasteChecks = [
+  { en: "composition", zh: "构图", value: "frame" },
+  { en: "continuity", zh: "连续性", value: "style" },
+  { en: "mood", zh: "情绪", value: "tone" },
+  { en: "rhythm", zh: "节奏", value: "motion" },
+  { en: "clarity", zh: "清晰度", value: "product" },
+  { en: "finish", zh: "完成度", value: "ship" },
+];
+
+const methodCards = [
+  {
+    step: "Observe",
+    en: "Read the brief, audience, reference, platform, and delivery constraint.",
+    zh: "读取 brief、受众、参考、平台和交付限制。",
+  },
+  {
+    step: "Script",
+    en: "Turn intent into scripts, shot logic, product hooks, and demo routes.",
+    zh: "把意图拆成脚本、镜头逻辑、产品钩子和 Demo 路线。",
+  },
+  {
+    step: "Generate",
+    en: "Route prompts through AI video, image, music, and coding workflows.",
+    zh: "把提示词接入 AI 视频、图像、音乐和 Vibe Coding 工作流。",
+  },
+  {
+    step: "Review",
+    en: "Review output by composition, continuity, mood, interaction clarity, and finish.",
+    zh: "按构图、连续性、情绪、交互清晰度和完成度审核输出。",
+  },
+  {
+    step: "Ship",
+    en: "Package public assets, product demos, docs, and review loops for delivery.",
+    zh: "把公开资产、产品 Demo、文档和复盘闭环打包交付。",
+  },
+];
+
+const credentials = [
+  { en: "AIGC visual direction", zh: "AIGC 视觉编导" },
+  { en: "AI product demo thinking", zh: "AI 产品 Demo 思维" },
+  { en: "Digital media and IT background", zh: "数字媒体与 IT 背景" },
+  { en: "Bilingual creator context", zh: "中英双语创作者语境" },
+];
+
 const proofPoints = [
-  { en: "25+ AI shorts", zh: "25+ 部 AI 短剧" },
-  { en: "1-2M top views", zh: "最高 100-200 万播放" },
-  { en: "Concert AIGC delivery", zh: "演唱会 AIGC 交付" },
-  { en: "TOEFL 101", zh: "托福 101" },
+  { en: "Public visual archive", zh: "公开视觉档案" },
+  { en: "AI product demo slot", zh: "AI 产品 Demo 接口" },
+  { en: "AIGC direction system", zh: "AIGC 编导系统" },
+  { en: "Bilingual portfolio", zh: "中英双语作品集" },
+];
+
+const kineticTracks = [
+  { en: "VISUAL FIRST", zh: "视觉先行" },
+  { en: "PRODUCT CLEAR", zh: "产品清晰" },
+  { en: "AI NATIVE", zh: "AI 原生" },
+  { en: "SHIP READY", zh: "可交付" },
 ];
 
 const socialLinks = [
@@ -691,6 +807,30 @@ export function PortfolioEditionsPrototype() {
             <div className="artifact-orbit orbit-b" />
           </div>
         </div>
+
+        <div className="hero-system-deck" data-reveal>
+          {heroModules.map((module) => (
+            <a className={`hero-module-card hero-module-${module.id}`} href={module.href} key={module.id}>
+              <span>{module.code}</span>
+              <strong>{locale === "zh" ? module.zh : module.en}</strong>
+              <p>{locale === "zh" ? module.lineZh : module.lineEn}</p>
+              <small>{locale === "zh" ? module.metaZh : module.metaEn}</small>
+              <i aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="kinetic-manifesto" aria-label={locale === "zh" ? "作品集视觉宣言" : "Portfolio manifesto"}>
+        <div className="manifesto-core">
+          {kineticTracks.map((track, index) => (
+            <div className="manifesto-track" data-direction={index % 2 === 0 ? "left" : "right"} key={track.en}>
+              <span>{locale === "zh" ? track.zh : track.en}</span>
+              <span>{locale === "zh" ? track.zh : track.en}</span>
+              <span>{locale === "zh" ? track.zh : track.en}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       {chapters.map((chapter, index) => (
@@ -738,6 +878,24 @@ function ScenePanel({
   activeProductModule: number;
   onProductModuleChange: (index: number) => void;
 }) {
+  if (chapter.id === "direction") {
+    return (
+      <div className="scene-panel evidence-ledger" data-reveal>
+        <span>{locale === "zh" ? "审美证据引擎" : "Visual evidence engine"}</span>
+        <strong>{locale === "zh" ? "先让网页证明审美，再让简历补充事实。" : "The page proves taste first. The resume adds context."}</strong>
+        <div className="ledger-rows">
+          {tasteSignals.map((item) => (
+            <div className="ledger-row" key={item.code}>
+              <i>{item.code}</i>
+              <p>{locale === "zh" ? item.zh : item.en}</p>
+              <b>{locale === "zh" ? item.metricZh : item.metricEn}</b>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (chapter.id === "product") {
     const activeModule = productModules[activeProductModule] ?? productModules[0];
     const activeMetrics = locale === "zh" ? activeModule.metricsZh : activeModule.metricsEn;
@@ -783,6 +941,28 @@ function ScenePanel({
           <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
         </div>
         <p>{copy[locale].productHint}</p>
+      </div>
+    );
+  }
+
+  if (chapter.id === "judgment") {
+    return (
+      <div className="scene-panel evaluation-panel" data-reveal>
+        <span>{locale === "zh" ? "审美协议" : "Taste protocol"}</span>
+        <strong>{chapter.signal}</strong>
+        <div className="evaluation-grid">
+          {tasteChecks.map((check) => (
+            <div className="evaluation-cell" key={check.value}>
+              <b>{check.value}</b>
+              <span>{locale === "zh" ? check.zh : check.en}</span>
+            </div>
+          ))}
+        </div>
+        <p>
+          {locale === "zh"
+            ? "把抽象的好看，拆成可以讨论、可以调整、可以交付的视觉标准。"
+            : "Turns abstract taste into visual criteria that can be discussed, adjusted, and shipped."}
+        </p>
       </div>
     );
   }
@@ -834,13 +1014,14 @@ function ScenePanel({
 
   if (chapter.id === "method") {
     return (
-      <div className="scene-panel method-panel" data-reveal>
+      <div className="scene-panel method-panel method-runway" data-reveal>
         <span>{copy[locale].methodTitle}</span>
-        <div>
-          {method.map((step, stepIndex) => (
-            <b key={step}>
+        <div className="method-track">
+          {methodCards.map((item, stepIndex) => (
+            <b key={item.step}>
               <i>{String(stepIndex + 1).padStart(2, "0")}</i>
-              {locale === "zh" ? translateMethod(step) : step}
+              <strong>{locale === "zh" ? translateMethod(item.step) : item.step}</strong>
+              <small>{locale === "zh" ? item.zh : item.en}</small>
             </b>
           ))}
         </div>
@@ -854,6 +1035,11 @@ function ScenePanel({
         <span>{copy[locale].contactTitle}</span>
         <strong>{chapter.signal}</strong>
         <p>{copy[locale].contactBody}</p>
+        <div className="credential-grid">
+          {credentials.map((item) => (
+            <b key={item.en}>{locale === "zh" ? item.zh : item.en}</b>
+          ))}
+        </div>
         <a href="mailto:Guokabunn@gmail.com">Guokabunn@gmail.com</a>
       </div>
     );
@@ -891,6 +1077,7 @@ function translateMethod(value: string) {
     Script: "编剧",
     Generate: "生成",
     Evaluate: "评估",
+    Review: "审核",
     Ship: "交付",
   };
   return map[value] ?? value;
