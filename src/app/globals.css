@@ -28,30 +28,24 @@
   position: relative;
   z-index: 2;
   display: flex;
-  width: min(100%, 1210px);
+  width: min(100%, 1240px);
   margin-top: clamp(36px, 8vh, 92px);
   padding: 0 clamp(10px, 1.6vw, 24px);
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 1.25vw, 18px);
+  gap: clamp(10px, 1.25vw, 18px);
 }
 
-.work-entry-card {
+.work-entry-card,
+.work-eye-portal {
   position: relative;
   display: grid;
-  flex: 0 1 clamp(112px, 9.4vw, 156px);
-  height: clamp(248px, 34vh, 366px);
+  flex: 0 0 clamp(128px, 10.4vw, 166px);
+  height: clamp(268px, 35vh, 356px);
   align-content: end;
   overflow: hidden;
-  border: 1.5px solid rgb(243 239 223 / 78%);
   border-radius: 24px;
   padding: 16px;
-  background-color: #10120e;
-  background-position: center;
-  background-size: cover;
-  box-shadow:
-    0 26px 72px rgb(0 0 0 / 48%),
-    inset 0 0 0 1px rgb(255 255 255 / 10%);
   color: var(--ivory);
   cursor: pointer;
   transform: translateY(var(--entry-y, 0)) rotate(var(--entry-rot, 0deg));
@@ -63,9 +57,19 @@
     transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.work-entry-card {
+  border: 1.5px solid rgb(243 239 223 / 78%);
+  background-color: #10120e;
+  background-position: center;
+  background-size: cover;
+  box-shadow:
+    0 26px 72px rgb(0 0 0 / 48%),
+    inset 0 0 0 1px rgb(255 255 255 / 10%);
+}
+
 .work-entry-card.wide {
-  flex-basis: clamp(176px, 17vw, 264px);
-  height: clamp(158px, 24vh, 246px);
+  flex-basis: clamp(128px, 10.4vw, 166px);
+  height: clamp(268px, 35vh, 356px);
 }
 
 .work-entry-card:nth-child(1) {
@@ -91,6 +95,11 @@
 .work-entry-card:nth-child(5) {
   --entry-y: 12px;
   --entry-rot: -2deg;
+}
+
+.work-eye-portal:nth-child(6) {
+  --entry-y: -10px;
+  --entry-rot: 4deg;
 }
 
 .work-entry-card::before {
@@ -150,83 +159,293 @@
   transform: translateY(0);
 }
 
-.work-hand-card {
-  position: absolute;
-  right: clamp(18px, 3.2vw, 52px);
-  top: 32%;
-  z-index: 5;
-  display: grid;
-  width: clamp(76px, 6.2vw, 98px);
-  aspect-ratio: 0.84;
-  align-content: end;
-  justify-items: start;
-  overflow: hidden;
-  border: 1px solid rgb(183 255 37 / 46%);
-  border-radius: 16px;
-  padding: 11px;
+.work-eye-portal {
+  isolation: isolate;
+  justify-items: center;
+  border: 1.5px solid rgb(183 255 37 / 58%);
   background:
-    linear-gradient(180deg, rgb(243 239 223 / 8%), transparent 42%),
-    rgb(5 6 4 / 78%);
+    radial-gradient(circle at 50% 38%, rgb(183 255 37 / 17%), transparent 31%),
+    radial-gradient(circle at 20% 88%, rgb(255 74 36 / 13%), transparent 36%),
+    linear-gradient(180deg, rgb(243 239 223 / 8%), rgb(5 6 4 / 86%)),
+    #050604;
   box-shadow:
-    0 22px 56px rgb(0 0 0 / 48%),
-    inset 0 0 0 1px rgb(255 255 255 / 7%);
-  color: var(--ivory);
-  cursor: pointer;
-  transform: translateY(-50%) rotate(3deg);
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    0 28px 76px rgb(0 0 0 / 52%),
+    0 0 34px rgb(183 255 37 / 12%),
+    inset 0 0 0 1px rgb(255 255 255 / 8%);
 }
 
-.work-hand-card span {
-  color: rgb(243 239 223 / 58%);
+.work-eye-portal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(rgb(243 239 223 / 8%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(243 239 223 / 7%) 1px, transparent 1px),
+    repeating-linear-gradient(90deg, rgb(183 255 37 / 20%) 0 1px, transparent 1px 7px);
+  background-size: 22px 22px, 22px 22px, 58px 100%;
+  mask-image: radial-gradient(ellipse at 50% 34%, black 0%, transparent 72%);
+  opacity: 0.45;
+  animation: eyeMatrixDrift 7s linear infinite;
+}
+
+.work-eye-portal::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 50% 26%, rgb(207 230 255 / 16%), transparent 34%),
+    linear-gradient(180deg, transparent 48%, rgb(0 0 0 / 58%) 100%);
+}
+
+.eye-label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: rgb(183 255 37 / 82%);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 860;
+  line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.work-hand-card b {
-  margin-top: 7px;
-  color: var(--acid);
-  font-size: clamp(18px, 1.8vw, 26px);
-  font-weight: 920;
-  line-height: 0.88;
-}
-
-.work-hand-card i {
+.eye-visual {
   position: absolute;
-  right: 11px;
-  top: 11px;
-  width: 18px;
-  height: 18px;
-  border-top: 2px solid var(--acid);
-  border-right: 2px solid var(--acid);
+  left: 50%;
+  top: 35%;
+  width: 77%;
+  aspect-ratio: 1.34;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 24px rgb(190 218 255 / 22%));
 }
 
-.work-hand-card i::after {
+.eye-matrix,
+.eye-shell,
+.eye-iris,
+.eye-pupil,
+.eye-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.eye-matrix {
+  border-radius: 999px;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgb(243 239 223 / 24%) 0 1px, transparent 1px 7px),
+    conic-gradient(from 90deg, transparent, rgb(183 255 37 / 22%), transparent, rgb(151 190 255 / 20%), transparent);
+  mask-image: radial-gradient(ellipse at 50% 50%, black 0 54%, transparent 62%);
+  opacity: 0.58;
+  transform: rotate(-8deg);
+  animation: eyeIrisFlow 9s linear infinite;
+}
+
+.eye-shell {
+  inset: 18% 2%;
+  border: 1.5px solid rgb(220 230 255 / 74%);
+  border-radius: 50% 50% 46% 54% / 62% 62% 38% 38%;
+  background:
+    radial-gradient(ellipse at 52% 52%, transparent 22%, rgb(181 205 255 / 24%) 24%, transparent 55%),
+    linear-gradient(115deg, transparent 0 20%, rgb(221 229 255 / 58%) 48%, transparent 78%);
+  box-shadow:
+    0 0 26px rgb(188 211 255 / 32%),
+    inset 0 0 26px rgb(183 255 37 / 10%);
+  transform: rotate(-10deg);
+  animation: eyeBreathe 4.8s ease-in-out infinite;
+}
+
+.eye-shell::before,
+.eye-shell::after {
   content: "";
   position: absolute;
-  right: -1px;
-  top: -1px;
-  width: 22px;
-  height: 2px;
-  background: var(--acid);
-  transform: rotate(-45deg);
-  transform-origin: right center;
+  top: 50%;
+  width: 34%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(220 230 255 / 80%));
 }
 
-.work-hand-card:hover,
-.work-hand-card:focus-visible {
+.eye-shell::before {
+  left: -26%;
+  transform: rotate(6deg);
+}
+
+.eye-shell::after {
+  right: -26%;
+  transform: rotate(176deg);
+}
+
+.eye-iris {
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 24%, rgb(183 255 37 / 18%) 25% 34%, transparent 35%),
+    conic-gradient(from 0deg, rgb(189 215 255 / 92%), rgb(183 255 37 / 45%), rgb(82 123 255 / 64%), rgb(243 239 223 / 82%), rgb(189 215 255 / 92%));
+  box-shadow:
+    0 0 22px rgb(196 216 255 / 44%),
+    inset 0 0 18px rgb(0 0 0 / 42%);
+  transform: translate(calc(-50% + var(--eye-dx)), calc(-50% + var(--eye-dy)));
+  transition: transform 120ms ease-out;
+  animation: eyeIrisFlow 5.6s linear infinite reverse;
+}
+
+.eye-iris::before {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: inherit;
+  background:
+    repeating-conic-gradient(from 0deg, rgb(255 255 255 / 52%) 0 2deg, transparent 2deg 7deg),
+    radial-gradient(circle, transparent 0 28%, rgb(0 0 0 / 34%) 29% 100%);
+  mix-blend-mode: screen;
+  opacity: 0.68;
+}
+
+.eye-pupil {
+  left: 50%;
+  top: 50%;
+  width: 19%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #020302;
+  box-shadow:
+    0 0 0 1px rgb(243 239 223 / 42%),
+    0 0 22px rgb(0 0 0 / 90%),
+    0 0 36px rgb(183 255 37 / 28%);
+  transform: translate(calc(-50% + var(--eye-dx)), calc(-50% + var(--eye-dy))) scale(1);
+  transition:
+    box-shadow 180ms ease,
+    transform 140ms ease-out;
+}
+
+.eye-particles {
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(calc(-50% + var(--eye-dx)), calc(-50% + var(--eye-dy)));
+  transition: transform 120ms ease-out;
+}
+
+.eye-particles i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--acid);
+  box-shadow: 0 0 10px rgb(183 255 37 / 82%);
+  transform: rotate(var(--particle-angle)) translateX(var(--particle-radius));
+  transform-origin: 0 0;
+  animation: eyeParticleOrbit 3.8s linear infinite;
+  animation-delay: var(--particle-delay);
+}
+
+.work-eye-portal b {
+  position: relative;
+  z-index: 1;
+  color: var(--acid);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(17px, 1.6vw, 23px);
+  font-weight: 920;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-shadow: 0 0 18px rgb(183 255 37 / 38%);
+}
+
+.work-eye-portal small {
+  position: relative;
+  z-index: 1;
+  margin-top: 7px;
+  color: rgb(243 239 223 / 62%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.work-eye-portal:hover,
+.work-eye-portal:focus-visible {
   border-color: var(--acid);
   box-shadow:
-    0 32px 78px rgb(0 0 0 / 58%),
-    0 0 40px rgb(183 255 37 / 24%),
-    inset 0 -12px 0 rgb(183 255 37 / 28%);
+    0 34px 82px rgb(0 0 0 / 58%),
+    0 0 42px rgb(183 255 37 / 24%),
+    inset 0 -14px 0 rgb(183 255 37 / 20%),
+    inset 0 0 0 1px rgb(255 255 255 / 14%);
+  filter: saturate(1.15) brightness(1.06);
   outline: none;
-  transform: translateY(-58%) rotate(1deg);
+  transform: translateY(calc(var(--entry-y, 0px) - 18px)) rotate(var(--entry-rot, 0deg));
+}
+
+.work-eye-portal:hover .eye-pupil,
+.work-eye-portal:focus-visible .eye-pupil {
+  transform: translate(calc(-50% + var(--eye-dx)), calc(-50% + var(--eye-dy))) scale(0.84);
+  box-shadow:
+    0 0 0 1px rgb(243 239 223 / 64%),
+    0 0 28px rgb(183 255 37 / 48%);
+}
+
+.work-eye-portal.is-entering .eye-pupil {
+  transform: translate(calc(-50% + var(--eye-dx)), calc(-50% + var(--eye-dy))) scale(0.46);
+  box-shadow:
+    0 0 0 16px rgb(183 255 37 / 16%),
+    0 0 46px rgb(183 255 37 / 54%);
+}
+
+.work-eye-portal.is-entering b {
+  animation: eyeEnterFlash 320ms ease both;
+}
+
+@keyframes eyeMatrixDrift {
+  to {
+    background-position: 22px 22px, -22px 22px, 58px 0;
+  }
+}
+
+@keyframes eyeIrisFlow {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+
+  50% {
+    filter: hue-rotate(24deg) brightness(1.16);
+  }
+}
+
+@keyframes eyeBreathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.24);
+  }
+}
+
+@keyframes eyeParticleOrbit {
+  to {
+    transform: rotate(calc(var(--particle-angle) + 360deg)) translateX(var(--particle-radius));
+  }
+}
+
+@keyframes eyeEnterFlash {
+  0% {
+    opacity: 0.68;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .photos-channel-shell {
@@ -497,28 +716,17 @@
   }
 
   .work-entry-card,
-  .work-entry-card.wide {
+  .work-entry-card.wide,
+  .work-eye-portal {
     flex: 0 0 210px;
     height: 320px;
     scroll-snap-align: center;
   }
 
-  .work-entry-card:nth-child(n) {
+  .work-entry-card:nth-child(n),
+  .work-eye-portal:nth-child(n) {
     --entry-y: 0px;
     --entry-rot: 0deg;
-  }
-
-  .work-hand-card {
-    right: 18px;
-    top: auto;
-    bottom: 106px;
-    width: 104px;
-    transform: rotate(3deg);
-  }
-
-  .work-hand-card:hover,
-  .work-hand-card:focus-visible {
-    transform: translateY(-4px) rotate(1deg);
   }
 }
 

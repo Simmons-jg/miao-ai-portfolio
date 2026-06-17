@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -1028,9 +1029,22 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const channelControlRef = useRef<null | ((index: number) => void)>(null);
+  const portalTimerRef = useRef<number | null>(null);
   const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+  const [portalArmed, setPortalArmed] = useState(false);
   const activeWork = works[activeWorkIndex] ?? works[0];
   const tags = locale === "zh" ? activeWork.tagsZh : activeWork.tagsEn;
+  const eyeParticles = useMemo(() => Array.from({ length: 18 }, (_, index) => index), []);
+  const eyePortalStyle = {
+    "--eye-dx": "0px",
+    "--eye-dy": "0px",
+  } as CSSProperties;
+
+  useEffect(() => {
+    return () => {
+      if (portalTimerRef.current) window.clearTimeout(portalTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -1249,6 +1263,28 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     window.location.assign("/photos");
   };
 
+  const moveEyePortal = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    event.currentTarget.style.setProperty("--eye-dx", `${Math.max(-1, Math.min(1, x)) * 10}px`);
+    event.currentTarget.style.setProperty("--eye-dy", `${Math.max(-1, Math.min(1, y)) * 7}px`);
+  };
+
+  const resetEyePortal = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    event.currentTarget.style.setProperty("--eye-dx", "0px");
+    event.currentTarget.style.setProperty("--eye-dy", "0px");
+    setPortalArmed(false);
+  };
+
+  const triggerEyePortal = () => {
+    setPortalArmed(true);
+    if (portalTimerRef.current) window.clearTimeout(portalTimerRef.current);
+    portalTimerRef.current = window.setTimeout(() => {
+      enterWork(activeWorkIndex);
+    }, 320);
+  };
+
   return (
     <div className="works-panel time-channel-panel" ref={rootRef} data-reveal>
       <div className="work-portal-entry">
@@ -1257,7 +1293,7 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
           {works.slice(0, 5).map((work, index) => (
             <button
               type="button"
-              className={`work-entry-card ${work.image.includes("blue-city") || work.image.includes("desert") || work.image.includes("fairy-study") ? "wide" : "portrait"} ${index === activeWorkIndex ? "active" : ""}`}
+              className={`work-entry-card ${index === activeWorkIndex ? "active" : ""}`}
               style={{ backgroundImage: `url(${work.image})` }}
               key={work.id}
               onClick={() => enterWork(index)}
@@ -1267,17 +1303,39 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
               <b>{locale === "zh" ? work.zh : work.en}</b>
             </button>
           ))}
+          <button
+            type="button"
+            className={`work-eye-portal ${portalArmed ? "is-entering" : ""}`}
+            style={eyePortalStyle}
+            onPointerMove={moveEyePortal}
+            onPointerLeave={resetEyePortal}
+            onPointerDown={() => setPortalArmed(true)}
+            onClick={triggerEyePortal}
+            aria-label={locale === "zh" ? "进入 AI 之眼作品频道" : "Enter AI Eye work channel"}
+          >
+            <span className="eye-label">{locale === "zh" ? "AI 之眼" : "AI EYE"}</span>
+            <span className="eye-visual" aria-hidden="true">
+              <span className="eye-matrix" />
+              <span className="eye-shell" />
+              <span className="eye-iris" />
+              <span className="eye-pupil" />
+              <span className="eye-particles">
+                {eyeParticles.map((index) => (
+                  <i
+                    key={index}
+                    style={{
+                      "--particle-angle": `${index * 20}deg`,
+                      "--particle-radius": `${18 + (index % 4) * 5}px`,
+                      "--particle-delay": `${index * -0.16}s`,
+                    } as CSSProperties}
+                  />
+                ))}
+              </span>
+            </span>
+            <b>ENTER</b>
+            <small>OPEN CHANNEL</small>
+          </button>
         </div>
-        <button
-          type="button"
-          className="work-hand-card"
-          onClick={() => enterWork(activeWorkIndex)}
-          aria-label={locale === "zh" ? "打开作品频道" : "Open work channel"}
-        >
-          <span>{locale === "zh" ? "作品频道" : "WORK CHANNEL"}</span>
-          <b>{locale === "zh" ? "进入" : "OPEN"}</b>
-          <i aria-hidden="true" />
-        </button>
         <div className="work-portal-copy">
           <p>{locale === "zh" ? "进入 Miao 的公开作品频道" : "Enter Miao's public work channel"}</p>
           <small>{locale === "zh" ? "视觉世界 / 产品 Demo / 交互实验" : "visual worlds / product demos / interaction experiments"}</small>
