@@ -150,7 +150,7 @@ const works = [
     roleZh: "视觉导演 / 构图审核",
     detailEn: "Lighting, atmosphere, scene logic, and frame-level visual judgment.",
     detailZh: "光线、氛围、场景逻辑和单帧级视觉判断。",
-    image: "/portfolio-assets/work-05.png",
+    image: "/portfolio-assets/miao-work-01-nine-tail-fox.webp",
     tagsEn: ["image", "scene logic", "taste"],
     tagsZh: ["影像", "场景逻辑", "审美"],
   },
@@ -162,7 +162,7 @@ const works = [
     roleZh: "动态情绪 / 视觉质检",
     detailEn: "Scale, rhythm, contrast, texture, and screen-ready visual tension.",
     detailZh: "尺度、节奏、对比、质感和适配大屏的视觉张力。",
-    image: "/portfolio-assets/work-03.jpg",
+    image: "/portfolio-assets/miao-work-02-crystal-crown.webp",
     tagsEn: ["scale", "motion", "QC"],
     tagsZh: ["尺度", "动态", "质检"],
   },
@@ -174,7 +174,7 @@ const works = [
     roleZh: "产品叙事 / Demo 设计",
     detailEn: "Product hooks, creator scripts, prototype surfaces, and audience-readable demos.",
     detailZh: "产品钩子、创意脚本、原型界面和受众能看懂的 Demo。",
-    image: "/portfolio-assets/work-01.png",
+    image: "/portfolio-assets/miao-work-03-blue-city.webp",
     tagsEn: ["product", "demo", "content"],
     tagsZh: ["产品", "Demo", "内容"],
   },
@@ -186,7 +186,7 @@ const works = [
     roleZh: "风格延续 / 人物审片",
     detailEn: "Character consistency, costume logic, mood, and image-system control.",
     detailZh: "人物一致性、服装逻辑、情绪和图像系统控制。",
-    image: "/portfolio-assets/work-02.png",
+    image: "/portfolio-assets/miao-work-04-desert-mirrors.webp",
     tagsEn: ["character", "style", "control"],
     tagsZh: ["人物", "风格", "控制"],
   },
@@ -198,7 +198,7 @@ const works = [
     roleZh: "世界观 / 视觉导演",
     detailEn: "Character systems, surreal scenes, horror texture, and cinematic mood boards.",
     detailZh: "人物系统、超现实场景、恐怖质感和电影化 moodboard。",
-    image: "/portfolio-assets/work-04.png",
+    image: "/portfolio-assets/miao-work-05-fairy-study.webp",
     tagsEn: ["world", "mood", "cinema"],
     tagsZh: ["世界", "情绪", "电影感"],
   },
@@ -210,7 +210,7 @@ const works = [
     roleZh: "类型控制 / 质感审核",
     detailEn: "Atmosphere, material texture, tension, and generated-image boundary testing.",
     detailZh: "氛围、材质、张力和生成图像边界测试。",
-    image: "/portfolio-assets/work-06.png",
+    image: "/portfolio-assets/miao-work-06-flower-portrait.webp",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
   },
@@ -1036,6 +1036,7 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     const root = rootRef.current;
     const canvas = canvasRef.current;
     if (!root || !canvas) return;
+    if (root.closest(".works-portal-scene")) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -1245,18 +1246,18 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
 
   const enterWork = (index: number) => {
     focusWork(index);
-    rootRef.current?.querySelector(".time-channel-stage")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    window.location.assign("/photos");
   };
 
   return (
     <div className="works-panel time-channel-panel" ref={rootRef} data-reveal>
       <div className="work-portal-entry">
         <strong aria-hidden="true">WORKS</strong>
-        <div className="work-card-fan" aria-label={locale === "zh" ? "精选作品入口" : "Selected work entry"}>
+        <div className="work-card-line" aria-label={locale === "zh" ? "精选作品入口" : "Selected work entry"}>
           {works.slice(0, 5).map((work, index) => (
             <button
               type="button"
-              className={index === activeWorkIndex ? "active" : ""}
+              className={`work-entry-card ${work.image.includes("blue-city") || work.image.includes("desert") || work.image.includes("fairy-study") ? "wide" : "portrait"} ${index === activeWorkIndex ? "active" : ""}`}
               style={{ backgroundImage: `url(${work.image})` }}
               key={work.id}
               onClick={() => enterWork(index)}
@@ -1267,6 +1268,22 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
             </button>
           ))}
         </div>
+        <button
+          type="button"
+          className="work-hand-card"
+          onClick={() => enterWork(activeWorkIndex)}
+          aria-label={locale === "zh" ? "打开作品频道" : "Open work channel"}
+        >
+          <span>{locale === "zh" ? "点击进入" : "Click in"}</span>
+          <svg viewBox="0 0 180 220" aria-hidden="true">
+            <path d="M63 170V96c0-12 17-12 17 0v38" />
+            <path d="M80 126V78c0-13 18-13 18 0v50" />
+            <path d="M98 130V94c0-12 17-12 17 0v44" />
+            <path d="M115 139v-26c0-11 16-11 16 0v35c0 30-21 49-50 49H63c-17 0-30-13-30-30v-37c0-9 13-10 17-2l13 26" />
+            <path d="M36 190h91" />
+            <path d="M80 78l35-43c9-10 24 2 16 13l-33 46" />
+          </svg>
+        </button>
         <div className="work-portal-copy">
           <p>{locale === "zh" ? "进入 Miao 的公开作品频道" : "Enter Miao's public work channel"}</p>
           <small>{locale === "zh" ? "视觉世界 / 产品 Demo / 交互实验" : "visual worlds / product demos / interaction experiments"}</small>

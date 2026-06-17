@@ -1,0 +1,123 @@
+/* Miao portfolio skin: keeps TimeChannel interaction, changes only the visual language. */
+.timechannel-page #title h1 {
+  color: #f3efdf;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 24px;
+  font-weight: 880;
+  letter-spacing: 6px;
+  text-shadow: 0 0 24px rgba(183, 255, 37, 0.28);
+}
+
+.timechannel-page #title p,
+.timechannel-page #hint,
+.timechannel-page #depth .label,
+.timechannel-page #focusInfo .fhint {
+  color: rgba(243, 239, 223, 0.56);
+  font-family: var(--font-geist-mono), monospace;
+  font-style: normal;
+}
+
+.timechannel-page #btnUpload,
+.timechannel-page #uploadPanel {
+  display: none !important;
+}
+
+.timechannel-page .btn,
+.timechannel-page #focusInfo .nav,
+.timechannel-page .sp-input button,
+.timechannel-page #storyPanel,
+.timechannel-page #toast,
+.timechannel-page #tip,
+.timechannel-page #skyPanel {
+  border-color: rgba(243, 239, 223, 0.18);
+  background: rgba(5, 6, 4, 0.56);
+  color: #f3efdf;
+  font-family: var(--font-geist-mono), monospace;
+  box-shadow: none;
+}
+
+.timechannel-page .btn:hover,
+.timechannel-page .btn.active,
+.timechannel-page #focusInfo .nav:hover,
+.timechannel-page .sp-input button:hover {
+  border-color: rgba(183, 255, 37, 0.78);
+  background: rgba(183, 255, 37, 0.16);
+  color: #b7ff25;
+  box-shadow: 0 0 24px rgba(183, 255, 37, 0.18);
+}
+
+.timechannel-page #skyPanel .swatch.active {
+  box-shadow: 0 0 0 2px rgba(183, 255, 37, 0.95), 0 0 14px rgba(183, 255, 37, 0.34);
+}
+
+.timechannel-page #focusInfo .fdate,
+.timechannel-page #depth .num,
+.timechannel-page #timeline .yr,
+.timechannel-page .sp-head,
+.timechannel-page .sp-entry .when,
+.timechannel-page #loader .text {
+  color: rgba(183, 255, 37, 0.82);
+  font-family: var(--font-geist-mono), monospace;
+  text-shadow: 0 0 18px rgba(183, 255, 37, 0.24);
+}
+
+.timechannel-page #timeline .track::before {
+  background: linear-gradient(rgba(183, 255, 37, 0.56), rgba(243, 239, 223, 0.12));
+}
+
+.timechannel-page #timeline .knob,
+.timechannel-page .sp-entry .dot,
+.timechannel-page #hint .scroll-icon::after {
+  background: #b7ff25;
+  box-shadow: 0 0 14px rgba(183, 255, 37, 0.85), 0 0 30px rgba(183, 255, 37, 0.28);
+}
+
+.timechannel-page #hint .scroll-icon {
+  border-color: rgba(183, 255, 37, 0.48);
+}
+
+.timechannel-page #loader {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(183, 255, 37, 0.12), transparent 28%),
+    #050604;
+}
+
+.timechannel-page #loader.done {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.timechannel-page #loader .ring {
+  border-color: rgba(183, 255, 37, 0.16);
+  border-top-color: rgba(183, 255, 37, 0.92);
+  box-shadow: 0 0 34px rgba(183, 255, 37, 0.16), inset 0 0 30px rgba(183, 255, 37, 0.08);
+}
+
+.timechannel-page #dropzone {
+  border-color: rgba(183, 255, 37, 0.72);
+  background: rgba(5, 6, 4, 0.62);
+  color: #b7ff25;
+}
+
+.timechannel-page #storyPanel {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .timechannel-page #title h1 {
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .timechannel-page #toolbar {
+    right: 12px;
+    gap: 6px;
+  }
+
+  .timechannel-page .btn {
+    min-height: 36px;
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+}
