@@ -1274,15 +1274,9 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
           onClick={() => enterWork(activeWorkIndex)}
           aria-label={locale === "zh" ? "打开作品频道" : "Open work channel"}
         >
-          <span>{locale === "zh" ? "点击进入" : "Click in"}</span>
-          <svg viewBox="0 0 180 220" aria-hidden="true">
-            <path d="M63 170V96c0-12 17-12 17 0v38" />
-            <path d="M80 126V78c0-13 18-13 18 0v50" />
-            <path d="M98 130V94c0-12 17-12 17 0v44" />
-            <path d="M115 139v-26c0-11 16-11 16 0v35c0 30-21 49-50 49H63c-17 0-30-13-30-30v-37c0-9 13-10 17-2l13 26" />
-            <path d="M36 190h91" />
-            <path d="M80 78l35-43c9-10 24 2 16 13l-33 46" />
-          </svg>
+          <span>{locale === "zh" ? "作品频道" : "WORK CHANNEL"}</span>
+          <b>{locale === "zh" ? "进入" : "OPEN"}</b>
+          <i aria-hidden="true" />
         </button>
         <div className="work-portal-copy">
           <p>{locale === "zh" ? "进入 Miao 的公开作品频道" : "Enter Miao's public work channel"}</p>

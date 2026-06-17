@@ -28,19 +28,19 @@
   position: relative;
   z-index: 2;
   display: flex;
-  width: min(92vw, 1120px);
-  margin-top: clamp(52px, 10vh, 116px);
-  padding: 0 clamp(18px, 3vw, 36px);
+  width: min(100%, 1210px);
+  margin-top: clamp(36px, 8vh, 92px);
+  padding: 0 clamp(10px, 1.6vw, 24px);
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2.2vw, 32px);
+  gap: clamp(8px, 1.25vw, 18px);
 }
 
 .work-entry-card {
   position: relative;
   display: grid;
-  flex: 0 0 clamp(142px, 13vw, 198px);
-  height: clamp(292px, 40vh, 420px);
+  flex: 0 1 clamp(112px, 9.4vw, 156px);
+  height: clamp(248px, 34vh, 366px);
   align-content: end;
   overflow: hidden;
   border: 1.5px solid rgb(243 239 223 / 78%);
@@ -64,33 +64,33 @@
 }
 
 .work-entry-card.wide {
-  flex-basis: clamp(210px, 22vw, 330px);
-  height: clamp(188px, 28vh, 300px);
+  flex-basis: clamp(176px, 17vw, 264px);
+  height: clamp(158px, 24vh, 246px);
 }
 
 .work-entry-card:nth-child(1) {
-  --entry-y: 22px;
-  --entry-rot: -6deg;
+  --entry-y: 14px;
+  --entry-rot: -4deg;
 }
 
 .work-entry-card:nth-child(2) {
-  --entry-y: -12px;
-  --entry-rot: 3deg;
+  --entry-y: -8px;
+  --entry-rot: 2deg;
 }
 
 .work-entry-card:nth-child(3) {
-  --entry-y: 26px;
+  --entry-y: 18px;
   --entry-rot: -2deg;
 }
 
 .work-entry-card:nth-child(4) {
-  --entry-y: -8px;
-  --entry-rot: 4deg;
+  --entry-y: -6px;
+  --entry-rot: 3deg;
 }
 
 .work-entry-card:nth-child(5) {
-  --entry-y: 20px;
-  --entry-rot: -3deg;
+  --entry-y: 12px;
+  --entry-rot: -2deg;
 }
 
 .work-entry-card::before {
@@ -152,65 +152,81 @@
 
 .work-hand-card {
   position: absolute;
-  right: clamp(-54px, -4vw, -18px);
-  top: 47%;
+  right: clamp(18px, 3.2vw, 52px);
+  top: 32%;
   z-index: 5;
   display: grid;
-  width: clamp(126px, 12vw, 188px);
-  aspect-ratio: 0.72;
-  place-items: center;
+  width: clamp(76px, 6.2vw, 98px);
+  aspect-ratio: 0.84;
+  align-content: end;
+  justify-items: start;
   overflow: hidden;
-  border: 1.5px solid rgb(10 12 10 / 82%);
-  border-radius: 24px;
-  background: #f7f7f2;
+  border: 1px solid rgb(183 255 37 / 46%);
+  border-radius: 16px;
+  padding: 11px;
+  background:
+    linear-gradient(180deg, rgb(243 239 223 / 8%), transparent 42%),
+    rgb(5 6 4 / 78%);
   box-shadow:
-    0 28px 70px rgb(0 0 0 / 52%),
-    inset 0 0 0 1px rgb(0 0 0 / 8%);
-  color: #11140f;
+    0 22px 56px rgb(0 0 0 / 48%),
+    inset 0 0 0 1px rgb(255 255 255 / 7%);
+  color: var(--ivory);
   cursor: pointer;
-  transform: translate(46%, -50%) rotate(6deg);
+  transform: translateY(-50%) rotate(3deg);
   transition:
+    border-color 220ms ease,
     box-shadow 220ms ease,
     transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .work-hand-card span {
-  position: absolute;
-  left: 16px;
-  top: 14px;
-  color: #11140f;
+  color: rgb(243 239 223 / 58%);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 860;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.work-hand-card svg {
-  width: 78%;
-  overflow: visible;
-  fill: none;
-  stroke: #11140f;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 8;
-  transform: translate(12px, 18px);
-  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+.work-hand-card b {
+  margin-top: 7px;
+  color: var(--acid);
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 920;
+  line-height: 0.88;
+}
+
+.work-hand-card i {
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid var(--acid);
+  border-right: 2px solid var(--acid);
+}
+
+.work-hand-card i::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 22px;
+  height: 2px;
+  background: var(--acid);
+  transform: rotate(-45deg);
+  transform-origin: right center;
 }
 
 .work-hand-card:hover,
 .work-hand-card:focus-visible {
+  border-color: var(--acid);
   box-shadow:
-    0 36px 86px rgb(0 0 0 / 62%),
+    0 32px 78px rgb(0 0 0 / 58%),
     0 0 40px rgb(183 255 37 / 24%),
-    inset 0 -42px 0 var(--acid);
+    inset 0 -12px 0 rgb(183 255 37 / 28%);
   outline: none;
-  transform: translate(3%, -50%) rotate(4deg);
-}
-
-.work-hand-card:hover svg,
-.work-hand-card:focus-visible svg {
-  transform: translate(-6px, 0);
+  transform: translateY(-58%) rotate(1deg);
 }
 
 .photos-channel-shell {
@@ -493,16 +509,16 @@
   }
 
   .work-hand-card {
-    right: -28px;
+    right: 18px;
     top: auto;
-    bottom: 96px;
-    width: 118px;
-    transform: translate(42%, 0) rotate(5deg);
+    bottom: 106px;
+    width: 104px;
+    transform: rotate(3deg);
   }
 
   .work-hand-card:hover,
   .work-hand-card:focus-visible {
-    transform: translate(4%, 0) rotate(3deg);
+    transform: translateY(-4px) rotate(1deg);
   }
 }
 
@@ -1202,7 +1218,7 @@
   .kinetic-manifesto {
     position: relative;
     z-index: 2;
-    min-height: clamp(520px, 78dvh, 820px);
+    min-height: clamp(560px, 72dvh, 760px);
     overflow: hidden;
     border-top: 1px solid rgb(243 239 223 / 10%);
     border-bottom: 1px solid rgb(243 239 223 / 10%);
@@ -1241,33 +1257,42 @@
     inset: 50% auto auto 50%;
     z-index: 2;
     display: grid;
-    width: 160vw;
-    gap: clamp(4px, 1.2vh, 14px);
-    transform: translate(-50%, -50%) rotate(-5deg);
+    width: min(1440px, 100vw);
+    gap: clamp(12px, 1.8vh, 24px);
+    transform: translate(-50%, -50%) rotate(-3deg);
   }
 
   .manifesto-track {
     display: flex;
-    width: max-content;
-    gap: clamp(28px, 5vw, 76px);
+    width: 100%;
+    justify-content: center;
+    gap: clamp(24px, 4vw, 58px);
     will-change: transform;
     animation: manifestoDrift 24s linear infinite;
   }
 
   .manifesto-track[data-direction="right"] {
-    margin-left: -34vw;
+    margin-left: 0;
     animation-direction: reverse;
     animation-duration: 30s;
   }
 
   .manifesto-track span {
     color: var(--ivory);
-    font-size: clamp(76px, 13vw, 220px);
+    font-size: clamp(58px, 8.2vw, 136px);
     font-weight: 880;
     letter-spacing: 0;
-    line-height: 0.82;
+    line-height: 0.96;
     white-space: nowrap;
     text-transform: uppercase;
+  }
+
+  [data-locale="zh"] .manifesto-track span {
+    font-size: clamp(62px, 8.6vw, 146px);
+  }
+
+  .manifesto-track span:nth-child(3) {
+    display: none;
   }
 
   .manifesto-track:nth-child(2) span,
@@ -2608,7 +2633,7 @@
     }
 
     to {
-      transform: translateX(-34%);
+      transform: translateX(-5%);
     }
   }
 
@@ -2868,12 +2893,12 @@
     }
 
     .kinetic-manifesto {
-      min-height: 440px;
+      min-height: 470px;
     }
 
     .manifesto-core {
-      width: 230vw;
-      transform: translate(-50%, -50%) rotate(-7deg);
+      width: 136vw;
+      transform: translate(-50%, -50%) rotate(-4deg);
     }
 
     .manifesto-track {
@@ -2881,8 +2906,8 @@
     }
 
     .manifesto-track span {
-      font-size: clamp(62px, 24vw, 128px);
-      line-height: 0.88;
+      font-size: clamp(42px, 14vw, 82px);
+      line-height: 0.98;
     }
 
     .hero-copy h1 {
