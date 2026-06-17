@@ -151,7 +151,8 @@ const works = [
     roleZh: "视觉导演 / 构图审核",
     detailEn: "Lighting, atmosphere, scene logic, and frame-level visual judgment.",
     detailZh: "光线、氛围、场景逻辑和单帧级视觉判断。",
-    image: "/portfolio-assets/miao-work-01-nine-tail-fox.webp",
+    image: "/portfolio-assets/miao-work-01-silver-orchid.png",
+    kind: "person",
     tagsEn: ["image", "scene logic", "taste"],
     tagsZh: ["影像", "场景逻辑", "审美"],
   },
@@ -163,7 +164,8 @@ const works = [
     roleZh: "动态情绪 / 视觉质检",
     detailEn: "Scale, rhythm, contrast, texture, and screen-ready visual tension.",
     detailZh: "尺度、节奏、对比、质感和适配大屏的视觉张力。",
-    image: "/portfolio-assets/miao-work-02-crystal-crown.webp",
+    image: "/portfolio-assets/miao-work-02-fairy-study-room.png",
+    kind: "scene",
     tagsEn: ["scale", "motion", "QC"],
     tagsZh: ["尺度", "动态", "质检"],
   },
@@ -175,7 +177,8 @@ const works = [
     roleZh: "产品叙事 / Demo 设计",
     detailEn: "Product hooks, creator scripts, prototype surfaces, and audience-readable demos.",
     detailZh: "产品钩子、创意脚本、原型界面和受众能看懂的 Demo。",
-    image: "/portfolio-assets/miao-work-03-blue-city.webp",
+    image: "/portfolio-assets/miao-work-03-blue-crown.png",
+    kind: "person",
     tagsEn: ["product", "demo", "content"],
     tagsZh: ["产品", "Demo", "内容"],
   },
@@ -187,7 +190,8 @@ const works = [
     roleZh: "风格延续 / 人物审片",
     detailEn: "Character consistency, costume logic, mood, and image-system control.",
     detailZh: "人物一致性、服装逻辑、情绪和图像系统控制。",
-    image: "/portfolio-assets/miao-work-04-desert-mirrors.webp",
+    image: "/portfolio-assets/miao-work-04-ink-lotus.png",
+    kind: "person",
     tagsEn: ["character", "style", "control"],
     tagsZh: ["人物", "风格", "控制"],
   },
@@ -199,7 +203,8 @@ const works = [
     roleZh: "世界观 / 视觉导演",
     detailEn: "Character systems, surreal scenes, horror texture, and cinematic mood boards.",
     detailZh: "人物系统、超现实场景、恐怖质感和电影化 moodboard。",
-    image: "/portfolio-assets/miao-work-05-fairy-study.webp",
+    image: "/portfolio-assets/miao-work-05-desert-stage.jpg",
+    kind: "scene",
     tagsEn: ["world", "mood", "cinema"],
     tagsZh: ["世界", "情绪", "电影感"],
   },
@@ -212,6 +217,7 @@ const works = [
     detailEn: "Atmosphere, material texture, tension, and generated-image boundary testing.",
     detailZh: "氛围、材质、张力和生成图像边界测试。",
     image: "/portfolio-assets/miao-work-06-flower-portrait.webp",
+    kind: "person",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
   },
@@ -1267,8 +1273,8 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    event.currentTarget.style.setProperty("--eye-dx", `${Math.max(-1, Math.min(1, x)) * 10}px`);
-    event.currentTarget.style.setProperty("--eye-dy", `${Math.max(-1, Math.min(1, y)) * 7}px`);
+    event.currentTarget.style.setProperty("--eye-dx", `${Math.max(-1, Math.min(1, x)) * 18}px`);
+    event.currentTarget.style.setProperty("--eye-dy", `${Math.max(-1, Math.min(1, y)) * 12}px`);
   };
 
   const resetEyePortal = (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -1289,11 +1295,11 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     <div className="works-panel time-channel-panel" ref={rootRef} data-reveal>
       <div className="work-portal-entry">
         <strong aria-hidden="true">WORKS</strong>
-        <div className="work-card-line" aria-label={locale === "zh" ? "精选作品入口" : "Selected work entry"}>
+        <div className="work-card-fan" aria-label={locale === "zh" ? "精选作品入口" : "Selected work entry"}>
           {works.slice(0, 5).map((work, index) => (
             <button
               type="button"
-              className={`work-entry-card ${index === activeWorkIndex ? "active" : ""}`}
+              className={`work-entry-card ${work.kind}`}
               style={{ backgroundImage: `url(${work.image})` }}
               key={work.id}
               onClick={() => enterWork(index)}
