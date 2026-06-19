@@ -6,6 +6,7 @@ import Lenis from "lenis";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { PRODUCT_ROOM_NODE_COUNT, ProductRoom } from "./ProductRoom";
 
 type Locale = "en" | "zh";
 
@@ -32,9 +33,9 @@ const copy = {
     secondary: "About Miao",
     index: "Chapters",
     stage: "Interactive personal site",
-    productTitle: "AI product lab",
+    productTitle: "AI production cockpit",
     productSubtitle: "Prototype in progress",
-    productHint: "Private product identifiers stay private. This layer only shows the public idea, interaction route, and demo surface.",
+    productHint: "The public layer shows the interaction route. The private product keeps its internal build details out of the portfolio.",
     worksTitle: "Works channel",
     worksLead:
       "Click or scroll through public works as a moving channel: visual worlds, demos, experiments, and image systems.",
@@ -55,9 +56,9 @@ const copy = {
     secondary: "关于 Miao",
     index: "章节",
     stage: "互动个人网站",
-    productTitle: "AI 产品实验室",
+    productTitle: "AI 制片实验舱",
     productSubtitle: "原型开发中",
-    productHint: "内部产品标识不在网页展示。这里保留公开的产品想法、交互路线和 Demo 表面。",
+    productHint: "公开层展示交互路线；产品内部构建细节暂时不放进作品集。",
     worksTitle: "作品频道",
     worksLead: "点击或滚动进入公开作品：视觉世界、产品 Demo、交互实验和生成图像系统会像频道一样移动。",
     methodTitle: "工作节奏",
@@ -84,13 +85,13 @@ const chapters: Chapter[] = [
     id: "product",
     code: "II",
     nav: { en: "Lab", zh: "实验室" },
-    title: { en: "AI products should feel usable before they feel clever.", zh: "AI 产品先要好用，再谈聪明。" },
-    line: { en: "The product layer is a lab for creator-facing AI tools.", zh: "产品层是面向创作者的 AI 工具实验室。" },
+    title: { en: "A product room for the machine behind the works.", zh: "这里不是作品墙，而是生产作品的机器。" },
+    line: { en: "Script, style, assets, storyboard, cover, video tasks, and production graph live in one cockpit.", zh: "脚本、风格、资产、分镜、封面、视频任务和生产图谱，在同一个实验舱里连接起来。" },
     body: {
-      en: "The current prototype is kept private while it is being shaped. The public site shows the interaction idea and how the experience should feel.",
-      zh: "当前原型在开发阶段保持私密。网站只展示公开的交互想法，以及这个体验应该呈现出的感觉。",
+      en: "The private prototype is an AI video production workbench. This public room shows how the tool thinks, moves, and organizes creative work.",
+      zh: "这个私有原型是一套 AI 视频制作工作台。公开页面展示它如何思考、流动，以及如何组织创作生产。",
     },
-    signal: "IDEA / DEMO / FLOW",
+    signal: "SCRIPT / STYLE / VIDEO / GRAPH",
   },
   {
     id: "judgment",
@@ -220,57 +221,6 @@ const works = [
     kind: "person",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
-  },
-];
-
-const productModules = [
-  {
-    id: "input",
-    code: "01",
-    en: "Brief to Mood",
-    zh: "Brief 到情绪",
-    stateEn: "creator intent",
-    stateZh: "创作者意图",
-    detailEn: "A product surface for turning rough ideas into visual mood, audience, and story direction.",
-    detailZh: "把粗糙想法转成视觉情绪、受众和叙事方向的产品界面。",
-    metricsEn: ["intent", "mood", "audience"],
-    metricsZh: ["意图", "情绪", "受众"],
-  },
-  {
-    id: "route",
-    code: "02",
-    en: "Reference Mixer",
-    zh: "参考混合器",
-    stateEn: "style route",
-    stateZh: "风格路线",
-    detailEn: "A way to compare references, extract taste signals, and make a repeatable style route.",
-    detailZh: "比较参考、提取审美信号，并形成可复用风格路线。",
-    metricsEn: ["reference", "taste", "route"],
-    metricsZh: ["参考", "审美", "路线"],
-  },
-  {
-    id: "review",
-    code: "03",
-    en: "Shot Review",
-    zh: "镜头审片",
-    stateEn: "visual judgment",
-    stateZh: "视觉判断",
-    detailEn: "A review layer for composition, continuity, mood, and whether the output still feels intentional.",
-    detailZh: "用来判断构图、连续性、情绪，以及生成结果是否仍然有作者感。",
-    metricsEn: ["frame", "mood", "intent"],
-    metricsZh: ["构图", "情绪", "作者感"],
-  },
-  {
-    id: "ship",
-    code: "04",
-    en: "Demo Room",
-    zh: "Demo 房间",
-    stateEn: "public preview",
-    stateZh: "公开预览",
-    detailEn: "A future page for playable demos, case notes, and product experiments when they are ready to show.",
-    detailZh: "后续用于放可玩的 Demo、案例笔记和成熟产品实验的页面。",
-    metricsEn: ["demo", "case", "preview"],
-    metricsZh: ["Demo", "案例", "预览"],
   },
 ];
 
@@ -731,7 +681,7 @@ export function PortfolioEditionsPrototype() {
     if (reduceMotion) return;
 
     const timer = window.setInterval(() => {
-      setActiveProductModule((current) => (current + 1) % productModules.length);
+      setActiveProductModule((current) => (current + 1) % PRODUCT_ROOM_NODE_COUNT);
     }, 2600);
 
     return () => window.clearInterval(timer);
@@ -911,51 +861,12 @@ function ScenePanel({
   }
 
   if (chapter.id === "product") {
-    const activeModule = productModules[activeProductModule] ?? productModules[0];
-    const activeMetrics = locale === "zh" ? activeModule.metricsZh : activeModule.metricsEn;
-
     return (
-      <div className="scene-panel product-panel product-console" data-reveal>
-        <div className="product-console-head">
-          <span>{copy[locale].productSubtitle}</span>
-          <b>{locale === "zh" ? "正在运行" : "running"}</b>
-        </div>
-        <strong>{copy[locale].productTitle}</strong>
-        <code>{locale === "zh" ? "私密原型 / 后续公开 Demo" : "private prototype / public demo later"}</code>
-
-        <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
-          {productModules.map((module, moduleIndex) => (
-            <button
-              type="button"
-              className={moduleIndex === activeProductModule ? "active" : ""}
-              key={module.id}
-              role="tab"
-              aria-selected={moduleIndex === activeProductModule}
-              onClick={() => onProductModuleChange(moduleIndex)}
-              onMouseEnter={() => onProductModuleChange(moduleIndex)}
-            >
-              <span>{module.code}</span>
-              <strong>{locale === "zh" ? module.zh : module.en}</strong>
-              <small>{locale === "zh" ? module.stateZh : module.stateEn}</small>
-            </button>
-          ))}
-        </div>
-
-        <div className="product-runtime" role="tabpanel">
-          <span>{locale === "zh" ? activeModule.zh : activeModule.en}</span>
-          <p>{locale === "zh" ? activeModule.detailZh : activeModule.detailEn}</p>
-          <div>
-            {activeMetrics.map((metric) => (
-              <b key={metric}>{metric}</b>
-            ))}
-          </div>
-        </div>
-
-        <div className="product-livebar" aria-hidden="true">
-          <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
-        </div>
-        <p>{copy[locale].productHint}</p>
-      </div>
+      <ProductRoom
+        locale={locale}
+        activeNodeIndex={activeProductModule}
+        onActiveNodeChange={onProductModuleChange}
+      />
     );
   }
 
