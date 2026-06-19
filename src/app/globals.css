@@ -2033,100 +2033,309 @@
     line-height: 1.6;
   }
 
-  .product-console {
-    width: min(100%, 680px);
+  .product-lab-room {
+    position: relative;
+    width: min(100%, 980px);
     overflow: hidden;
-    padding: 0;
+    border-color: rgb(183 255 37 / 22%);
+    background:
+      linear-gradient(145deg, rgb(7 8 7 / 88%), rgb(18 19 17 / 72%)),
+      radial-gradient(circle at 78% 12%, rgb(183 255 37 / 16%), transparent 30%);
+    isolation: isolate;
   }
 
-  .product-console-head {
+  .product-lab-room::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(rgb(243 239 223 / 6%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(243 239 223 / 5%) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(135deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
+    opacity: 0.38;
+  }
+
+  .product-type-field {
+    pointer-events: none;
+    position: absolute;
+    inset: -34px -24px auto;
+    height: 190px;
+    overflow: hidden;
+    color: rgb(243 239 223 / 10%);
+    font-family: var(--font-geist-mono), monospace;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.78;
+    text-transform: uppercase;
+    z-index: -1;
+  }
+
+  .product-type-field span {
+    position: absolute;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .product-type-solid {
+    top: 4px;
+    left: clamp(16px, 4vw, 48px);
+    font-size: clamp(64px, 11vw, 154px);
+  }
+
+  .product-type-outline {
+    top: 48px;
+    right: clamp(12px, 3vw, 40px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(183 255 37 / 28%);
+    font-size: clamp(72px, 12vw, 168px);
+  }
+
+  .product-type-sliced {
+    top: 108px;
+    left: 22%;
+    color: rgb(243 239 223 / 8%);
+    font-size: clamp(44px, 7vw, 96px);
+    text-decoration: line-through;
+    text-decoration-thickness: 8px;
+    text-decoration-color: rgb(183 255 37 / 24%);
+  }
+
+  .product-lab-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
+    gap: 16px;
     border-bottom: 1px solid rgb(243 239 223 / 12%);
-    padding: 18px clamp(18px, 2.6vw, 28px);
-    background: rgb(0 0 0 / 18%);
+    padding: 18px clamp(18px, 2.8vw, 30px);
+    background: rgb(0 0 0 / 22%);
+    font-family: var(--font-geist-mono), monospace;
+    text-transform: uppercase;
   }
 
-  .product-console-head span {
+  .product-lab-head span,
+  .product-cockpit-screen > span {
+    color: var(--acid);
+    font-size: 11px;
+    font-weight: 760;
+  }
+
+  .product-lab-head b {
+    color: rgb(243 239 223 / 66%);
+    font-size: 10px;
+    font-weight: 720;
+  }
+
+  .product-lab-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.86fr) minmax(320px, 1.14fr);
+    gap: clamp(18px, 3vw, 30px);
+    padding: clamp(24px, 3.4vw, 36px);
+  }
+
+  .product-lab-copy {
+    min-width: 0;
+  }
+
+  .product-lab-copy > p {
+    margin: 0 0 12px;
     color: var(--acid);
     font-family: var(--font-geist-mono), monospace;
     font-size: 11px;
-    font-weight: 720;
+    font-weight: 760;
     text-transform: uppercase;
   }
 
-  .product-console-head b {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: rgb(243 239 223 / 68%);
+  .product-lab-copy h3 {
+    max-width: 11ch;
+    margin: 0;
+    color: var(--ivory);
+    font-size: clamp(42px, 5.5vw, 78px);
+    font-weight: 890;
+    line-height: 0.88;
+  }
+
+  [data-locale="zh"] .product-lab-copy h3 {
+    max-width: 9ch;
+    line-height: 0.98;
+  }
+
+  .product-lab-copy > strong {
+    display: block;
+    max-width: 34ch;
+    margin-top: 18px;
+    color: rgb(243 239 223 / 76%);
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: 640;
+    line-height: 1.35;
+  }
+
+  .product-debug-chip {
+    display: grid;
+    gap: 6px;
+    max-width: 100%;
+    margin-top: 22px;
+    border: 1px solid rgb(243 239 223 / 13%);
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: rgb(0 0 0 / 28%);
+  }
+
+  .product-debug-chip span,
+  .product-debug-chip code {
     font-family: var(--font-geist-mono), monospace;
     font-size: 10px;
-    font-weight: 720;
+    line-height: 1.35;
     text-transform: uppercase;
   }
 
-  .product-console-head b::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: var(--acid);
-    box-shadow: 0 0 16px rgb(183 255 37 / 52%);
+  .product-debug-chip span {
+    color: rgb(243 239 223 / 48%);
   }
 
-  .product-console > strong {
-    padding: clamp(20px, 3vw, 28px) clamp(18px, 2.6vw, 28px) 0;
-  }
-
-  .product-panel code {
-    display: block;
-    margin: 16px clamp(18px, 2.6vw, 28px) 18px;
-    border: 1px solid rgb(243 239 223 / 12%);
-    border-radius: 6px;
-    padding: 12px 14px;
-    background: rgb(7 8 7 / 54%);
-    color: rgb(243 239 223 / 74%);
-    font-family: var(--font-geist-mono), monospace;
-    font-size: 12px;
-    line-height: 1.4;
+  .product-debug-chip code {
+    color: rgb(243 239 223 / 68%);
     word-break: break-all;
   }
 
-  .product-panel > p,
-  .works-panel p,
-  .contact-panel p {
-    margin: 22px 0 0;
+  .product-lab-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .product-lab-actions a {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(243 239 223 / 16%);
+    border-radius: 6px;
+    padding: 0 14px;
+    color: var(--ivory);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 11px;
+    font-weight: 760;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .product-lab-actions a:first-child {
+    border-color: rgb(183 255 37 / 46%);
+    background: var(--acid);
+    color: rgb(7 8 7);
+  }
+
+  .product-lab-actions a:hover,
+  .product-lab-actions a:focus-visible {
+    border-color: rgb(183 255 37 / 62%);
+    background: rgb(183 255 37 / 12%);
+    color: var(--acid);
+    outline: none;
+    transform: translateY(-2px);
+  }
+
+  .product-cockpit {
+    min-width: 0;
+  }
+
+  .product-cockpit-screen {
+    min-height: 268px;
+    border: 1px solid rgb(183 255 37 / 22%);
+    border-radius: 8px;
+    padding: clamp(18px, 2.4vw, 26px);
+    background:
+      radial-gradient(circle at 18% 4%, rgb(183 255 37 / 15%), transparent 32%),
+      linear-gradient(150deg, rgb(0 0 0 / 52%), rgb(7 8 7 / 76%));
+    box-shadow: inset 0 0 0 1px rgb(243 239 223 / 5%);
+  }
+
+  .product-cockpit-screen b {
+    display: block;
+    margin-top: 18px;
+    color: rgb(243 239 223 / 38%);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: clamp(44px, 6vw, 82px);
+    font-weight: 900;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  .product-cockpit-screen h4 {
+    max-width: 24ch;
+    margin: 18px 0 0;
+    color: var(--ivory);
+    font-size: clamp(20px, 2.1vw, 30px);
+    font-weight: 820;
+    line-height: 1.02;
+  }
+
+  .product-cockpit-screen p,
+  .product-cockpit-screen small,
+  .product-lab-note {
     color: rgb(243 239 223 / 66%);
-    font-size: 15px;
-    line-height: 1.62;
+    font-size: 14px;
+    line-height: 1.58;
   }
 
-  .product-panel > p {
-    margin: 18px clamp(18px, 2.6vw, 28px) clamp(20px, 3vw, 30px);
+  .product-cockpit-screen p {
+    max-width: 52ch;
+    margin: 12px 0 0;
   }
 
-  .product-module-grid {
+  .product-cockpit-screen small {
+    display: block;
+    max-width: 48ch;
+    margin-top: 10px;
+  }
+
+  .product-node-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .product-node-metrics i {
+    display: inline-grid;
+    min-height: 24px;
+    place-items: center;
+    border: 1px solid rgb(243 239 223 / 13%);
+    border-radius: 999px;
+    padding: 0 9px;
+    color: rgb(243 239 223 / 70%);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 720;
+    text-transform: uppercase;
+  }
+
+  .product-node-rail {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    padding: 0 clamp(18px, 2.6vw, 28px);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
   }
 
-  .product-module-grid button {
+  .product-node-rail button {
     position: relative;
     display: grid;
-    min-height: 118px;
+    min-height: 112px;
+    align-content: space-between;
     overflow: hidden;
-    border: 1px solid rgb(243 239 223 / 14%);
-    border-radius: 8px;
-    padding: 14px;
-    background:
-      linear-gradient(145deg, rgb(243 239 223 / 7%), transparent 52%),
-      rgb(0 0 0 / 20%);
-    color: rgb(243 239 223 / 82%);
+    border: 1px solid rgb(243 239 223 / 13%);
+    border-radius: 6px;
+    padding: 10px;
+    background: rgb(0 0 0 / 22%);
+    color: rgb(243 239 223 / 72%);
     text-align: left;
     cursor: pointer;
     transition:
@@ -2135,141 +2344,170 @@
       transform 180ms ease;
   }
 
-  .product-module-grid button::after {
+  .product-node-rail button::before {
     content: "";
     position: absolute;
-    inset: auto 12px 10px 12px;
-    height: 1px;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: linear-gradient(90deg, var(--acid), transparent);
+    inset: 0 auto 0 0;
+    width: 2px;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    background: var(--acid);
     opacity: 0;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
   }
 
-  .product-module-grid button:hover,
-  .product-module-grid button:focus-visible,
-  .product-module-grid button.active {
-    border-color: rgb(183 255 37 / 42%);
-    background:
-      linear-gradient(145deg, rgb(183 255 37 / 10%), transparent 54%),
-      rgb(0 0 0 / 28%);
+  .product-node-rail button:hover,
+  .product-node-rail button:focus-visible,
+  .product-node-rail button.active {
+    border-color: rgb(183 255 37 / 45%);
+    background: rgb(183 255 37 / 9%);
     outline: none;
     transform: translateY(-2px);
   }
 
-  .product-module-grid button.active::after {
-    transform: scaleX(1);
+  .product-node-rail button.active::before {
     opacity: 1;
+    transform: scaleY(1);
   }
 
-  .product-module-grid span,
-  .product-module-grid small,
-  .product-runtime span,
-  .product-runtime b {
+  .product-node-rail span,
+  .product-node-rail strong,
+  .product-node-rail small {
     font-family: var(--font-geist-mono), monospace;
     text-transform: uppercase;
   }
 
-  .product-module-grid span {
+  .product-node-rail span {
     color: var(--acid);
     font-size: 10px;
     font-weight: 760;
   }
 
-  .product-module-grid strong {
-    align-self: end;
+  .product-node-rail strong {
     color: var(--ivory);
-    font-size: clamp(18px, 1.8vw, 24px);
-    font-weight: 780;
+    font-size: 12px;
+    font-weight: 820;
     line-height: 1;
   }
 
-  [data-locale="zh"] .product-module-grid strong {
-    line-height: 1.12;
-  }
-
-  .product-module-grid small {
+  .product-node-rail small {
     color: rgb(243 239 223 / 48%);
     font-size: 9px;
     font-weight: 720;
-    line-height: 1.3;
+    line-height: 1.25;
   }
 
-  .product-runtime {
-    margin: 18px clamp(18px, 2.6vw, 28px) 0;
-    border: 1px solid rgb(183 255 37 / 18%);
-    border-radius: 8px;
-    padding: 18px;
-    background:
-      radial-gradient(circle at 14% 0%, rgb(183 255 37 / 14%), transparent 34%),
-      rgb(7 8 7 / 64%);
-  }
-
-  .product-runtime span {
-    color: var(--acid);
-    font-size: 10px;
-    font-weight: 760;
-  }
-
-  .product-runtime p {
-    max-width: 52ch;
-    margin: 10px 0 16px;
-    color: rgb(243 239 223 / 72%);
-    font-size: 14px;
-    line-height: 1.52;
-  }
-
-  .product-runtime div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  .product-runtime b {
-    display: inline-grid;
-    min-height: 24px;
-    place-items: center;
-    border: 1px solid rgb(243 239 223 / 13%);
-    border-radius: 999px;
-    padding: 0 9px;
-    color: rgb(243 239 223 / 66%);
-    font-size: 9px;
-    font-weight: 720;
-  }
-
-  .product-livebar {
+  .product-lab-progress {
     height: 2px;
-    margin: 18px clamp(18px, 2.6vw, 28px) 0;
+    margin-top: 12px;
     overflow: hidden;
     border-radius: 999px;
     background: rgb(243 239 223 / 10%);
   }
 
-  .product-livebar i {
+  .product-lab-progress i {
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--acid), rgb(243 239 223 / 72%));
+    background: linear-gradient(90deg, var(--acid), rgb(243 239 223 / 74%));
     transition: width 420ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .product-signal-rail {
+    display: flex;
+    gap: 18px;
+    overflow: hidden;
+    border-top: 1px solid rgb(243 239 223 / 11%);
+    border-bottom: 1px solid rgb(243 239 223 / 11%);
+    padding: 10px 0;
+    color: rgb(243 239 223 / 38%);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 10px;
+    font-weight: 720;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .product-signal-rail span {
+    min-width: max-content;
+    padding-left: 18px;
+  }
+
+  .product-lab-note {
+    max-width: 68ch;
+    margin: 18px clamp(18px, 2.8vw, 30px) clamp(20px, 3vw, 30px);
+  }
+
   @media (prefers-reduced-motion: no-preference) {
-    .product-module-grid button.active::after {
-      animation: productScan 1800ms ease-in-out infinite;
+    .product-type-outline {
+      animation: productTypeDrift 9s ease-in-out infinite alternate;
+    }
+
+    .product-type-sliced {
+      animation: productTypeScan 3.6s steps(2, end) infinite;
+    }
+
+    .product-node-rail button.active::before {
+      animation: productNodePulse 1300ms ease-in-out infinite;
+    }
+
+    .product-signal-rail span {
+      animation: productSignalRail 18s linear infinite;
     }
   }
 
-  @keyframes productScan {
-    0%,
-    100% {
-      opacity: 0.2;
-      transform: scaleX(0.16);
+  @keyframes productTypeDrift {
+    from {
+      transform: translateX(-2%);
     }
 
-    52% {
-      opacity: 1;
-      transform: scaleX(1);
+    to {
+      transform: translateX(3%);
     }
+  }
+
+  @keyframes productTypeScan {
+    0%,
+    100% {
+      opacity: 0.34;
+      clip-path: inset(0 0 42% 0);
+    }
+
+    50% {
+      opacity: 0.72;
+      clip-path: inset(36% 0 0 0);
+    }
+  }
+
+  @keyframes productNodePulse {
+    0%,
+    100% {
+      opacity: 0.42;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes productSignalRail {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .works-panel p,
+  .contact-panel p {
+    margin: 22px 0 0;
+    color: rgb(243 239 223 / 66%);
+    font-size: 15px;
+    line-height: 1.62;
   }
 
   .works-panel {
@@ -3262,9 +3500,13 @@
     .hero-module-card::before,
     .work-card-fan button,
     .work-portal-copy button,
-    .product-module-grid button,
-    .product-module-grid button::after,
-    .product-livebar i,
+    .product-lab-actions a,
+    .product-node-rail button,
+    .product-node-rail button::before,
+    .product-lab-progress i,
+    .product-type-outline,
+    .product-type-sliced,
+    .product-signal-rail span,
     .evidence-card,
     .evidence-media img,
     .time-channel-depth i,
@@ -3595,30 +3837,35 @@
       width: 100%;
     }
 
-    .product-module-grid {
+    .product-lab-grid {
       grid-template-columns: 1fr;
+      padding: 22px 16px;
     }
 
-    .product-module-grid button {
-      min-height: 104px;
+    .product-lab-copy h3 {
+      max-width: 10ch;
+      font-size: clamp(38px, 13vw, 56px);
     }
 
-    .ledger-row {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-
-    .ledger-row b {
-      grid-column: auto;
-    }
-
-    .evaluation-grid,
-    .credential-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .product-runtime {
+    .product-cockpit-screen {
+      min-height: 240px;
       padding: 16px;
+    }
+
+    .product-cockpit-screen b {
+      font-size: clamp(40px, 15vw, 64px);
+    }
+
+    .product-node-rail {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-node-rail button {
+      min-height: 96px;
+    }
+
+    .product-signal-rail {
+      font-size: 9px;
     }
 
     .works-scene {
