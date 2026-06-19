@@ -1812,12 +1812,12 @@
   }
 
   .product-scene {
-    grid-template-columns: minmax(96px, 0.16fr) minmax(320px, 0.48fr) minmax(520px, 0.82fr);
-    gap: clamp(22px, 3.2vw, 52px);
+    grid-template-columns: minmax(72px, 0.12fr) minmax(250px, 0.34fr) minmax(680px, 1fr);
+    gap: clamp(18px, 2.4vw, 34px);
   }
 
   .product-scene article {
-    max-width: 560px;
+    max-width: 360px;
   }
 
   .chapter-kicker {
@@ -1857,6 +1857,23 @@
   [data-locale="zh"] .chapter-scene h2 {
     font-size: clamp(42px, 6vw, 94px);
     line-height: 1.02;
+  }
+
+  .product-scene h2 {
+    max-width: 5.2ch;
+    font-size: clamp(44px, 5vw, 82px);
+  }
+
+  [data-locale="zh"] .product-scene h2 {
+    font-size: clamp(38px, 4.6vw, 72px);
+  }
+
+  .product-scene .chapter-line {
+    font-size: clamp(18px, 1.65vw, 28px);
+  }
+
+  .product-scene article p:not(.chapter-line) {
+    max-width: 32ch;
   }
 
   .chapter-line {
@@ -2129,7 +2146,7 @@
 
   .product-lab-grid {
     display: grid;
-    grid-template-columns: minmax(260px, 0.86fr) minmax(320px, 1.14fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: clamp(18px, 3vw, 30px);
     padding: clamp(24px, 3.4vw, 36px);
   }
