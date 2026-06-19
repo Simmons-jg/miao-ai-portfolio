@@ -238,7 +238,7 @@ export function ProductRoom({ locale, activeNodeIndex, onActiveNodeChange }: Pro
             </div>
           </div>
 
-          <div className="product-node-rail" id="product-pipeline" role="tablist" aria-label={c.route}>
+          <div className="product-node-rail" id="product-pipeline" role="group" aria-label={c.route}>
             {productNodes.map((node, index) => {
               const isActive = index === activeIndex;
 
@@ -246,9 +246,7 @@ export function ProductRoom({ locale, activeNodeIndex, onActiveNodeChange }: Pro
                 <button
                   type="button"
                   key={node.id}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls="product-lab-title"
+                  aria-pressed={isActive}
                   className={isActive ? "active" : ""}
                   onClick={() => onActiveNodeChange(index)}
                   onMouseEnter={() => onActiveNodeChange(index)}
