@@ -16,7 +16,7 @@
 - Product local prototype entry can be `http://127.0.0.1:8888/app.html`; external links must be optional and clearly framed as prototype/lab entry.
 - Product Room copy must describe an AI production cockpit: script in; style, assets, storyboard, cover, video tasks, and production graph out.
 - Use local/system fonts only; do not add remote font downloads.
-- Do not use `E:\作品\局中局短剧`; video-room work later should use `E:\作品\作品\视频\出海短剧`.
+- Do not reference the previously rejected short-drama folder in source/UI code; video-room work later should use `E:\作品\作品\视频\出海短剧`.
 - Product Room must remain understandable without animation and respect `prefers-reduced-motion`.
 - Keep cards at 8px radius or less. Do not nest cards inside cards.
 - Avoid landing-page marketing composition; this is a personal portfolio lab section.
@@ -1255,8 +1255,9 @@ Expected: no matches.
 
 Run:
 
-```bash
-rg -n "局中局短剧" src docs public
+```powershell
+$rejectedFolderPattern = "局中局" + "短剧"
+rg -n $rejectedFolderPattern src docs public
 ```
 
 Expected: no matches.
