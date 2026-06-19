@@ -71,6 +71,10 @@ export async function loadDefaultPhotos() {
         date: normalizeDate(photo.date, index),
         id: photo.id || `miao-${index + 1}`,
         title: photo.title || `Miao work ${index + 1}`,
+        width: photo.width || null,
+        height: photo.height || null,
+        orientation: photo.orientation || null,
+        rotatedFromPortrait: Boolean(photo.rotatedFromPortrait),
       };
 
       texLoader.load(

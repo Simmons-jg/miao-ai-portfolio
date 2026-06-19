@@ -16,6 +16,11 @@ const raycaster = new THREE.Raycaster();
 const _ndc = new THREE.Vector2();
 const _v1 = new THREE.Vector3(), _v2 = new THREE.Vector3(), _v3 = new THREE.Vector3();
 const _q1 = new THREE.Quaternion();
+const _q2 = new THREE.Quaternion();
+const _focusRot = new THREE.Quaternion();
+const _focusAxisZ = new THREE.Vector3(0, 0, 1);
+const PORTRAIT_FOCUS_ROTATION = Math.PI / 2;
+const PORTRAIT_FOCUS_SCALE_Y = (9 / 16) * (CFG.photoW / CFG.photoH);
 
 const focusInfo = document.getElementById('focusInfo');
 const focusDate = document.getElementById('focusDate');
@@ -60,7 +65,7 @@ async function loadHiRes(item, idx, mesh) {
         const heic2any = await loadHeic2any();
         const blob = await heic2any({ blob: item.file, toType: 'image/jpeg', quality: 0.92 });
         url = URL.createObjectURL(blob); temp = true;
-      } catch (_) { return; }
+      } catch { return; }
     } else {
       url = URL.createObjectURL(item.file);
       temp = true;
@@ -88,6 +93,8 @@ function showFocusedPhoto(idx) {
   focused.idx = idx;
   const item = photoItems[idx];
   const mesh = focused.card.userData.photoMesh;
+  focused.card.userData.focusRotatedPortrait = Boolean(item.rotatedFromPortrait);
+  focused.card.userData.focusRotateZ = item.rotatedFromPortrait ? PORTRAIT_FOCUS_ROTATION : 0;
   bindTexture(mesh, item);
   const tex = getTex(item);
   if (tex) mesh.material.map = tex;
@@ -116,6 +123,8 @@ function finalizeFocusClose() {
   bindTexture(mesh, photoItems[mesh.userData.photoIndex]);
   mesh.material.toneMapped = true;
   mesh.material.needsUpdate = true;
+  focused.card.userData.focusRotatedPortrait = false;
+  focused.card.userData.focusRotateZ = 0;
   focused.card.userData.frameMesh.visible = true;
   focused.card.scale.setScalar(1);
   disposeHiRes();
@@ -156,9 +165,12 @@ export function update(dt, t) {
   // 取出距离随视口自适应；桌面端照片靠左给故事面板留位，移动端上移
   const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
   const fW = isMobile ? 0.84 : 0.52, fH = isMobile ? 0.50 : 0.66;
+  const portraitFocus = Boolean(focused?.card.userData.focusRotatedPortrait);
+  const focusFitW = portraitFocus ? CFG.photoH * PORTRAIT_FOCUS_SCALE_Y : CFG.photoW;
+  const focusFitH = portraitFocus ? CFG.photoW : CFG.photoH;
   const focusDist = Math.max(
-    (CFG.photoH * 1.55 * 0.5) / (fH * tanHalfFov),
-    (CFG.photoW * 1.55 * 0.5) / (fW * tanHalfFov * camera.aspect)
+    (focusFitH * 1.55 * 0.5) / (fH * tanHalfFov),
+    (focusFitW * 1.55 * 0.5) / (fW * tanHalfFov * camera.aspect)
   );
 
   if (focused && focusEase > 0.0001) {
@@ -177,11 +189,15 @@ export function update(dt, t) {
     card.parent.worldToLocal(_v1);
     card.position.lerp(_v1, focusEase); // 从墙面位姿（tunnel.updateCards 刚算好）出发
     card.parent.getWorldQuaternion(_q1).invert().multiply(camera.quaternion);
-    card.quaternion.slerp(_q1, focusEase);
+    _q2.copy(_q1);
+    if (u.focusRotateZ) _q2.multiply(_focusRot.setFromAxisAngle(_focusAxisZ, u.focusRotateZ));
+    card.quaternion.slerp(_q2, focusEase);
     // 按原图宽高比显示（隧道里仍是统一尺寸）
     let fsx = 1, fsy = 1;
     const im = u.photoMesh.material.map && u.photoMesh.material.map.image;
-    if (im && im.width && im.height) {
+    if (u.focusRotatedPortrait) {
+      fsy = PORTRAIT_FOCUS_SCALE_Y;
+    } else if (im && im.width && im.height) {
       const imgA = im.width / im.height, cardA = CFG.photoW / CFG.photoH;
       if (imgA > cardA) fsy = cardA / imgA; else fsx = imgA / cardA;
     }
@@ -210,6 +226,8 @@ export function update(dt, t) {
 export function debugState() {
   return {
     focused: !!focused, idx: focused?.idx, focusT: +focusT.toFixed(3),
+    focusRotatedPortrait: Boolean(focused?.card.userData.focusRotatedPortrait),
+    focusRotateZ: +(focused?.card.userData.focusRotateZ || 0).toFixed(3),
     cardWorld: focused ? focused.card.getWorldPosition(new THREE.Vector3()).toArray().map((v) => +v.toFixed(2)) : null,
     camPos: camera.position.toArray().map((v) => +v.toFixed(2)),
   };
