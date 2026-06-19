@@ -6,6 +6,7 @@ import Lenis from "lenis";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { PRODUCT_ROOM_NODE_COUNT, ProductRoom } from "./ProductRoom";
 
 type Locale = "en" | "zh";
 
@@ -220,57 +221,6 @@ const works = [
     kind: "person",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
-  },
-];
-
-const productModules = [
-  {
-    id: "input",
-    code: "01",
-    en: "Brief to Mood",
-    zh: "Brief 到情绪",
-    stateEn: "creator intent",
-    stateZh: "创作者意图",
-    detailEn: "A product surface for turning rough ideas into visual mood, audience, and story direction.",
-    detailZh: "把粗糙想法转成视觉情绪、受众和叙事方向的产品界面。",
-    metricsEn: ["intent", "mood", "audience"],
-    metricsZh: ["意图", "情绪", "受众"],
-  },
-  {
-    id: "route",
-    code: "02",
-    en: "Reference Mixer",
-    zh: "参考混合器",
-    stateEn: "style route",
-    stateZh: "风格路线",
-    detailEn: "A way to compare references, extract taste signals, and make a repeatable style route.",
-    detailZh: "比较参考、提取审美信号，并形成可复用风格路线。",
-    metricsEn: ["reference", "taste", "route"],
-    metricsZh: ["参考", "审美", "路线"],
-  },
-  {
-    id: "review",
-    code: "03",
-    en: "Shot Review",
-    zh: "镜头审片",
-    stateEn: "visual judgment",
-    stateZh: "视觉判断",
-    detailEn: "A review layer for composition, continuity, mood, and whether the output still feels intentional.",
-    detailZh: "用来判断构图、连续性、情绪，以及生成结果是否仍然有作者感。",
-    metricsEn: ["frame", "mood", "intent"],
-    metricsZh: ["构图", "情绪", "作者感"],
-  },
-  {
-    id: "ship",
-    code: "04",
-    en: "Demo Room",
-    zh: "Demo 房间",
-    stateEn: "public preview",
-    stateZh: "公开预览",
-    detailEn: "A future page for playable demos, case notes, and product experiments when they are ready to show.",
-    detailZh: "后续用于放可玩的 Demo、案例笔记和成熟产品实验的页面。",
-    metricsEn: ["demo", "case", "preview"],
-    metricsZh: ["Demo", "案例", "预览"],
   },
 ];
 
@@ -731,7 +681,7 @@ export function PortfolioEditionsPrototype() {
     if (reduceMotion) return;
 
     const timer = window.setInterval(() => {
-      setActiveProductModule((current) => (current + 1) % productModules.length);
+      setActiveProductModule((current) => (current + 1) % PRODUCT_ROOM_NODE_COUNT);
     }, 2600);
 
     return () => window.clearInterval(timer);
@@ -911,51 +861,12 @@ function ScenePanel({
   }
 
   if (chapter.id === "product") {
-    const activeModule = productModules[activeProductModule] ?? productModules[0];
-    const activeMetrics = locale === "zh" ? activeModule.metricsZh : activeModule.metricsEn;
-
     return (
-      <div className="scene-panel product-panel product-console" data-reveal>
-        <div className="product-console-head">
-          <span>{copy[locale].productSubtitle}</span>
-          <b>{locale === "zh" ? "正在运行" : "running"}</b>
-        </div>
-        <strong>{copy[locale].productTitle}</strong>
-        <code>{locale === "zh" ? "私密原型 / 后续公开 Demo" : "private prototype / public demo later"}</code>
-
-        <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
-          {productModules.map((module, moduleIndex) => (
-            <button
-              type="button"
-              className={moduleIndex === activeProductModule ? "active" : ""}
-              key={module.id}
-              role="tab"
-              aria-selected={moduleIndex === activeProductModule}
-              onClick={() => onProductModuleChange(moduleIndex)}
-              onMouseEnter={() => onProductModuleChange(moduleIndex)}
-            >
-              <span>{module.code}</span>
-              <strong>{locale === "zh" ? module.zh : module.en}</strong>
-              <small>{locale === "zh" ? module.stateZh : module.stateEn}</small>
-            </button>
-          ))}
-        </div>
-
-        <div className="product-runtime" role="tabpanel">
-          <span>{locale === "zh" ? activeModule.zh : activeModule.en}</span>
-          <p>{locale === "zh" ? activeModule.detailZh : activeModule.detailEn}</p>
-          <div>
-            {activeMetrics.map((metric) => (
-              <b key={metric}>{metric}</b>
-            ))}
-          </div>
-        </div>
-
-        <div className="product-livebar" aria-hidden="true">
-          <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
-        </div>
-        <p>{copy[locale].productHint}</p>
-      </div>
+      <ProductRoom
+        locale={locale}
+        activeNodeIndex={activeProductModule}
+        onActiveNodeChange={onProductModuleChange}
+      />
     );
   }
 
