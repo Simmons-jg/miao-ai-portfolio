@@ -3,9 +3,11 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import Link from "next/link";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { videoWorks } from "@/lib/videoCatalog";
 
 type Locale = "en" | "zh";
 
@@ -155,6 +157,186 @@ const chapters: Chapter[] = [
   },
 ];
 
+const refinedCopy = {
+  en: {
+    ...copy.en,
+    brand: "Guo Jiawen / Miao喵渺淼妙",
+    role: "AI creator / images / videos / music / product",
+    lang: "中文",
+    heroTitle: "Hello,\nthis is Miao",
+    heroBody:
+      "Hello, this is Miao, an AI creator. I make images, videos, music, and strange little tools with AI. Let's do some cool things :)",
+    primary: "Enter images",
+    secondary: "What I make",
+    index: "Rooms",
+    stage: "AI creator playground",
+    productTitle: "I'M MAKING AN AI VIDEO TOOL",
+    productSubtitle: "Script in. Style, characters, shots, covers and video tasks out.",
+    productHint: "It is not a gallery. It is the machine behind the gallery.",
+    worksTitle: "Images",
+    worksLead: "Some pictures made with AI, but judged by human taste.",
+    methodTitle: "MUSIC",
+    contactTitle: "CONTACT ME",
+    contactBody:
+      "If you like strange images, AI videos, product demos, or cool interactive websites, we can talk.",
+  },
+  zh: {
+    ...copy.zh,
+    brand: "郭嘉雯 / Miao喵渺淼妙",
+    role: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
+    lang: "EN",
+    heroTitle: "你好，\n我是 Miao",
+    heroBody:
+      "你好，我是 Miao，一个用 AI 做视觉、视频和产品的人。我做图像、视频、音乐，也做一些奇奇怪怪的 AI 工具。一起做点酷东西 :)",
+    primary: "进入图像",
+    secondary: "我会做什么",
+    index: "房间",
+    stage: "AI 创作者游乐场",
+    productTitle: "我在做一台 AI 视频机器",
+    productSubtitle: "剧本进去，人物、风格、分镜、封面和视频任务出来。",
+    productHint: "它不是作品墙。它是作品墙背后的机器。",
+    worksTitle: "图像",
+    worksLead: "不是生成了就算作品。我更在意氛围、构图、人物感和世界观。",
+    methodTitle: "音乐",
+    contactTitle: "CONTACT ME",
+    contactBody:
+      "如果你喜欢奇怪的图像、AI 视频、产品 Demo，或者酷一点的互动网站，我们可以聊聊。",
+  },
+} as const;
+
+const refinedNavLabelsZh = ["主页", "关于", "图像", "影视", "音乐", "产品", "联系"];
+
+const refinedNavLinks = navLinks.map((link, index) => ({
+  ...link,
+  zh: refinedNavLabelsZh[index] ?? link.zh,
+}));
+
+const refinedChapterText: Record<string, Partial<Chapter>> = {
+  direction: {
+    nav: { en: "About", zh: "关于" },
+    title: { en: "WHAT SKILLS DO I HAVE", zh: "我会做什么" },
+    line: {
+      en: "A personal toolkit for images, videos, music, and AI products.",
+      zh: "图像、影视、音乐和 AI 产品，是我现在最常用的创作工具箱。",
+    },
+    body: {
+      en: "Not just prompting. I care about mood, story, tool logic, and how a viewer enters the work.",
+      zh: "不是只会写提示词。我更在意氛围、故事、工具逻辑，以及一个人怎么进入作品。",
+    },
+    signal: "VISUAL FIRST / MAKE IT MOVE / TOOL AS PLAY",
+  },
+  product: {
+    nav: { en: "Product", zh: "产品" },
+    title: { en: "PRODUCT", zh: "产品" },
+    line: {
+      en: "I am building an AI video machine.",
+      zh: "我在做一台 AI 视频机器。",
+    },
+    body: {
+      en: "Script in. Style, characters, shots, covers and video tasks out. It is not a gallery. It is the machine behind the gallery.",
+      zh: "剧本进去，人物、风格、分镜、封面和视频任务出来。它不是作品墙，它是作品墙背后的机器。",
+    },
+    signal: "SCRIPT / STYLE / SHOTS / TASKS",
+  },
+  judgment: {
+    nav: { en: "Videos", zh: "影视" },
+    title: { en: "VIDEOS", zh: "影视" },
+    line: {
+      en: "Short films, edits, moving images, and rhythm.",
+      zh: "短片、剪辑、移动的画面和节奏。",
+    },
+    body: {
+      en: "Video should be played, paced, and told. It should not be mixed into the image wall.",
+      zh: "这里放视频，不跟图片墙混在一起。视频要被播放，要有节奏，也要有故事。",
+    },
+    signal: "PLAY / RHYTHM / STORY",
+  },
+  works: {
+    nav: { en: "Images", zh: "图像" },
+    title: { en: "IMAGES", zh: "图像" },
+    line: {
+      en: "Some pictures made with AI, but judged by human taste.",
+      zh: "不是生成了就算作品。",
+    },
+    body: {
+      en: "I care more about atmosphere, composition, character presence, and worldbuilding.",
+      zh: "我更在意氛围、构图、人物感和世界观。",
+    },
+    signal: "IMAGE / TASTE / WORLD",
+  },
+  method: {
+    nav: { en: "Music", zh: "音乐" },
+    title: { en: "MUSIC", zh: "音乐" },
+    line: {
+      en: "Some sounds, moods, and unfinished little tracks.",
+      zh: "一些声音、情绪，和还没完成的小片段。",
+    },
+    body: {
+      en: "Music does not always need to be complete. Sometimes it is just the temperature of an image.",
+      zh: "音乐不一定要完整。有时候它只是一个画面的温度。",
+    },
+    signal: "SOUND / MOOD / TRACK",
+  },
+  contact: {
+    nav: { en: "Contact", zh: "联系" },
+    title: { en: "CONTACT ME", zh: "CONTACT ME" },
+    line: {
+      en: "If you like strange images, AI videos, product demos, or cool interactive websites, we can talk.",
+      zh: "如果你喜欢奇怪的图像、AI 视频、产品 Demo，或者酷一点的互动网站，我们可以聊聊。",
+    },
+    body: {
+      en: "Email, X, Bilibili, Xiaohongshu, and Douyin are open for different kinds of conversation.",
+      zh: "Email、X、B 站、小红书和抖音，都可以作为不同的入口。",
+    },
+    signal: "EMAIL / X / BILI / RED / DOUYIN",
+  },
+};
+
+const refinedChapters = chapters.map((chapter) => ({
+  ...chapter,
+  ...(refinedChapterText[chapter.id] ?? {}),
+})) as Chapter[];
+
+const refinedTasteSignals = [
+  {
+    code: "01",
+    en: "I'M AN AI VISUAL CREATOR",
+    zh: "爱做一些有氛围的 AI 图像",
+    metricEn: "visual first",
+    metricZh: "视觉先行",
+  },
+  {
+    code: "02",
+    en: "I'M A VIDEO STORYTELLER",
+    zh: "爱做一些有节奏、有故事感的影像和片段",
+    metricEn: "make it move",
+    metricZh: "让它动起来",
+  },
+  {
+    code: "03",
+    en: "I'M AN AI PRODUCT THINKER",
+    zh: "爱把创作流程做成可以玩的工具",
+    metricEn: "tools can play",
+    metricZh: "工具也要好玩",
+  },
+  {
+    code: "04",
+    en: "I'M AN AI MUSIC MAKER",
+    zh: "会用 AI 写一些有画面感的音乐",
+    metricEn: "sound mood",
+    metricZh: "声音情绪",
+  },
+];
+
+const refinedKineticTracks = [
+  { en: "VISUAL FIRST", zh: "视觉先行" },
+  { en: "MAKE IT MOVE", zh: "让它动起来" },
+  { en: "AI CAN BE WILD", zh: "AI 可以很野" },
+  { en: "STORY BEFORE TOOL", zh: "故事先于工具" },
+  { en: "NOT JUST PROMPTS", zh: "不只是提示词" },
+  { en: "CREATE COOL THINGS", zh: "一起做点酷东西" },
+];
+
 const works = [
   {
     id: "01",
@@ -284,6 +466,33 @@ const productModules = [
     detailZh: "输出的是清楚的制作路线：做什么、检查什么、下一步发给谁。",
     metricsEn: ["make", "check", "send"],
     metricsZh: ["制作", "检查", "分发"],
+  },
+];
+
+const productEntrances = [
+  {
+    code: "LIVE",
+    en: "AI video machine",
+    zh: "AI 影视机器",
+    detailEn: "Open the production tool behind the image and video workflow.",
+    detailZh: "进入图像和影视流程背后的真实产品。",
+    href: "/product",
+  },
+  {
+    code: "LAB",
+    en: "Small experiments",
+    zh: "小作品集合",
+    detailEn: "Tiny tools, prototypes, and unfinished interaction ideas.",
+    detailZh: "一些小工具、原型和还在生长的交互想法。",
+    href: "/product#lab",
+  },
+  {
+    code: "ROOM",
+    en: "Creator channels",
+    zh: "创作房间",
+    detailEn: "Images, videos, music, and product demos stay in their own rooms.",
+    detailZh: "图像、影视、音乐和产品 Demo 分开进入。",
+    href: "/#works",
   },
 ];
 
@@ -459,8 +668,9 @@ export function PortfolioEditionsPrototype() {
   const rootRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const activeChapter = chapters[activeIndex] ?? chapters[0];
-  const c = copy[locale];
+  const [activeVideo, setActiveVideo] = useState(0);
+  const activeChapter = refinedChapters[activeIndex] ?? refinedChapters[0];
+  const c = refinedCopy[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-Hans" : "en";
@@ -495,7 +705,7 @@ export function PortfolioEditionsPrototype() {
 
       sections.forEach((section, index) => {
         const sceneIndex = Number.parseInt(section.dataset.sceneIndex ?? String(index), 10);
-        const nextIndex = Number.isFinite(sceneIndex) ? Math.min(chapters.length - 1, Math.max(0, sceneIndex)) : 0;
+        const nextIndex = Number.isFinite(sceneIndex) ? Math.min(refinedChapters.length - 1, Math.max(0, sceneIndex)) : 0;
         ScrollTrigger.create({
           trigger: section,
           start: "top 55%",
@@ -762,7 +972,7 @@ export function PortfolioEditionsPrototype() {
     return () => window.clearInterval(timer);
   }, [activeChapter.id]);
 
-  const progress = useMemo(() => `${((activeIndex + 1) / chapters.length) * 100}%`, [activeIndex]);
+  const progress = useMemo(() => `${((activeIndex + 1) / refinedChapters.length) * 100}%`, [activeIndex]);
 
   return (
     <main ref={rootRef} className="portfolio-shell" data-locale={locale} data-active={activeChapter.id}>
@@ -778,7 +988,7 @@ export function PortfolioEditionsPrototype() {
           </span>
         </a>
         <nav aria-label="Primary navigation">
-          {navLinks.map((link) => (
+          {refinedNavLinks.map((link) => (
             <a href={link.href} key={link.href}>
               {locale === "zh" ? link.zh : link.en}
             </a>
@@ -796,7 +1006,7 @@ export function PortfolioEditionsPrototype() {
 
       <aside className="chapter-rail" aria-label={c.index}>
         <b>{c.index}</b>
-        {chapters.map((chapter, index) => (
+        {refinedChapters.map((chapter, index) => (
           <a href={`#${chapter.id}`} className={index === activeIndex ? "active" : ""} key={chapter.id}>
             <span>{chapter.code}</span>
             <strong>{chapter.nav[locale]}</strong>
@@ -853,7 +1063,7 @@ export function PortfolioEditionsPrototype() {
 
       <section className="kinetic-manifesto" aria-label={locale === "zh" ? "作品集视觉宣言" : "Portfolio manifesto"}>
         <div className="manifesto-core">
-          {kineticTracks.map((track, index) => (
+          {refinedKineticTracks.map((track, index) => (
             <div className="manifesto-track" data-direction={index % 2 === 0 ? "left" : "right"} key={track.en}>
               <span>{locale === "zh" ? track.zh : track.en}</span>
               <span>{locale === "zh" ? track.zh : track.en}</span>
@@ -863,7 +1073,7 @@ export function PortfolioEditionsPrototype() {
         </div>
       </section>
 
-      {chapters.map((chapter, index) =>
+      {refinedChapters.map((chapter, index) =>
         chapter.id === "works" ? (
           <section
             id={chapter.id}
@@ -873,6 +1083,21 @@ export function PortfolioEditionsPrototype() {
             key={chapter.id}
           >
             <WorkTimeChannel locale={locale} />
+          </section>
+        ) : chapter.id === "judgment" ? (
+          <section
+            id={chapter.id}
+            className="chapter-scene video-chapter-scene"
+            data-chapter
+            data-scene-index={index}
+            key={chapter.id}
+          >
+            <VideoRoomPanel
+              chapter={chapter}
+              locale={locale}
+              activeVideo={activeVideo}
+              onVideoChange={setActiveVideo}
+            />
           </section>
         ) : (
           <section
@@ -919,7 +1144,7 @@ function ScenePanel({
   onProductModuleChange: (index: number) => void;
 }) {
   const [activeSkill, setActiveSkill] = useState(0);
-  const activeSignal = tasteSignals[activeSkill] ?? tasteSignals[0];
+  const activeSignal = refinedTasteSignals[activeSkill] ?? refinedTasteSignals[0];
 
   if (chapter.id === "direction") {
     return (
@@ -936,7 +1161,7 @@ function ScenePanel({
           <p>{locale === "zh" ? activeSignal.zh : activeSignal.en}</p>
         </div>
         <div className="skill-picker" role="tablist" aria-label={locale === "zh" ? "选择技能" : "Choose a skill"}>
-          {tasteSignals.map((item, skillIndex) => (
+          {refinedTasteSignals.map((item, skillIndex) => (
             <button
               type="button"
               className={skillIndex === activeSkill ? "active" : ""}
@@ -968,13 +1193,13 @@ function ScenePanel({
     return (
       <div className="scene-panel product-panel product-console" data-reveal>
         <div className="product-console-head">
-          <span>{copy[locale].productSubtitle}</span>
+          <span>{refinedCopy[locale].productSubtitle}</span>
           <b>{locale === "zh" ? "正在运行" : "running"}</b>
         </div>
-        <strong>{copy[locale].productTitle}</strong>
+        <strong>{refinedCopy[locale].productTitle}</strong>
         <code>{locale === "zh" ? "剧本 / 风格 / 人物 / 分镜 / 任务" : "script / style / characters / shots / tasks"}</code>
 
-        <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
+        <div className="product-module-grid" role="tablist" aria-label={refinedCopy[locale].productTitle}>
           {productModules.map((module, moduleIndex) => (
             <button
               type="button"
@@ -1002,15 +1227,25 @@ function ScenePanel({
           </div>
         </div>
 
+        <div className="product-entrance-strip" aria-label={locale === "zh" ? "产品和小作品入口" : "Product and lab entrances"}>
+          {productEntrances.map((entry) => (
+            <Link href={entry.href} key={entry.code}>
+              <span>{entry.code}</span>
+              <strong>{locale === "zh" ? entry.zh : entry.en}</strong>
+              <small>{locale === "zh" ? entry.detailZh : entry.detailEn}</small>
+            </Link>
+          ))}
+        </div>
+
         <div className="product-livebar" aria-hidden="true">
           <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
         </div>
-        <p>{copy[locale].productHint}</p>
+        <p>{refinedCopy[locale].productHint}</p>
       </div>
     );
   }
 
-  if (chapter.id === "judgment") {
+  if (chapter.id === "judgment-old") {
     return (
       <div className="scene-panel evaluation-panel" data-reveal>
         <span>{locale === "zh" ? "影视房间" : "Videos room"}</span>
@@ -1039,7 +1274,7 @@ function ScenePanel({
   if (chapter.id === "method") {
     return (
       <div className="scene-panel method-panel method-runway" data-reveal>
-        <span>{copy[locale].methodTitle}</span>
+        <span>{refinedCopy[locale].methodTitle}</span>
         <div className="method-track">
           {methodCards.map((item, stepIndex) => (
             <b key={item.step}>
@@ -1056,9 +1291,9 @@ function ScenePanel({
   if (chapter.id === "contact") {
     return (
       <div className="scene-panel contact-panel" data-reveal>
-        <span>{copy[locale].contactTitle}</span>
+        <span>{refinedCopy[locale].contactTitle}</span>
         <strong>{chapter.signal}</strong>
-        <p>{copy[locale].contactBody}</p>
+        <p>{refinedCopy[locale].contactBody}</p>
         <div className="credential-grid">
           {credentials.map((item) => (
             <b key={item.en}>{locale === "zh" ? item.zh : item.en}</b>
@@ -1077,6 +1312,73 @@ function ScenePanel({
         <i />
         <i />
         <i />
+      </div>
+    </div>
+  );
+}
+
+function VideoRoomPanel({
+  locale,
+  chapter,
+  activeVideo,
+  onVideoChange,
+}: {
+  locale: Locale;
+  chapter: Chapter;
+  activeVideo: number;
+  onVideoChange: (index: number) => void;
+}) {
+  const active = videoWorks[activeVideo] ?? videoWorks[0];
+  const featured = videoWorks.slice(0, 5);
+
+  return (
+    <div className="video-room-panel" data-reveal>
+      <div className="home-video-banner">
+        <div className="home-video-banner-copy">
+          <span>
+            {chapter.code} / {chapter.nav[locale]}
+          </span>
+          <h2>{chapter.title[locale]}</h2>
+          <p className="chapter-line">{chapter.line[locale]}</p>
+          <p>{chapter.body[locale]}</p>
+          <Link className="home-video-open" href={`/videos?work=${active.id}`}>
+            <span>{locale === "zh" ? "点开后播放原片" : "play original cut"}</span>
+            <b>{locale === "zh" ? active.titleZh : active.titleEn}</b>
+          </Link>
+        </div>
+
+        <div className="home-video-banner-stack" aria-label={locale === "zh" ? "精选视频封面" : "Featured video covers"}>
+          {featured.map((work, index) => (
+            <Link
+              href={`/videos?work=${work.id}`}
+              key={work.id}
+              className={`home-video-frame ${index === activeVideo ? "active" : ""}`}
+              onMouseEnter={() => onVideoChange(index)}
+              onFocus={() => onVideoChange(index)}
+            >
+              <img src={work.poster} alt="" />
+              <b>{work.code}</b>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="home-video-index" aria-label={locale === "zh" ? "视频作品索引" : "Video work index"}>
+        {videoWorks.map((work, workIndex) => (
+          <Link
+            href={`/videos?work=${work.id}`}
+            key={work.id}
+            className={`home-video-row ${workIndex === activeVideo ? "active" : ""}`}
+            onMouseEnter={() => onVideoChange(workIndex)}
+            onFocus={() => onVideoChange(workIndex)}
+          >
+            <span>{work.code}</span>
+            <strong>{locale === "zh" ? work.titleZh : work.titleEn}</strong>
+            <small>{locale === "zh" ? work.metaZh : work.metaEn}</small>
+            <b>{work.date}</b>
+            <img className="home-video-row-poster" src={work.poster} alt="" />
+          </Link>
+        ))}
       </div>
     </div>
   );
