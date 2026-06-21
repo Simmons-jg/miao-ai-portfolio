@@ -11,7 +11,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -1038,8 +1038,10 @@
   --border: rgb(243 239 223 / 18%);
   --ring: #b7ff25;
   --radius: 0.5rem;
-  --font-geist-sans: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  --font-geist-sans: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
   --font-geist-mono: "Cascadia Mono", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --font-display: Impact, "Arial Narrow", "Arial Black", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  --font-zh-display: "Noto Sans SC", "Microsoft YaHei UI", "SimHei", sans-serif;
 }
 
 @layer base {
@@ -1051,7 +1053,10 @@
   html {
     min-height: 100%;
     scroll-behavior: auto;
-    background: #080907;
+    background:
+      radial-gradient(circle at 0% 4%, rgb(183 255 37 / 18%), transparent 28%),
+      radial-gradient(circle at 88% 72%, rgb(255 74 36 / 13%), transparent 26%),
+      linear-gradient(120deg, #080907 0%, #10130d 54%, #160d09 100%);
     font-family: var(--font-geist-sans), "Microsoft YaHei", "PingFang SC", sans-serif;
   }
 
@@ -1119,6 +1124,10 @@
     z-index: -3;
     width: 100%;
     height: 100%;
+    background:
+      radial-gradient(circle at 4% 8%, rgb(183 255 37 / 24%), transparent 30%),
+      radial-gradient(circle at 92% 82%, rgb(255 74 36 / 16%), transparent 28%),
+      linear-gradient(120deg, #080907 0%, #11140e 56%, #180d08 100%);
   }
 
   .stage-fade {
@@ -1155,16 +1164,14 @@
 
   .brand-mark {
     display: grid;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     place-items: center;
-    border: 1px solid rgb(243 239 223 / 34%);
-    background: linear-gradient(145deg, rgb(243 239 223 / 10%), rgb(8 9 7 / 34%));
-    color: var(--acid);
-    font-family: var(--font-geist-mono), monospace;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0;
+    border: 0;
+    border-radius: 0;
+    background:
+      url("/miao-paw-brand.svg") center / 100% 100% no-repeat;
+    box-shadow: none;
   }
 
   .brand-lockup strong,
@@ -1188,7 +1195,7 @@
 
   .site-header nav {
     display: flex;
-    gap: clamp(22px, 4vw, 66px);
+    gap: clamp(14px, 2.2vw, 34px);
     align-items: center;
   }
 
@@ -1382,9 +1389,9 @@
 
   .hero-scene {
     display: grid;
-    grid-template-columns: minmax(0, 0.94fr) minmax(420px, 0.76fr);
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.54fr);
     align-items: center;
-    gap: clamp(28px, 5vw, 86px);
+    gap: clamp(24px, 3.4vw, 56px);
   }
 
   .hero-copy {
@@ -1405,17 +1412,22 @@
   .hero-copy h1 {
     max-width: 950px;
     margin: 0;
+    font-family: var(--font-display);
     font-size: clamp(72px, 10.2vw, 164px);
-    font-weight: 820;
+    font-weight: 900;
     letter-spacing: 0;
     line-height: 0.82;
+    text-transform: uppercase;
+    white-space: pre-line;
   }
 
   [data-locale="zh"] .hero-copy h1 {
-    max-width: 820px;
-    font-family: var(--font-geist-sans), "Microsoft YaHei", "PingFang SC", sans-serif;
-    font-size: clamp(64px, 8.6vw, 142px);
-    line-height: 0.98;
+    max-width: 920px;
+    font-family: var(--font-zh-display);
+    font-size: clamp(56px, 6.2vw, 96px);
+    font-weight: 900;
+    line-height: 1.04;
+    text-transform: none;
   }
 
   .hero-bottom {
@@ -1513,7 +1525,7 @@
   .artifact-core {
     position: relative;
     width: min(42vw, 560px);
-    min-width: 420px;
+    min-width: 360px;
     aspect-ratio: 1;
     transform-style: preserve-3d;
   }
@@ -1590,7 +1602,7 @@
   .hero-system-deck {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1px;
     width: min(100%, 1120px);
     margin-top: clamp(-56px, -4vh, -22px);
@@ -1609,6 +1621,11 @@
       rgb(8 9 7 / 78%);
     color: inherit;
     text-decoration: none;
+    transform: translateY(0);
+    transition:
+      transform 220ms ease,
+      background 220ms ease,
+      box-shadow 220ms ease;
   }
 
   .hero-module-card::before {
@@ -1628,6 +1645,17 @@
     transform: scaleX(1);
   }
 
+  .hero-module-card:hover,
+  .hero-module-card:focus-visible {
+    background:
+      radial-gradient(circle at 80% 12%, rgb(183 255 37 / 18%), transparent 28%),
+      linear-gradient(135deg, rgb(243 239 223 / 13%), transparent 62%),
+      rgb(8 9 7 / 82%);
+    box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+    outline: none;
+    transform: translateY(-8px) rotate(-0.8deg);
+  }
+
   .hero-module-card span,
   .hero-module-card small {
     font-family: var(--font-geist-mono), monospace;
@@ -1644,9 +1672,16 @@
     display: block;
     margin-top: 26px;
     color: var(--ivory);
+    font-family: var(--font-display);
     font-size: clamp(25px, 2.4vw, 42px);
-    font-weight: 790;
+    font-weight: 900;
     line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  [data-locale="zh"] .hero-module-card strong {
+    font-family: var(--font-zh-display);
+    text-transform: none;
   }
 
   .hero-module-card p {
@@ -1748,8 +1783,9 @@
 
   .manifesto-track span {
     color: var(--ivory);
+    font-family: var(--font-display);
     font-size: clamp(58px, 8.2vw, 136px);
-    font-weight: 880;
+    font-weight: 900;
     letter-spacing: 0;
     line-height: 0.96;
     white-space: nowrap;
@@ -1757,6 +1793,7 @@
   }
 
   [data-locale="zh"] .manifesto-track span {
+    font-family: var(--font-zh-display);
     font-size: clamp(62px, 8.6vw, 146px);
   }
 
@@ -1848,15 +1885,20 @@
 
   .chapter-scene h2 {
     margin: 0;
+    font-family: var(--font-display);
     font-size: clamp(48px, 7.2vw, 116px);
-    font-weight: 790;
+    font-weight: 900;
     letter-spacing: 0;
     line-height: 0.92;
+    text-transform: uppercase;
   }
 
   [data-locale="zh"] .chapter-scene h2 {
+    font-family: var(--font-zh-display);
     font-size: clamp(42px, 6vw, 94px);
+    font-weight: 900;
     line-height: 1.02;
+    text-transform: none;
   }
 
   .chapter-line {
@@ -1903,9 +1945,16 @@
   .scene-panel > strong {
     display: block;
     color: var(--ivory);
+    font-family: var(--font-display);
     font-size: clamp(26px, 3vw, 48px);
-    font-weight: 780;
+    font-weight: 900;
     line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  [data-locale="zh"] .scene-panel > strong {
+    font-family: var(--font-zh-display);
+    text-transform: none;
   }
 
   .signal-panel div {
@@ -1987,6 +2036,218 @@
     color: rgb(183 255 37 / 82%);
     font-size: 9px;
     font-weight: 720;
+  }
+
+  .skill-showcase-panel {
+    position: relative;
+    width: min(100%, 680px);
+    min-height: 560px;
+    overflow: hidden;
+  }
+
+  .skill-showcase-panel > strong {
+    max-width: 12ch;
+    font-size: clamp(24px, 2.6vw, 40px);
+    line-height: 0.98;
+  }
+
+  [data-locale="zh"] .skill-showcase-panel > strong {
+    max-width: 12em;
+    font-size: clamp(22px, 2.35vw, 34px);
+    line-height: 1.08;
+  }
+
+  .skill-showcase-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgb(243 239 223 / 6%) 1px, transparent 1px),
+      linear-gradient(0deg, rgb(243 239 223 / 4%) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at 80% 18%, black 0 18%, transparent 54%);
+    opacity: 0.64;
+  }
+
+  .skill-stage {
+    position: relative;
+    display: grid;
+    min-height: 214px;
+    align-content: end;
+    gap: 14px;
+    margin-top: 28px;
+    overflow: hidden;
+    border: 1px solid rgb(183 255 37 / 26%);
+    border-radius: 8px;
+    padding: 22px;
+    background:
+      radial-gradient(circle at 78% 18%, rgb(183 255 37 / 18%), transparent 32%),
+      linear-gradient(135deg, rgb(243 239 223 / 10%), rgb(243 239 223 / 2%)),
+      rgb(8 9 7 / 76%);
+  }
+
+  .skill-stage::before {
+    content: "";
+    position: absolute;
+    inset: -22% -10%;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, transparent, rgb(183 255 37 / 16%), transparent),
+      repeating-linear-gradient(90deg, transparent 0 12px, rgb(243 239 223 / 8%) 12px 13px);
+    opacity: 0.72;
+    transform: translateX(-32%);
+    animation: skillScan 4.8s ease-in-out infinite;
+  }
+
+  .skill-stage i {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(243 239 223 / 42%);
+    font-family: var(--font-display);
+    font-size: clamp(76px, 8vw, 128px);
+    font-style: normal;
+    font-weight: 900;
+    line-height: 0.8;
+  }
+
+  .skill-stage b {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    border: 1px solid rgb(183 255 37 / 34%);
+    border-radius: 999px;
+    padding: 7px 11px 5px;
+    color: var(--acid);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 10px;
+    font-weight: 760;
+    text-transform: uppercase;
+  }
+
+  .skill-stage p {
+    position: relative;
+    z-index: 1;
+    max-width: 17ch;
+    margin: 0;
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-size: clamp(34px, 4vw, 62px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  [data-locale="zh"] .skill-stage p {
+    max-width: 12em;
+    font-family: var(--font-zh-display);
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.12;
+    text-transform: none;
+  }
+
+  .skill-picker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .skill-picker button {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 10px;
+    min-height: 86px;
+    border: 1px solid rgb(243 239 223 / 14%);
+    border-radius: 8px;
+    padding: 12px;
+    background: rgb(8 9 7 / 64%);
+    color: var(--ivory);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .skill-picker button:hover,
+  .skill-picker button:focus-visible,
+  .skill-picker button.active {
+    border-color: rgb(183 255 37 / 60%);
+    background:
+      linear-gradient(135deg, rgb(183 255 37 / 10%), transparent 56%),
+      rgb(8 9 7 / 72%);
+    outline: none;
+    transform: translateY(-3px);
+  }
+
+  .skill-picker span,
+  .skill-picker small {
+    font-family: var(--font-geist-mono), monospace;
+    text-transform: uppercase;
+  }
+
+  .skill-picker span {
+    color: var(--acid);
+    font-size: 10px;
+    font-weight: 780;
+  }
+
+  .skill-picker strong {
+    grid-column: 2;
+    color: rgb(243 239 223 / 82%);
+    font-size: 13px;
+    font-weight: 760;
+    line-height: 1.25;
+  }
+
+  .skill-picker small {
+    grid-column: 2;
+    color: rgb(243 239 223 / 44%);
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .skill-orbit {
+    position: absolute;
+    right: -76px;
+    top: -70px;
+    width: 220px;
+    aspect-ratio: 1;
+    border: 1px solid rgb(183 255 37 / 16%);
+    border-radius: 999px;
+    pointer-events: none;
+    animation: rotateArtifact 18s linear infinite;
+  }
+
+  .skill-orbit i {
+    position: absolute;
+    width: 9px;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: var(--acid);
+    box-shadow: 0 0 24px rgb(183 255 37 / 58%);
+  }
+
+  .skill-orbit i:nth-child(1) {
+    left: 50%;
+    top: 0;
+  }
+
+  .skill-orbit i:nth-child(2) {
+    right: 13%;
+    bottom: 18%;
+  }
+
+  .skill-orbit i:nth-child(3) {
+    left: 10%;
+    bottom: 30%;
   }
 
   .evaluation-panel {
@@ -2269,6 +2530,19 @@
     52% {
       opacity: 1;
       transform: scaleX(1);
+    }
+  }
+
+  @keyframes skillScan {
+    0%,
+    100% {
+      opacity: 0.32;
+      transform: translateX(-38%);
+    }
+
+    50% {
+      opacity: 0.78;
+      transform: translateX(24%);
     }
   }
 
@@ -3260,6 +3534,9 @@
     .social-dock a,
     .hero-module-card,
     .hero-module-card::before,
+    .skill-stage::before,
+    .skill-picker button,
+    .skill-orbit,
     .work-card-fan button,
     .work-portal-copy button,
     .product-module-grid button,
@@ -3527,7 +3804,7 @@
     }
 
     [data-locale="zh"] .hero-copy h1 {
-      font-size: clamp(46px, 12vw, 76px);
+      font-size: clamp(42px, 11vw, 70px);
       line-height: 1.04;
     }
 
@@ -3593,6 +3870,18 @@
     .scene-panel {
       grid-column: auto;
       width: 100%;
+    }
+
+    .skill-showcase-panel {
+      min-height: 0;
+    }
+
+    .skill-picker {
+      grid-template-columns: 1fr;
+    }
+
+    .skill-stage {
+      min-height: 188px;
     }
 
     .product-module-grid {

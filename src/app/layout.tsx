@@ -4,6 +4,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Guo Jiawen / Miao Portfolio",
   description: "A bilingual scroll-driven portfolio for AI product, AIGC direction, visual systems, and public creative work.",
+  icons: {
+    icon: [
+      { url: "/miao-paw.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    shortcut: "/miao-paw.svg",
+    apple: "/miao-paw.png",
+  },
 };
 
 export default function RootLayout({

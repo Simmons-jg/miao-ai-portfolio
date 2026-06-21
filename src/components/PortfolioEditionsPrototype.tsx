@@ -21,124 +21,137 @@ type Chapter = {
 
 const copy = {
   en: {
-    brand: "Guo Jiawen / Miao",
-    role: "AI product / AIGC direction / visual storytelling",
-    nav: ["Work", "Product", "Method", "Contact"],
+    brand: "Miao / Guo Jiawen",
+    role: "AI creator / images / videos / music / product",
+    nav: ["Home", "About", "Images", "Videos", "Music", "Product", "Contact"],
     lang: "中文",
-    heroTitle: "Hi, I am Miao. I direct AI into things you can see, click, and feel.",
+    heroTitle: "MIAO\nAI CREATOR",
     heroBody:
-      "A personal site for public works, product prototypes, visual experiments, and the way I think with AI.",
-    primary: "Enter works",
-    secondary: "About Miao",
-    index: "Chapters",
-    stage: "Interactive personal site",
-    productTitle: "AI product lab",
-    productSubtitle: "Prototype in progress",
-    productHint: "Private product identifiers stay private. This layer only shows the public idea, interaction route, and demo surface.",
-    worksTitle: "Works channel",
+      "Hello, this is Miao. I make AI images, moving stories, music, and strange little tools. Let's do some cool things :)",
+    primary: "Enter images",
+    secondary: "About",
+    index: "Rooms",
+    stage: "AI creator playground",
+    productTitle: "I'M MAKING AN AI VIDEO TOOL",
+    productSubtitle: "Script in. Video tasks out.",
+    productHint: "It is not a gallery. It is the machine behind the gallery.",
+    worksTitle: "Images",
     worksLead:
-      "Click or scroll through public works as a moving channel: visual worlds, demos, experiments, and image systems.",
-    methodTitle: "Operating rhythm",
-    contactTitle: "About Miao",
+      "Some pictures made with AI, but judged by human taste.",
+    methodTitle: "Music notes",
+    contactTitle: "CONTACT ME",
     contactBody:
-      "I am interested in AI products that still have authorship: clearer interfaces, stronger images, better stories, and workflows that creators can actually use.",
+      "If you like strange images, AI videos, product demos, or cool interactive websites, we can talk.",
   },
   zh: {
     brand: "郭嘉雯 / Miao喵渺淼妙",
-    role: "AI 产品 / AIGC 编导 / 视觉叙事",
-    nav: ["作品", "产品", "方法", "联系"],
+    role: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
+    nav: ["主页", "关于", "图像", "影视", "音乐", "产品", "联系"],
     lang: "EN",
-    heroTitle: "我是 Miao，把 AI 变成可以被看见、点击和感受到的作品。",
+    heroTitle: "MIAO\nAI 创作者",
     heroBody:
-      "这是一个个人网站，放公开作品、产品原型、视觉实验，以及我如何用 AI 思考和创作。",
-    primary: "进入作品",
-    secondary: "关于 Miao",
-    index: "章节",
-    stage: "互动个人网站",
-    productTitle: "AI 产品实验室",
-    productSubtitle: "原型开发中",
-    productHint: "内部产品标识不在网页展示。这里保留公开的产品想法、交互路线和 Demo 表面。",
-    worksTitle: "作品频道",
-    worksLead: "点击或滚动进入公开作品：视觉世界、产品 Demo、交互实验和生成图像系统会像频道一样移动。",
-    methodTitle: "工作节奏",
-    contactTitle: "关于 Miao",
+      "你好，我是 Miao。我做 AI 图像、影视、音乐，也做一些奇奇怪怪的 AI 工具。一起做点酷东西 :)",
+    primary: "进入图像",
+    secondary: "关于",
+    index: "房间",
+    stage: "AI 创作者游乐场",
+    productTitle: "我在做一台 AI 视频小机器",
+    productSubtitle: "剧本进去，任务出来",
+    productHint: "它不是作品墙，是作品墙背后的机器。",
+    worksTitle: "图像",
+    worksLead: "不是生成了就算作品。我更在意氛围、构图、人物感和世界观。",
+    methodTitle: "声音草稿",
+    contactTitle: "CONTACT ME",
     contactBody:
-      "我关心的是有作者感的 AI 产品：更清晰的界面、更强的图像、更好的故事，以及创作者真的能使用的工作流。",
+      "如果你喜欢奇怪的图像、AI 视频、产品 Demo，或者酷一点的互动网站，我们可以聊聊。",
   },
 } as const;
+
+const navLinks = [
+  { href: "#top", en: "Home", zh: "主页" },
+  { href: "#direction", en: "About", zh: "关于" },
+  { href: "#works", en: "Images", zh: "图像" },
+  { href: "#judgment", en: "Videos", zh: "影视" },
+  { href: "#method", en: "Music", zh: "音乐" },
+  { href: "#product", en: "Product", zh: "产品" },
+  { href: "#contact", en: "Contact", zh: "联系" },
+];
 
 const chapters: Chapter[] = [
   {
     id: "direction",
-    code: "I",
+    code: "01",
     nav: { en: "About", zh: "关于" },
-    title: { en: "I make AI feel directed, not accidental.", zh: "我让 AI 作品看起来像被导演过，而不是偶然生成。" },
-    line: { en: "Images, interfaces, and stories all need rhythm.", zh: "图像、界面和故事都需要节奏。" },
-    body: {
-      en: "My work sits between creative direction, AI product thinking, and visual systems. I care about what the model makes, but also why it should exist.",
-      zh: "我的工作在创意编导、AI 产品思维和视觉系统之间。我关心模型生成了什么，也关心它为什么值得存在。",
+    title: { en: "WHAT SKILLS DO I HAVE", zh: "我会做什么" },
+    line: {
+      en: "I turn AI images, video, product ideas, and music into things with taste, rhythm, and interaction.",
+      zh: "我把 AI 图像、影视、产品想法和音乐，做成有审美、有节奏、能被点开的作品。",
     },
-    signal: "IMAGE / PRODUCT / STORY",
+    body: {
+      en: "Not just prompting. I care about mood, story, tool logic, and how a viewer enters the work.",
+      zh: "不是只会写提示词。我更在意氛围、故事、工具逻辑，以及一个人怎么进入作品。",
+    },
+    signal: "VISUAL / VIDEO / MUSIC / TOOL",
   },
   {
     id: "product",
-    code: "II",
-    nav: { en: "Lab", zh: "实验室" },
-    title: { en: "AI products should feel usable before they feel clever.", zh: "AI 产品先要好用，再谈聪明。" },
-    line: { en: "The product layer is a lab for creator-facing AI tools.", zh: "产品层是面向创作者的 AI 工具实验室。" },
+    code: "02",
+    nav: { en: "Product", zh: "产品" },
+    title: { en: "I am building an AI video machine.", zh: "我在做一台 AI 视频小机器。" },
+    line: { en: "Script in. Style, characters, shots, covers and video tasks out.", zh: "剧本进去，人物、风格、分镜、封面和视频任务出来。" },
     body: {
-      en: "The current prototype is kept private while it is being shaped. The public site shows the interaction idea and how the experience should feel.",
-      zh: "当前原型在开发阶段保持私密。网站只展示公开的交互想法，以及这个体验应该呈现出的感觉。",
+      en: "It is not a gallery. It is the machine behind the gallery.",
+      zh: "它不是作品墙，是作品墙背后的机器。",
     },
-    signal: "IDEA / DEMO / FLOW",
+    signal: "SCRIPT / STYLE / SHOTS / TASKS",
   },
   {
     id: "judgment",
-    code: "III",
-    nav: { en: "Taste Protocol", zh: "审美协议" },
-    title: { en: "Taste becomes a visible system.", zh: "审美变成可见系统。" },
-    line: { en: "AI output still needs taste, rhythm, and restraint.", zh: "AI 输出仍然需要审美、节奏和克制。" },
+    code: "03",
+    nav: { en: "Videos", zh: "影视" },
+    title: { en: "VIDEOS", zh: "影视与动态" },
+    line: { en: "Short films, edits, moving images, and rhythm.", zh: "短片、剪辑、移动的画面和节奏。" },
     body: {
-      en: "Composition, continuity, mood, interaction clarity, and finish become a review system for AI-native work.",
-      zh: "构图、连续性、情绪、交互清晰度和完成度，构成 AI 原生作品的审核系统。",
+      en: "Video should be played, paced, and told. It should not be mixed into the image wall.",
+      zh: "这里放视频，不跟图片墙混在一起。视频要被播放，要有节奏，也要有故事。",
     },
-    signal: "TASTE / RHYTHM / CONTROL",
+    signal: "PLAY / RHYTHM / STORY",
   },
   {
     id: "works",
-    code: "IV",
-    nav: { en: "Works", zh: "作品" },
-    title: { en: "A moving channel of public works.", zh: "一个会移动的公开作品频道。" },
-    line: { en: "The archive should invite touch, not ask people to read a wall.", zh: "作品集应该引导人点击，而不是逼人读一堵墙。" },
+    code: "04",
+    nav: { en: "Images", zh: "图像" },
+    title: { en: "IMAGES", zh: "图像" },
+    line: { en: "Some pictures made with AI, but judged by human taste.", zh: "不是生成了就算作品。" },
     body: {
-      en: "This is where the site becomes closer to a gallery toy: hover, click, enter, and inspect the pieces directly.",
-      zh: "这里更接近一个可以玩的作品入口：悬停、点击、进入，然后直接查看作品。",
+      en: "I care more about atmosphere, composition, character presence, and worldbuilding.",
+      zh: "我更在意氛围、构图、人物感和世界观。",
     },
-    signal: "CLICK / ENTER / VIEW",
+    signal: "IMAGE / TASTE / WORLD",
   },
   {
     id: "method",
-    code: "V",
-    nav: { en: "Method", zh: "方法" },
-    title: { en: "Observe, script, generate, review, ship.", zh: "观察、编剧、生成、审核、交付。" },
-    line: { en: "A process should move, not read like a list.", zh: "方法不应该像清单，而应该像流程一样移动。" },
+    code: "05",
+    nav: { en: "Music", zh: "音乐" },
+    title: { en: "MUSIC", zh: "音乐" },
+    line: { en: "Some sounds, moods, and unfinished little tracks.", zh: "一些声音、情绪，和还没完成的小片段。" },
     body: {
-      en: "The page shows how a messy creative or product question becomes a visual route, a prototype, and a shipped artifact.",
-      zh: "页面会展示一个混乱的创意或产品问题如何变成视觉路线、可运行原型和可交付作品。",
+      en: "Music does not always need to be complete. Sometimes it is just the temperature of an image.",
+      zh: "音乐不一定要完整，有时候它只是一个画面的温度。",
     },
-    signal: "OBSERVE / FRAME / SHIP",
+    signal: "SOUND / MOOD / TRACK",
   },
   {
     id: "contact",
-    code: "VI",
+    code: "06",
     nav: { en: "Contact", zh: "联系" },
-    title: { en: "A personal site first. A resume second.", zh: "先是个人网站，然后才是简历入口。" },
-    line: { en: "Taste, product sense, and AI-native practice live in the same person.", zh: "审美、产品感和 AI 原生实践，应该在同一个人身上合起来。" },
+    title: { en: "CONTACT ME", zh: "CONTACT ME" },
+    line: { en: "If you like strange images, AI videos, product demos, or cool interactive websites, we can talk.", zh: "如果你喜欢奇怪的图像、AI 视频、产品 Demo，或者酷一点的互动网站，我们可以聊聊。" },
     body: {
-      en: "If the page gives you a clear feeling of how I think, the resume can fill in the facts afterward.",
-      zh: "如果这个网页先让你感受到我是怎么思考的，简历再负责补充事实就够了。",
+      en: "Email, X, Bilibili, Xiaohongshu, and Douyin are open for different kinds of conversation.",
+      zh: "Email、X、B 站、小红书和抖音，都可以作为不同的入口。",
     },
-    signal: "MIAO / WORK / CONTACT",
+    signal: "EMAIL / X / BILI / RED / DOUYIN",
   },
 ];
 
@@ -227,176 +240,189 @@ const productModules = [
   {
     id: "input",
     code: "01",
-    en: "Brief to Mood",
-    zh: "Brief 到情绪",
-    stateEn: "creator intent",
-    stateZh: "创作者意图",
-    detailEn: "A product surface for turning rough ideas into visual mood, audience, and story direction.",
-    detailZh: "把粗糙想法转成视觉情绪、受众和叙事方向的产品界面。",
-    metricsEn: ["intent", "mood", "audience"],
-    metricsZh: ["意图", "情绪", "受众"],
+    en: "Script In",
+    zh: "剧本进入",
+    stateEn: "source material",
+    stateZh: "原始材料",
+    detailEn: "A rough script or idea becomes something the machine can read, split, and route.",
+    detailZh: "粗糙的剧本或想法，会被拆成机器可以读取和分发的材料。",
+    metricsEn: ["script", "intent", "route"],
+    metricsZh: ["剧本", "意图", "路线"],
   },
   {
     id: "route",
     code: "02",
-    en: "Reference Mixer",
-    zh: "参考混合器",
+    en: "Style Route",
+    zh: "风格路线",
     stateEn: "style route",
     stateZh: "风格路线",
-    detailEn: "A way to compare references, extract taste signals, and make a repeatable style route.",
-    detailZh: "比较参考、提取审美信号，并形成可复用风格路线。",
-    metricsEn: ["reference", "taste", "route"],
-    metricsZh: ["参考", "审美", "路线"],
+    detailEn: "The tool keeps character, world, and visual style from drifting apart.",
+    detailZh: "让人物、世界观和视觉风格不要在生成过程中散掉。",
+    metricsEn: ["style", "world", "character"],
+    metricsZh: ["风格", "世界", "人物"],
   },
   {
     id: "review",
     code: "03",
-    en: "Shot Review",
-    zh: "镜头审片",
-    stateEn: "visual judgment",
-    stateZh: "视觉判断",
-    detailEn: "A review layer for composition, continuity, mood, and whether the output still feels intentional.",
-    detailZh: "用来判断构图、连续性、情绪，以及生成结果是否仍然有作者感。",
-    metricsEn: ["frame", "mood", "intent"],
-    metricsZh: ["构图", "情绪", "作者感"],
+    en: "Shot Logic",
+    zh: "分镜逻辑",
+    stateEn: "moving image",
+    stateZh: "动态影像",
+    detailEn: "Characters, scenes, shots, and covers become a video task list instead of a pile of prompts.",
+    detailZh: "人物、场景、分镜和封面会变成视频任务表，而不是一堆提示词。",
+    metricsEn: ["shots", "covers", "tasks"],
+    metricsZh: ["分镜", "封面", "任务"],
   },
   {
     id: "ship",
     code: "04",
-    en: "Demo Room",
-    zh: "Demo 房间",
-    stateEn: "public preview",
-    stateZh: "公开预览",
-    detailEn: "A future page for playable demos, case notes, and product experiments when they are ready to show.",
-    detailZh: "后续用于放可玩的 Demo、案例笔记和成熟产品实验的页面。",
-    metricsEn: ["demo", "case", "preview"],
-    metricsZh: ["Demo", "案例", "预览"],
+    en: "Video Tasks Out",
+    zh: "视频任务输出",
+    stateEn: "machine output",
+    stateZh: "机器输出",
+    detailEn: "The output is a clear production route: what to make, what to check, and what to send next.",
+    detailZh: "输出的是清楚的制作路线：做什么、检查什么、下一步发给谁。",
+    metricsEn: ["make", "check", "send"],
+    metricsZh: ["制作", "检查", "分发"],
   },
 ];
 
 const heroModules = [
   {
-    id: "product",
-    href: "#product",
-    code: "02",
-    en: "Product",
-    zh: "产品",
-    lineEn: "Creator-facing AI product experiments.",
-    lineZh: "面向创作者的 AI 产品实验。",
-    metaEn: "mood / route / demo",
-    metaZh: "情绪 / 路线 / Demo",
-  },
-  {
     id: "works",
     href: "#works",
-    code: "04",
-    en: "Work",
-    zh: "作品",
-    lineEn: "Public visuals, interaction experiments, product demos.",
-    lineZh: "公开视觉、交互实验、产品 Demo。",
-    metaEn: "evidence archive",
-    metaZh: "证据档案",
+    code: "01",
+    en: "Images",
+    zh: "图像",
+    lineEn: "AI pictures judged by human taste.",
+    lineZh: "AI 做的图像，但由人的审美判断。",
+    metaEn: "mood / frame / world",
+    metaZh: "氛围 / 构图 / 世界观",
+  },
+  {
+    id: "judgment",
+    href: "#judgment",
+    code: "02",
+    en: "Videos",
+    zh: "影视",
+    lineEn: "Short films, edits, moving images, and rhythm.",
+    lineZh: "短片、剪辑、会移动的画面和节奏。",
+    metaEn: "play / rhythm / story",
+    metaZh: "播放 / 节奏 / 故事",
   },
   {
     id: "method",
     href: "#method",
-    code: "05",
-    en: "Method",
-    zh: "方法",
-    lineEn: "From brief to visual system to interactive prototype.",
-    lineZh: "从 brief 到视觉系统，再到交互原型。",
-    metaEn: "observe / generate / ship",
-    metaZh: "观察 / 生成 / 交付",
+    code: "03",
+    en: "Music",
+    zh: "音乐",
+    lineEn: "Small sounds, moods, and unfinished tracks.",
+    lineZh: "一些声音、情绪和还没完成的小片段。",
+    metaEn: "sound / mood / image",
+    metaZh: "声音 / 情绪 / 画面",
+  },
+  {
+    id: "product",
+    href: "#product",
+    code: "04",
+    en: "Product",
+    zh: "产品",
+    lineEn: "An AI video tool behind the gallery.",
+    lineZh: "作品墙背后的 AI 视频工具。",
+    metaEn: "script / shots / tasks",
+    metaZh: "剧本 / 分镜 / 任务",
   },
 ];
 
 const tasteSignals = [
   {
-    code: "IMAGE",
-    en: "Framing, light, atmosphere, and continuity become the first layer of proof.",
-    zh: "构图、光线、氛围和连续性，是第一层证据。",
-    metricEn: "visual taste",
-    metricZh: "审美判断",
+    code: "01",
+    en: "I'M AN AI VISUAL CREATOR",
+    zh: "爱做有氛围、有构图、有世界观的 AI 图像",
+    metricEn: "visual first",
+    metricZh: "视觉先行",
   },
   {
-    code: "SYSTEM",
-    en: "A reference can become a reusable style route, not a one-off prompt.",
-    zh: "参考可以被整理成可复用的风格路线，而不是一次性提示词。",
-    metricEn: "repeatable route",
-    metricZh: "可复用路线",
+    code: "02",
+    en: "I'M A VIDEO STORYTELLER",
+    zh: "爱做有节奏、有画面感的影视片段",
+    metricEn: "make it move",
+    metricZh: "让它动起来",
   },
   {
-    code: "PRODUCT",
-    en: "AI tools are translated into demos, decisions, and product-facing surfaces.",
-    zh: "AI 工具会被翻译成 Demo、决策和面向产品的界面。",
-    metricEn: "demo thinking",
-    metricZh: "Demo 思维",
+    code: "03",
+    en: "I'M AN AI PRODUCT THINKER",
+    zh: "爱把创作流程拆成可以玩的 AI 工具",
+    metricEn: "tools can play",
+    metricZh: "工具也要好玩",
   },
   {
-    code: "PROFILE",
-    en: "The resume stays available as context, while this page carries the first visual argument.",
-    zh: "简历保留为事实背景，网页负责先完成审美论证。",
-    metricEn: "resume layer",
-    metricZh: "简历层",
+    code: "04",
+    en: "I'M AN AI MUSIC MAKER",
+    zh: "爱用 AI 写一些声音、情绪和小段旋律",
+    metricEn: "sound mood",
+    metricZh: "声音情绪",
   },
 ];
 
 const tasteChecks = [
-  { en: "composition", zh: "构图", value: "frame" },
-  { en: "continuity", zh: "连续性", value: "style" },
-  { en: "mood", zh: "情绪", value: "tone" },
-  { en: "rhythm", zh: "节奏", value: "motion" },
-  { en: "clarity", zh: "清晰度", value: "product" },
-  { en: "finish", zh: "完成度", value: "ship" },
+  { en: "play", zh: "播放", value: "play" },
+  { en: "cut", zh: "剪辑", value: "cut" },
+  { en: "rhythm", zh: "节奏", value: "rhythm" },
+  { en: "mood", zh: "情绪", value: "mood" },
+  { en: "story", zh: "故事", value: "story" },
+  { en: "screen", zh: "画面", value: "screen" },
 ];
 
 const methodCards = [
   {
-    step: "Observe",
-    en: "Read the brief, audience, reference, platform, and delivery constraint.",
-    zh: "读取 brief、受众、参考、平台和交付限制。",
+    step: "Listen",
+    en: "Start from the feeling of an image, a scene, or a character.",
+    zh: "从一张图、一个场景或一个人物的情绪开始。",
   },
   {
-    step: "Script",
-    en: "Turn intent into scripts, shot logic, product hooks, and demo routes.",
-    zh: "把意图拆成脚本、镜头逻辑、产品钩子和 Demo 路线。",
+    step: "Mood",
+    en: "Use AI to sketch texture, temperature, and a first sound direction.",
+    zh: "用 AI 先搓出质感、温度和声音方向。",
   },
   {
     step: "Generate",
-    en: "Route prompts through AI video, image, music, and coding workflows.",
-    zh: "把提示词接入 AI 视频、图像、音乐和 Vibe Coding 工作流。",
+    en: "Make small loops, unfinished tracks, and fragments that match the picture.",
+    zh: "生成一些循环、小样和能贴住画面的片段。",
   },
   {
-    step: "Review",
-    en: "Review output by composition, continuity, mood, interaction clarity, and finish.",
-    zh: "按构图、连续性、情绪、交互清晰度和完成度审核输出。",
+    step: "Edit",
+    en: "Keep the strange parts, cut the boring parts, and leave room for rhythm.",
+    zh: "留下奇怪的部分，剪掉无聊的部分，给节奏留空间。",
   },
   {
-    step: "Ship",
-    en: "Package public assets, product demos, docs, and review loops for delivery.",
-    zh: "把公开资产、产品 Demo、文档和复盘闭环打包交付。",
+    step: "Keep",
+    en: "Not every track needs to be finished. Some are only a mood archive.",
+    zh: "不是每段音乐都要完成，有些只是情绪档案。",
   },
 ];
 
 const credentials = [
-  { en: "AIGC visual direction", zh: "AIGC 视觉编导" },
-  { en: "AI product demo thinking", zh: "AI 产品 Demo 思维" },
-  { en: "Digital media and IT background", zh: "数字媒体与 IT 背景" },
-  { en: "Bilingual creator context", zh: "中英双语创作者语境" },
+  { en: "Email / Guokabunn@gmail.com", zh: "Email / Guokabunn@gmail.com" },
+  { en: "X / @GuoGarvena", zh: "X / @GuoGarvena" },
+  { en: "Bilibili / UID 31520441", zh: "B站 / UID 31520441" },
+  { en: "Xiaohongshu / Miao", zh: "小红书 / Miao喵渺淼妙" },
 ];
 
 const proofPoints = [
-  { en: "Public visual archive", zh: "公开视觉档案" },
-  { en: "AI product demo slot", zh: "AI 产品 Demo 接口" },
-  { en: "AIGC direction system", zh: "AIGC 编导系统" },
-  { en: "Bilingual portfolio", zh: "中英双语作品集" },
+  { en: "Images room", zh: "图像房间" },
+  { en: "Video room", zh: "影视房间" },
+  { en: "Music room", zh: "音乐房间" },
+  { en: "AI video tool", zh: "AI 视频工具" },
 ];
 
 const kineticTracks = [
   { en: "VISUAL FIRST", zh: "视觉先行" },
-  { en: "PRODUCT CLEAR", zh: "产品清晰" },
-  { en: "AI NATIVE", zh: "AI 原生" },
-  { en: "SHIP READY", zh: "可交付" },
+  { en: "MAKE IT MOVE", zh: "让它动起来" },
+  { en: "AI CAN BE WILD", zh: "AI 可以很野" },
+  { en: "STORY BEFORE TOOL", zh: "故事先于工具" },
+  { en: "NOT JUST PROMPTS", zh: "不只是提示词" },
+  { en: "CREATE COOL THINGS", zh: "一起做酷东西" },
 ];
 
 const socialLinks = [
@@ -480,12 +506,11 @@ export function PortfolioEditionsPrototype() {
 
         gsap.fromTo(
           section.querySelectorAll("[data-reveal]"),
-          { autoAlpha: 0, y: 46, filter: "blur(16px)" },
+          { autoAlpha: 0, y: 38 },
           {
             autoAlpha: 1,
             y: 0,
-            filter: "blur(0px)",
-            duration: 1,
+            duration: 0.82,
             stagger: 0.08,
             ease: "power3.out",
             scrollTrigger: {
@@ -578,7 +603,7 @@ export function PortfolioEditionsPrototype() {
       alpha: true,
       powerPreference: "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -746,17 +771,18 @@ export function PortfolioEditionsPrototype() {
 
       <header className="site-header">
         <a className="brand-lockup" href="#top" aria-label={c.brand}>
-          <span className="brand-mark">AI</span>
+          <span className="brand-mark" aria-hidden="true" />
           <span>
             <strong>{c.brand}</strong>
             <small>{c.role}</small>
           </span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#works">{c.nav[0]}</a>
-          <a href="#product">{c.nav[1]}</a>
-          <a href="#method">{c.nav[2]}</a>
-          <a href="#contact">{c.nav[3]}</a>
+          {navLinks.map((link) => (
+            <a href={link.href} key={link.href}>
+              {locale === "zh" ? link.zh : link.en}
+            </a>
+          ))}
         </nav>
         <button
           className="language-switch"
@@ -892,19 +918,44 @@ function ScenePanel({
   activeProductModule: number;
   onProductModuleChange: (index: number) => void;
 }) {
+  const [activeSkill, setActiveSkill] = useState(0);
+  const activeSignal = tasteSignals[activeSkill] ?? tasteSignals[0];
+
   if (chapter.id === "direction") {
     return (
-      <div className="scene-panel evidence-ledger" data-reveal>
-        <span>{locale === "zh" ? "审美证据引擎" : "Visual evidence engine"}</span>
-        <strong>{locale === "zh" ? "先让网页证明审美，再让简历补充事实。" : "The page proves taste first. The resume adds context."}</strong>
-        <div className="ledger-rows">
-          {tasteSignals.map((item) => (
-            <div className="ledger-row" key={item.code}>
-              <i>{item.code}</i>
-              <p>{locale === "zh" ? item.zh : item.en}</p>
-              <b>{locale === "zh" ? item.metricZh : item.metricEn}</b>
-            </div>
+      <div className="scene-panel skill-showcase-panel" data-reveal>
+        <span>{locale === "zh" ? "个人技能" : "Personal skills"}</span>
+        <strong>
+          {locale === "zh"
+            ? "不是只会生成，而是把 AI 变成画面、节奏、工具和声音。"
+            : "Not just generating. I turn AI into images, rhythm, tools, and sound."}
+        </strong>
+        <div className="skill-stage" aria-live="polite">
+          <i>{activeSignal.code}</i>
+          <b>{locale === "zh" ? activeSignal.metricZh : activeSignal.metricEn}</b>
+          <p>{locale === "zh" ? activeSignal.zh : activeSignal.en}</p>
+        </div>
+        <div className="skill-picker" role="tablist" aria-label={locale === "zh" ? "选择技能" : "Choose a skill"}>
+          {tasteSignals.map((item, skillIndex) => (
+            <button
+              type="button"
+              className={skillIndex === activeSkill ? "active" : ""}
+              key={item.code}
+              role="tab"
+              aria-selected={skillIndex === activeSkill}
+              onClick={() => setActiveSkill(skillIndex)}
+              onMouseEnter={() => setActiveSkill(skillIndex)}
+            >
+              <span>{item.code}</span>
+              <strong>{locale === "zh" ? item.zh : item.en}</strong>
+              <small>{locale === "zh" ? item.metricZh : item.metricEn}</small>
+            </button>
           ))}
+        </div>
+        <div className="skill-orbit" aria-hidden="true">
+          <i />
+          <i />
+          <i />
         </div>
       </div>
     );
@@ -921,7 +972,7 @@ function ScenePanel({
           <b>{locale === "zh" ? "正在运行" : "running"}</b>
         </div>
         <strong>{copy[locale].productTitle}</strong>
-        <code>{locale === "zh" ? "私密原型 / 后续公开 Demo" : "private prototype / public demo later"}</code>
+        <code>{locale === "zh" ? "剧本 / 风格 / 人物 / 分镜 / 任务" : "script / style / characters / shots / tasks"}</code>
 
         <div className="product-module-grid" role="tablist" aria-label={copy[locale].productTitle}>
           {productModules.map((module, moduleIndex) => (
@@ -962,7 +1013,7 @@ function ScenePanel({
   if (chapter.id === "judgment") {
     return (
       <div className="scene-panel evaluation-panel" data-reveal>
-        <span>{locale === "zh" ? "审美协议" : "Taste protocol"}</span>
+        <span>{locale === "zh" ? "影视房间" : "Videos room"}</span>
         <strong>{chapter.signal}</strong>
         <div className="evaluation-grid">
           {tasteChecks.map((check) => (
@@ -974,8 +1025,8 @@ function ScenePanel({
         </div>
         <p>
           {locale === "zh"
-            ? "把抽象的好看，拆成可以讨论、可以调整、可以交付的视觉标准。"
-            : "Turns abstract taste into visual criteria that can be discussed, adjusted, and shipped."}
+            ? "视频要被播放，要有节奏，也要有故事。它不应该被塞进图片墙。"
+            : "Video needs playback, rhythm, and story. It should not be buried inside an image wall."}
         </p>
       </div>
     );
@@ -1317,7 +1368,7 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
             onPointerLeave={resetEyePortal}
             onPointerDown={() => setPortalArmed(true)}
             onClick={triggerEyePortal}
-            aria-label={locale === "zh" ? "进入 AI 之眼作品频道" : "Enter AI Eye work channel"}
+            aria-label={locale === "zh" ? "进入 AI 之眼图像频道" : "Enter AI Eye image channel"}
           >
             <span className="eye-label">{locale === "zh" ? "AI 之眼" : "AI EYE"}</span>
             <span className="eye-visual" aria-hidden="true">
@@ -1343,8 +1394,8 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
           </button>
         </div>
         <div className="work-portal-copy">
-          <p>{locale === "zh" ? "进入 Miao 的公开作品频道" : "Enter Miao's public work channel"}</p>
-          <small>{locale === "zh" ? "视觉世界 / 产品 Demo / 交互实验" : "visual worlds / product demos / interaction experiments"}</small>
+          <p>{locale === "zh" ? "进入 Miao 的图像频道" : "Enter Miao's image channel"}</p>
+          <small>{locale === "zh" ? "氛围 / 构图 / 人物感 / 世界观" : "mood / framing / character / world"}</small>
           <button type="button" onClick={() => enterWork(activeWorkIndex)}>
             {locale === "zh" ? "打开频道" : "Open channel"}
           </button>
@@ -1420,6 +1471,10 @@ function translateMethod(value: string) {
     Evaluate: "评估",
     Review: "审核",
     Ship: "交付",
+    Listen: "聆听",
+    Mood: "情绪",
+    Edit: "剪辑",
+    Keep: "保留",
   };
   return map[value] ?? value;
 }
