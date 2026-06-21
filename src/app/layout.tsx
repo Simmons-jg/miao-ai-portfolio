@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Guo Jiawen / Miao Portfolio",
-  description: "A bilingual scroll-driven portfolio for AI product, AIGC direction, visual systems, and public creative work.",
+  title: "MiaoMeowMew / Miao喵渺淼妙",
+  description: "A bilingual scroll-driven portfolio for AI images, film, music, products, and interactive creative work.",
   icons: {
     icon: [
       { url: "/miao-paw.svg", type: "image/svg+xml" },

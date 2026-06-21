@@ -72,8 +72,8 @@ const copy = {
 const navLinks = [
   { href: "#top", en: "Home", zh: "主页" },
   { href: "#direction", en: "About", zh: "关于" },
-  { href: "#works", en: "Images", zh: "图像" },
   { href: "#judgment", en: "Videos", zh: "影视" },
+  { href: "#works", en: "Images", zh: "图像" },
   { href: "#method", en: "Music", zh: "音乐" },
   { href: "#product", en: "Product", zh: "产品" },
   { href: "#contact", en: "Contact", zh: "联系" },
@@ -163,7 +163,10 @@ const chapters: Chapter[] = [
 const refinedCopy = {
   en: {
     ...copy.en,
-    brand: "MIAO",
+    brand: "MiaoMeowMew",
+    resumeBrand: "Guo Jiawen",
+    resumeRole: "AI creator / AI product & AIGC creation",
+    siteTitle: "MiaoMeowMew / AI Creator Portfolio",
     role: "AI creator / images / film / music / product",
     lang: "中文",
     heroTitle: "Hello,\nthis is Miao",
@@ -185,8 +188,11 @@ const refinedCopy = {
   },
   zh: {
     ...copy.zh,
-    brand: "MIAO",
-    role: "AI creator / images / film / music / product",
+    brand: "Miao喵渺淼妙",
+    resumeBrand: "郭嘉雯",
+    resumeRole: "AI 创作者 / AI 产品 / AIGC 创作方向",
+    siteTitle: "Miao喵渺淼妙 / AI 创作者作品集",
+    role: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
     lang: "EN",
     heroTitle: "你好，\n我是 Miao",
     heroBody:
@@ -207,7 +213,7 @@ const refinedCopy = {
   },
 } as const;
 
-const refinedNavLabelsZh = ["主页", "关于", "图像", "影视", "音乐", "产品", "联系"];
+const refinedNavLabelsZh = ["主页", "关于", "影视", "图像", "音乐", "产品", "联系"];
 
 const refinedNavLinks = navLinks.map((link, index) => ({
   ...link,
@@ -295,39 +301,49 @@ const refinedChapterText: Record<string, Partial<Chapter>> = {
   },
 };
 
-const refinedChapters = chapters.map((chapter) => ({
-  ...chapter,
-  ...(refinedChapterText[chapter.id] ?? {}),
-})) as Chapter[];
+const chapterOrder = ["direction", "judgment", "works", "method", "product", "contact"];
+
+const refinedChapters = chapterOrder.map((id, index) => {
+  const chapter = chapters.find((item) => item.id === id);
+  if (!chapter) {
+    throw new Error(`Missing portfolio chapter: ${id}`);
+  }
+
+  return {
+    ...chapter,
+    ...(refinedChapterText[chapter.id] ?? {}),
+    code: String(index + 1).padStart(2, "0"),
+  };
+}) as Chapter[];
 
 const refinedTasteSignals = [
   {
     code: "01",
-    en: "I'M AN AI VISUAL CREATOR",
-    zh: "爱做一些有氛围的 AI 图像",
-    metricEn: "visual first",
-    metricZh: "视觉先行",
-  },
-  {
-    code: "02",
     en: "I'M A VIDEO STORYTELLER",
     zh: "爱做一些有节奏、有故事感的影像和片段",
     metricEn: "make it move",
     metricZh: "让它动起来",
   },
   {
-    code: "03",
-    en: "I'M AN AI PRODUCT THINKER",
-    zh: "爱把创作流程做成可以玩的工具",
-    metricEn: "tools can play",
-    metricZh: "工具也要好玩",
+    code: "02",
+    en: "I'M AN AI VISUAL CREATOR",
+    zh: "爱做一些有氛围的 AI 图像",
+    metricEn: "visual first",
+    metricZh: "视觉先行",
   },
   {
-    code: "04",
+    code: "03",
     en: "I'M AN AI MUSIC MAKER",
     zh: "会用 AI 写一些有画面感的音乐",
     metricEn: "sound mood",
     metricZh: "声音情绪",
+  },
+  {
+    code: "04",
+    en: "I'M AN AI PRODUCT THINKER",
+    zh: "爱把创作流程做成可以玩的工具",
+    metricEn: "tools can play",
+    metricZh: "工具也要好玩",
   },
 ];
 
@@ -501,17 +517,6 @@ const productEntrances = [
 
 const heroModules = [
   {
-    id: "works",
-    href: "#works",
-    code: "01",
-    en: "Images",
-    zh: "图像",
-    lineEn: "AI pictures judged by human taste.",
-    lineZh: "AI 做的图像，但由人的审美判断。",
-    metaEn: "mood / frame / world",
-    metaZh: "氛围 / 构图 / 世界观",
-  },
-  {
     id: "judgment",
     href: "#judgment",
     code: "02",
@@ -523,9 +528,20 @@ const heroModules = [
     metaZh: "MV / 短片 / 氛围",
   },
   {
+    id: "works",
+    href: "#works",
+    code: "03",
+    en: "Images",
+    zh: "图像",
+    lineEn: "AI pictures judged by human taste.",
+    lineZh: "AI 做的图像，但由人的审美判断。",
+    metaEn: "mood / frame / world",
+    metaZh: "氛围 / 构图 / 世界观",
+  },
+  {
     id: "method",
     href: "#method",
-    code: "03",
+    code: "04",
     en: "Music",
     zh: "音乐",
     lineEn: "Small sounds, moods, and unfinished tracks.",
@@ -536,7 +552,7 @@ const heroModules = [
   {
     id: "product",
     href: "#product",
-    code: "04",
+    code: "05",
     en: "Product",
     zh: "产品",
     lineEn: "An AI video tool behind the gallery.",
@@ -677,7 +693,8 @@ export function PortfolioEditionsPrototype() {
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-Hans" : "en";
-  }, [locale]);
+    document.title = c.siteTitle;
+  }, [c.siteTitle, locale]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -991,8 +1008,8 @@ export function PortfolioEditionsPrototype() {
               <small>{c.role}</small>
             </span>
             <span className="brand-face brand-face-resume" aria-hidden="true">
-              <strong>Guo Jiawen / 郭嘉雯</strong>
-              <small>AI creator / AI product &amp; AIGC creation</small>
+              <strong>{c.resumeBrand}</strong>
+              <small>{c.resumeRole}</small>
             </span>
           </span>
         </a>
@@ -1161,8 +1178,8 @@ function ScenePanel({
         <span>{locale === "zh" ? "个人技能" : "Personal skills"}</span>
         <strong>
           {locale === "zh"
-            ? "不是只会生成，而是把 AI 变成画面、节奏、工具和声音。"
-            : "Not just generating. I turn AI into images, rhythm, tools, and sound."}
+            ? "不是只会生成，而是把 AI 变成影像、图像、声音和工具。"
+            : "Not just generating. I turn AI into video, images, sound, and tools."}
         </strong>
         <div className="skill-stage" aria-live="polite">
           <i>{activeSignal.code}</i>
