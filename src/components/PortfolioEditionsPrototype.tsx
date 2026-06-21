@@ -113,12 +113,12 @@ const chapters: Chapter[] = [
     nav: { en: "Videos", zh: "影视" },
     title: { en: "VIDEOS", zh: "影视" },
     line: {
-      en: "I also cut images into things that feel like they breathe.",
-      zh: "我也会把画面剪成会呼吸的东西。",
+      en: "I like making interesting moving visuals.",
+      zh: "我喜欢做一些有趣的动态画面。",
     },
     body: {
-      en: "Some are music videos, some are experimental shorts, and some are just atmospheres I wanted to try. They are not always complete, but each one has its own rhythm.",
-      zh: "有些是 MV，有些是实验短片，有些只是一个我想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
+      en: "Some are music videos, some are experimental shorts, and some are just a mood I wanted to try. They are not always complete, but each one has its own rhythm.",
+      zh: "有些是 MV，有些是实验短片，有些只是一个想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
     },
     signal: "MV / SHORTS / MOOD / RHYTHM",
   },
@@ -163,8 +163,8 @@ const chapters: Chapter[] = [
 const refinedCopy = {
   en: {
     ...copy.en,
-    brand: "Guo Jiawen / Miao喵渺淼妙",
-    role: "AI creator / images / videos / music / product",
+    brand: "MIAO",
+    role: "AI creator / images / film / music / product",
     lang: "中文",
     heroTitle: "Hello,\nthis is Miao",
     heroBody:
@@ -185,8 +185,8 @@ const refinedCopy = {
   },
   zh: {
     ...copy.zh,
-    brand: "郭嘉雯 / Miao喵渺淼妙",
-    role: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
+    brand: "MIAO",
+    role: "AI creator / images / film / music / product",
     lang: "EN",
     heroTitle: "你好，\n我是 Miao",
     heroBody:
@@ -245,12 +245,12 @@ const refinedChapterText: Record<string, Partial<Chapter>> = {
     nav: { en: "Videos", zh: "影视" },
     title: { en: "VIDEOS", zh: "影视" },
     line: {
-      en: "I also cut images into things that feel like they breathe.",
-      zh: "我也会把画面剪成会呼吸的东西。",
+      en: "I like making interesting moving visuals.",
+      zh: "我喜欢做一些有趣的动态画面。",
     },
     body: {
-      en: "Some are music videos, some are experimental shorts, and some are just atmospheres I wanted to try. They are not always complete, but each one has its own rhythm.",
-      zh: "有些是 MV，有些是实验短片，有些只是一个我想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
+      en: "Some are music videos, some are experimental shorts, and some are just a mood I wanted to try. They are not always complete, but each one has its own rhythm.",
+      zh: "有些是 MV，有些是实验短片，有些只是一个想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
     },
     signal: "MV / SHORTS / MOOD / RHYTHM",
   },
@@ -517,8 +517,8 @@ const heroModules = [
     code: "02",
     en: "Videos",
     zh: "影视",
-    lineEn: "I cut images into things that feel like they breathe.",
-    lineZh: "我也会把画面剪成会呼吸的东西。",
+    lineEn: "I like making interesting moving visuals.",
+    lineZh: "我喜欢做一些有趣的动态画面。",
     metaEn: "MV / shorts / mood",
     metaZh: "MV / 短片 / 氛围",
   },
@@ -985,9 +985,15 @@ export function PortfolioEditionsPrototype() {
       <header className="site-header">
         <a className="brand-lockup" href="#top" aria-label={c.brand}>
           <span className="brand-mark" aria-hidden="true" />
-          <span>
-            <strong>{c.brand}</strong>
-            <small>{c.role}</small>
+          <span className="brand-copy">
+            <span className="brand-face brand-face-public">
+              <strong>{c.brand}</strong>
+              <small>{c.role}</small>
+            </span>
+            <span className="brand-face brand-face-resume" aria-hidden="true">
+              <strong>Guo Jiawen / 郭嘉雯</strong>
+              <small>AI creator / AI product &amp; AIGC creation</small>
+            </span>
           </span>
         </a>
         <nav aria-label="Primary navigation">

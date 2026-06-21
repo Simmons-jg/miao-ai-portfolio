@@ -20,6 +20,66 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
+.brand-copy {
+  position: relative;
+  display: block;
+  min-width: 330px;
+  min-height: 34px;
+  overflow: hidden;
+}
+
+.brand-copy::after {
+  content: "";
+  position: absolute;
+  inset: -6px -18px;
+  background: linear-gradient(90deg, transparent, rgb(183 255 37 / 18%), transparent);
+  opacity: 0;
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.brand-face {
+  display: block;
+  transition:
+    transform 420ms cubic-bezier(.2, .8, .2, 1),
+    opacity 240ms ease;
+}
+
+.brand-face-resume {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.brand-copy:hover::after {
+  animation: brand-scan 620ms ease both;
+}
+
+.brand-copy:hover .brand-face-public {
+  opacity: 0;
+  transform: translateY(-110%);
+}
+
+.brand-copy:hover .brand-face-resume {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes brand-scan {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}
+
 .portfolio-shell .work-card-fan > button {
   position: absolute;
   left: 50%;
