@@ -111,13 +111,16 @@ const chapters: Chapter[] = [
     id: "judgment",
     code: "03",
     nav: { en: "Videos", zh: "影视" },
-    title: { en: "VIDEOS", zh: "影视与动态" },
-    line: { en: "Short films, edits, moving images, and rhythm.", zh: "短片、剪辑、移动的画面和节奏。" },
-    body: {
-      en: "Video should be played, paced, and told. It should not be mixed into the image wall.",
-      zh: "这里放视频，不跟图片墙混在一起。视频要被播放，要有节奏，也要有故事。",
+    title: { en: "VIDEOS", zh: "影视" },
+    line: {
+      en: "I also cut images into things that feel like they breathe.",
+      zh: "我也会把画面剪成会呼吸的东西。",
     },
-    signal: "PLAY / RHYTHM / STORY",
+    body: {
+      en: "Some are music videos, some are experimental shorts, and some are just atmospheres I wanted to try. They are not always complete, but each one has its own rhythm.",
+      zh: "有些是 MV，有些是实验短片，有些只是一个我想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
+    },
+    signal: "MV / SHORTS / MOOD / RHYTHM",
   },
   {
     id: "works",
@@ -242,14 +245,14 @@ const refinedChapterText: Record<string, Partial<Chapter>> = {
     nav: { en: "Videos", zh: "影视" },
     title: { en: "VIDEOS", zh: "影视" },
     line: {
-      en: "Short films, edits, moving images, and rhythm.",
-      zh: "短片、剪辑、移动的画面和节奏。",
+      en: "I also cut images into things that feel like they breathe.",
+      zh: "我也会把画面剪成会呼吸的东西。",
     },
     body: {
-      en: "Video should be played, paced, and told. It should not be mixed into the image wall.",
-      zh: "这里放视频，不跟图片墙混在一起。视频要被播放，要有节奏，也要有故事。",
+      en: "Some are music videos, some are experimental shorts, and some are just atmospheres I wanted to try. They are not always complete, but each one has its own rhythm.",
+      zh: "有些是 MV，有些是实验短片，有些只是一个我想试出来的气氛。不一定都很完整，但它们都有自己的节奏。",
     },
-    signal: "PLAY / RHYTHM / STORY",
+    signal: "MV / SHORTS / MOOD / RHYTHM",
   },
   works: {
     nav: { en: "Images", zh: "图像" },
@@ -514,10 +517,10 @@ const heroModules = [
     code: "02",
     en: "Videos",
     zh: "影视",
-    lineEn: "Short films, edits, moving images, and rhythm.",
-    lineZh: "短片、剪辑、会移动的画面和节奏。",
-    metaEn: "play / rhythm / story",
-    metaZh: "播放 / 节奏 / 故事",
+    lineEn: "I cut images into things that feel like they breathe.",
+    lineZh: "我也会把画面剪成会呼吸的东西。",
+    metaEn: "MV / shorts / mood",
+    metaZh: "MV / 短片 / 氛围",
   },
   {
     id: "method",
@@ -1342,7 +1345,7 @@ function VideoRoomPanel({
           <p className="chapter-line">{chapter.line[locale]}</p>
           <p>{chapter.body[locale]}</p>
           <Link className="home-video-open" href={`/videos?work=${active.id}`}>
-            <span>{locale === "zh" ? "点开后播放原片" : "play original cut"}</span>
+            <span>{locale === "zh" ? "点开看原片" : "watch original cut"}</span>
             <b>{locale === "zh" ? active.titleZh : active.titleEn}</b>
           </Link>
         </div>

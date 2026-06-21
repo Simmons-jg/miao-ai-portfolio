@@ -47,9 +47,9 @@ export function VideoRoomPage() {
           <span>VIDEOS</span>
         </div>
         <div className="videos-hero-copy">
-          <p>moving images / rhythm / story</p>
+          <p>MV / experimental shorts / strange little moods</p>
           <h1 id="videos-title">VIDEOS</h1>
-          <b>影视作品频道</b>
+          <b>我也会把画面剪成会呼吸的东西。</b>
         </div>
         <div className="videos-hero-strip" aria-label="Featured video covers">
           {videoWorks.slice(0, 5).map((work, index) => (
@@ -87,7 +87,7 @@ export function VideoRoomPage() {
       <section className="videos-index-section" aria-label="Video index">
         <div className="videos-index-heading">
           <span>PORTFOLIO</span>
-          <p>Hover to reveal a cover. Click to play the original file.</p>
+          <p>Some are MV, some are experimental shorts. Hover for covers, click to play the original cuts.</p>
         </div>
 
         <div className="videos-hover-poster" aria-hidden="true">
