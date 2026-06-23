@@ -2,11 +2,12 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import Link from "next/link";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import * as THREE from "three";
+import MusicParticles from "@/components/MusicParticles";
 import { videoWorks } from "@/lib/videoCatalog";
 
 type Locale = "en" | "zh";
@@ -20,6 +21,13 @@ type Chapter = {
   body: Record<Locale, string>;
   signal: string;
 };
+
+const MAINFRAME_CAT_VIDEO_URL =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_37vWe8zXxPK530lYMCDkCgkIHii/hf_20260621_223340_b9143502-d3b1-45ad-a1fb-a322c3300fff.mp4";
+
+const MAINFRAME_CAT_POSTER = "/portfolio-assets/miao-ai-cat-entry.png";
+const MAINFRAME_CAT_WECHAT_QR = "/portfolio-assets/wechat-kabunnchan-qr.png";
+const WECHAT_ID = "kabunnchan";
 
 const copy = {
   en: {
@@ -62,7 +70,7 @@ const copy = {
     productHint: "它不是作品墙，是作品墙背后的机器。",
     worksTitle: "图像",
     worksLead: "不是生成了就算作品。我更在意氛围、构图、人物感和世界观。",
-    methodTitle: "声音草稿",
+    methodTitle: "音乐空间",
     contactTitle: "CONTACT ME",
     contactBody:
       "如果你喜欢奇怪的图像、AI 视频、产品 Demo，或者酷一点的互动网站，我们可以聊聊。",
@@ -139,12 +147,12 @@ const chapters: Chapter[] = [
     code: "05",
     nav: { en: "Music", zh: "音乐" },
     title: { en: "MUSIC", zh: "音乐" },
-    line: { en: "Some sounds, moods, and unfinished little tracks.", zh: "一些声音、情绪，和还没完成的小片段。" },
+    line: { en: "Complete music pieces, built as a way to explore diversity.", zh: "完整的音乐作品，也是我探索多样性的入口。" },
     body: {
-      en: "Music does not always need to be complete. Sometimes it is just the temperature of an image.",
-      zh: "音乐不一定要完整，有时候它只是一个画面的温度。",
+      en: "I use melody, rhythm, texture, and emotion as different rooms. Each finished piece can open into many paths of style and feeling.",
+      zh: "我用旋律、节奏、材质和情绪做不同的空间。每首作品都是完整的，也会延展出很多条风格和情绪路径。",
     },
-    signal: "SOUND / MOOD / TRACK",
+    signal: "COMPLETE TRACKS / DIVERSITY / QUIET PLAY",
   },
   {
     id: "contact",
@@ -277,14 +285,14 @@ const refinedChapterText: Record<string, Partial<Chapter>> = {
     nav: { en: "Music", zh: "音乐" },
     title: { en: "MUSIC", zh: "音乐" },
     line: {
-      en: "Some sounds, moods, and unfinished little tracks.",
-      zh: "一些声音、情绪，和还没完成的小片段。",
+      en: "Complete music pieces, built as a way to explore diversity.",
+      zh: "完整的音乐作品，也是我探索多样性的入口。",
     },
     body: {
-      en: "Music does not always need to be complete. Sometimes it is just the temperature of an image.",
-      zh: "音乐不一定要完整。有时候它只是一个画面的温度。",
+      en: "I use melody, rhythm, texture, and emotion as different rooms. Each finished piece can open into many paths of style and feeling.",
+      zh: "我用旋律、节奏、材质和情绪做不同的空间。每首作品都是完整的，也会延展出很多条风格和情绪路径。",
     },
-    signal: "SOUND / MOOD / TRACK",
+    signal: "COMPLETE TRACKS / DIVERSITY / QUIET PLAY",
   },
   contact: {
     nav: { en: "Contact", zh: "联系" },
@@ -365,7 +373,7 @@ const works = [
     roleZh: "视觉导演 / 构图审核",
     detailEn: "Lighting, atmosphere, scene logic, and frame-level visual judgment.",
     detailZh: "光线、氛围、场景逻辑和单帧级视觉判断。",
-    image: "/portfolio-assets/miao-work-01-silver-orchid.png",
+    image: "/portfolio-assets/optimized/miao-work-01-silver-orchid.webp",
     kind: "person",
     tagsEn: ["image", "scene logic", "taste"],
     tagsZh: ["影像", "场景逻辑", "审美"],
@@ -378,7 +386,7 @@ const works = [
     roleZh: "动态情绪 / 视觉质检",
     detailEn: "Scale, rhythm, contrast, texture, and screen-ready visual tension.",
     detailZh: "尺度、节奏、对比、质感和适配大屏的视觉张力。",
-    image: "/portfolio-assets/miao-work-02-fairy-study-room.png",
+    image: "/portfolio-assets/optimized/miao-work-02-fairy-study-room.webp",
     kind: "scene",
     tagsEn: ["scale", "motion", "QC"],
     tagsZh: ["尺度", "动态", "质检"],
@@ -391,7 +399,7 @@ const works = [
     roleZh: "产品叙事 / Demo 设计",
     detailEn: "Product hooks, creator scripts, prototype surfaces, and audience-readable demos.",
     detailZh: "产品钩子、创意脚本、原型界面和受众能看懂的 Demo。",
-    image: "/portfolio-assets/miao-work-03-blue-crown.png",
+    image: "/portfolio-assets/optimized/miao-work-03-blue-crown.webp",
     kind: "person",
     tagsEn: ["product", "demo", "content"],
     tagsZh: ["产品", "Demo", "内容"],
@@ -404,7 +412,7 @@ const works = [
     roleZh: "风格延续 / 人物审片",
     detailEn: "Character consistency, costume logic, mood, and image-system control.",
     detailZh: "人物一致性、服装逻辑、情绪和图像系统控制。",
-    image: "/portfolio-assets/miao-work-04-ink-lotus.png",
+    image: "/portfolio-assets/optimized/miao-work-04-ink-lotus.webp",
     kind: "person",
     tagsEn: ["character", "style", "control"],
     tagsZh: ["人物", "风格", "控制"],
@@ -417,7 +425,7 @@ const works = [
     roleZh: "世界观 / 视觉导演",
     detailEn: "Character systems, surreal scenes, horror texture, and cinematic mood boards.",
     detailZh: "人物系统、超现实场景、恐怖质感和电影化 moodboard。",
-    image: "/portfolio-assets/miao-work-05-desert-stage.jpg",
+    image: "/portfolio-assets/optimized/miao-work-05-desert-stage.webp",
     kind: "scene",
     tagsEn: ["world", "mood", "cinema"],
     tagsZh: ["世界", "情绪", "电影感"],
@@ -430,7 +438,7 @@ const works = [
     roleZh: "类型控制 / 质感审核",
     detailEn: "Atmosphere, material texture, tension, and generated-image boundary testing.",
     detailZh: "氛围、材质、张力和生成图像边界测试。",
-    image: "/portfolio-assets/miao-work-06-flower-portrait.webp",
+    image: "/portfolio-assets/optimized/miao-work-06-flower-portrait.webp",
     kind: "person",
     tagsEn: ["genre", "texture", "boundary"],
     tagsZh: ["类型", "质感", "边界"],
@@ -515,84 +523,6 @@ const productEntrances = [
   },
 ];
 
-const heroModules = [
-  {
-    id: "judgment",
-    href: "#judgment",
-    code: "02",
-    en: "Videos",
-    zh: "影视",
-    lineEn: "I like making interesting moving visuals.",
-    lineZh: "我喜欢做一些有趣的动态画面。",
-    metaEn: "MV / shorts / mood",
-    metaZh: "MV / 短片 / 氛围",
-  },
-  {
-    id: "works",
-    href: "#works",
-    code: "03",
-    en: "Images",
-    zh: "图像",
-    lineEn: "AI pictures judged by human taste.",
-    lineZh: "AI 做的图像，但由人的审美判断。",
-    metaEn: "mood / frame / world",
-    metaZh: "氛围 / 构图 / 世界观",
-  },
-  {
-    id: "method",
-    href: "#method",
-    code: "04",
-    en: "Music",
-    zh: "音乐",
-    lineEn: "Small sounds, moods, and unfinished tracks.",
-    lineZh: "一些声音、情绪和还没完成的小片段。",
-    metaEn: "sound / mood / image",
-    metaZh: "声音 / 情绪 / 画面",
-  },
-  {
-    id: "product",
-    href: "#product",
-    code: "05",
-    en: "Product",
-    zh: "产品",
-    lineEn: "An AI video tool behind the gallery.",
-    lineZh: "作品墙背后的 AI 视频工具。",
-    metaEn: "script / shots / tasks",
-    metaZh: "剧本 / 分镜 / 任务",
-  },
-];
-
-const tasteSignals = [
-  {
-    code: "01",
-    en: "I'M AN AI VISUAL CREATOR",
-    zh: "爱做有氛围、有构图、有世界观的 AI 图像",
-    metricEn: "visual first",
-    metricZh: "视觉先行",
-  },
-  {
-    code: "02",
-    en: "I'M A VIDEO STORYTELLER",
-    zh: "爱做有节奏、有画面感的影视片段",
-    metricEn: "make it move",
-    metricZh: "让它动起来",
-  },
-  {
-    code: "03",
-    en: "I'M AN AI PRODUCT THINKER",
-    zh: "爱把创作流程拆成可以玩的 AI 工具",
-    metricEn: "tools can play",
-    metricZh: "工具也要好玩",
-  },
-  {
-    code: "04",
-    en: "I'M AN AI MUSIC MAKER",
-    zh: "爱用 AI 写一些声音、情绪和小段旋律",
-    metricEn: "sound mood",
-    metricZh: "声音情绪",
-  },
-];
-
 const tasteChecks = [
   { en: "play", zh: "播放", value: "play" },
   { en: "cut", zh: "剪辑", value: "cut" },
@@ -602,55 +532,36 @@ const tasteChecks = [
   { en: "screen", zh: "画面", value: "screen" },
 ];
 
-const methodCards = [
+const contactChannels = [
   {
-    step: "Listen",
-    en: "Start from the feeling of an image, a scene, or a character.",
-    zh: "从一张图、一个场景或一个人物的情绪开始。",
+    key: "email",
+    label: "EMAIL",
+    value: "Guokabunn@gmail.com",
+    detailEn: "Send a brief, idea, or weird image question.",
+    detailZh: "发项目想法、合作需求，或者奇怪图像问题。",
+    href: "mailto:Guokabunn@gmail.com",
   },
   {
-    step: "Mood",
-    en: "Use AI to sketch texture, temperature, and a first sound direction.",
-    zh: "用 AI 先搓出质感、温度和声音方向。",
+    key: "wechat",
+    label: "WECHAT",
+    value: WECHAT_ID,
+    detailEn: "Scan the card, or search the WeChat ID.",
+    detailZh: "扫猫卡二维码，或直接搜微信号。",
   },
   {
-    step: "Generate",
-    en: "Make small loops, unfinished tracks, and fragments that match the picture.",
-    zh: "生成一些循环、小样和能贴住画面的片段。",
+    key: "bili",
+    label: "BILI",
+    value: "UID 31520441",
+    detailEn: "Video room and public experiments.",
+    detailZh: "视频房间和公开实验。",
   },
   {
-    step: "Edit",
-    en: "Keep the strange parts, cut the boring parts, and leave room for rhythm.",
-    zh: "留下奇怪的部分，剪掉无聊的部分，给节奏留空间。",
+    key: "red",
+    label: "RED",
+    value: "Miao喵渺淼妙",
+    detailEn: "Image notes and work-in-progress fragments.",
+    detailZh: "图像笔记和一些正在生长的片段。",
   },
-  {
-    step: "Keep",
-    en: "Not every track needs to be finished. Some are only a mood archive.",
-    zh: "不是每段音乐都要完成，有些只是情绪档案。",
-  },
-];
-
-const credentials = [
-  { en: "Email / Guokabunn@gmail.com", zh: "Email / Guokabunn@gmail.com" },
-  { en: "X / @GuoGarvena", zh: "X / @GuoGarvena" },
-  { en: "Bilibili / UID 31520441", zh: "B站 / UID 31520441" },
-  { en: "Xiaohongshu / Miao", zh: "小红书 / Miao喵渺淼妙" },
-];
-
-const proofPoints = [
-  { en: "Images room", zh: "图像房间" },
-  { en: "Video room", zh: "影视房间" },
-  { en: "Music room", zh: "音乐房间" },
-  { en: "AI video tool", zh: "AI 视频工具" },
-];
-
-const kineticTracks = [
-  { en: "VISUAL FIRST", zh: "视觉先行" },
-  { en: "MAKE IT MOVE", zh: "让它动起来" },
-  { en: "AI CAN BE WILD", zh: "AI 可以很野" },
-  { en: "STORY BEFORE TOOL", zh: "故事先于工具" },
-  { en: "NOT JUST PROMPTS", zh: "不只是提示词" },
-  { en: "CREATE COOL THINGS", zh: "一起做酷东西" },
 ];
 
 const socialLinks = [
@@ -680,10 +591,243 @@ const socialLinks = [
   },
 ];
 
+const MUSIC_SAMPLE_URL = "/audio/out-yo-head-music-box-edit.mp3";
+
+type WebglRendererOptions = {
+  alpha?: boolean;
+  antialias?: boolean;
+  powerPreference?: WebGLPowerPreference;
+};
+
+function canCreateWebglContext() {
+  if (typeof window === "undefined" || !window.WebGLRenderingContext) return false;
+
+  const testCanvas = document.createElement("canvas");
+  const context =
+    testCanvas.getContext("webgl2", { failIfMajorPerformanceCaveat: false }) ||
+    testCanvas.getContext("webgl", { failIfMajorPerformanceCaveat: false });
+
+  if (!context) return false;
+
+  context.getExtension("WEBGL_lose_context")?.loseContext();
+  return true;
+}
+
+function createWebglRenderer(
+  canvas: HTMLCanvasElement,
+  options: WebglRendererOptions,
+  label: string,
+) {
+  const attempts: WebglRendererOptions[] = [
+    options,
+    { ...options, antialias: false, powerPreference: "default" },
+    { ...options, antialias: false, powerPreference: "low-power" },
+  ];
+  let lastError: unknown;
+
+  for (const attempt of attempts) {
+    try {
+      return new THREE.WebGLRenderer({
+        canvas,
+        ...attempt,
+      });
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  console.warn(`${label} WebGL renderer unavailable.`, lastError);
+  return null;
+}
+
+function startWebglStageFallback(canvas: HTMLCanvasElement, rootRef: { current: HTMLElement | null }) {
+  const context = canvas.getContext("2d", { alpha: false });
+  if (!context) return () => {};
+
+  canvas.classList.add("webgl-stage-fallback");
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pointer = { x: 0.5, y: 0.5 };
+  const scene = { current: 0, target: 0 };
+  let width = 1;
+  let height = 1;
+  let raf = 0;
+  let lastDraw = 0;
+  let scrolling = false;
+  let scrollTimer = 0;
+
+  const accents = [
+    [183, 255, 37],
+    [206, 236, 126],
+    [114, 192, 178],
+    [245, 222, 188],
+    [255, 118, 54],
+    [255, 74, 36],
+  ];
+
+  const accentForScene = () => {
+    const clamped = Math.max(0, Math.min(accents.length - 1, scene.current));
+    const baseIndex = Math.floor(clamped);
+    const nextIndex = Math.min(accents.length - 1, baseIndex + 1);
+    const mix = clamped - baseIndex;
+    const base = accents[baseIndex];
+    const next = accents[nextIndex];
+    return base.map((value, index) => value + (next[index] - value) * mix);
+  };
+
+  const resize = () => {
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.25);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.max(1, Math.floor(width * ratio));
+    canvas.height = Math.max(1, Math.floor(height * ratio));
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  };
+
+  const readScene = () => {
+    const raw = rootRef.current?.style.getPropertyValue("--scene-index");
+    const next = raw ? Number.parseFloat(raw) : 0;
+    if (Number.isFinite(next)) scene.target = next;
+  };
+
+  const onPointerMove = (event: PointerEvent) => {
+    pointer.x = event.clientX / Math.max(1, width);
+    pointer.y = event.clientY / Math.max(1, height);
+  };
+
+  const onScroll = () => {
+    scrolling = true;
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => {
+      scrolling = false;
+    }, 140);
+  };
+
+  const drawGrid = () => {
+    context.save();
+    context.globalAlpha = 0.22;
+    context.strokeStyle = "rgba(243, 239, 223, 0.12)";
+    context.lineWidth = 1;
+    for (let x = 0; x <= width; x += 64) {
+      context.beginPath();
+      context.moveTo(x, 0);
+      context.lineTo(x, height);
+      context.stroke();
+    }
+    for (let y = 0; y <= height; y += 64) {
+      context.beginPath();
+      context.moveTo(0, y);
+      context.lineTo(width, y);
+      context.stroke();
+    }
+    context.restore();
+  };
+
+  const draw = (time = performance.now()) => {
+    if (rootRef.current?.classList.contains("hero-theme-light")) {
+      if (!reduceMotion) {
+        raf = window.requestAnimationFrame(draw);
+      }
+      return;
+    }
+
+    if (!reduceMotion && time - lastDraw < (scrolling ? 120 : 33)) {
+      raf = window.requestAnimationFrame(draw);
+      return;
+    }
+    lastDraw = time;
+
+    scene.current += (scene.target - scene.current) * (reduceMotion ? 0.18 : 0.045);
+    const seconds = time * 0.001;
+    const [r, g, b] = accentForScene();
+    const px = pointer.x * width;
+    const py = pointer.y * height;
+
+    const background = context.createLinearGradient(0, 0, width, height);
+    background.addColorStop(0, "#070806");
+    background.addColorStop(0.5, "#12150e");
+    background.addColorStop(1, "#1b0c07");
+    context.fillStyle = background;
+    context.fillRect(0, 0, width, height);
+
+    const centerGlow = context.createRadialGradient(width * 0.54, height * 0.42, 0, width * 0.54, height * 0.42, width * 0.55);
+    centerGlow.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.18)`);
+    centerGlow.addColorStop(0.42, "rgba(243, 239, 223, 0.055)");
+    centerGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    context.fillStyle = centerGlow;
+    context.fillRect(0, 0, width, height);
+
+    const pointerGlow = context.createRadialGradient(px, py, 0, px, py, Math.max(width, height) * 0.34);
+    pointerGlow.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.2)`);
+    pointerGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    context.fillStyle = pointerGlow;
+    context.fillRect(0, 0, width, height);
+
+    drawGrid();
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+    for (let index = 0; index < 7; index += 1) {
+      const x = width * (0.18 + index * 0.13 + Math.sin(seconds * 0.18 + index) * 0.018);
+      const beam = context.createLinearGradient(x - 90, 0, x + 90, height);
+      beam.addColorStop(0, "rgba(0, 0, 0, 0)");
+      beam.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${0.035 + index * 0.004})`);
+      beam.addColorStop(1, "rgba(0, 0, 0, 0)");
+      context.fillStyle = beam;
+      context.fillRect(x - 110, 0, 220, height);
+    }
+
+    context.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.14)`;
+    context.lineWidth = 1;
+    for (let index = 0; index < 9; index += 1) {
+      const y = height * (0.18 + index * 0.075);
+      const sway = Math.sin(seconds * 0.22 + index * 0.9) * 38;
+      context.beginPath();
+      context.moveTo(width * 0.35, y + sway);
+      context.bezierCurveTo(width * 0.48, y - 40, width * 0.62, y + 42, width * 0.86, y + sway * 0.4);
+      context.stroke();
+    }
+    context.restore();
+
+    const vignette = context.createRadialGradient(width * 0.5, height * 0.48, width * 0.2, width * 0.5, height * 0.5, width * 0.72);
+    vignette.addColorStop(0, "rgba(0, 0, 0, 0)");
+    vignette.addColorStop(1, "rgba(0, 0, 0, 0.62)");
+    context.fillStyle = vignette;
+    context.fillRect(0, 0, width, height);
+
+    if (!reduceMotion) {
+      raf = window.requestAnimationFrame(draw);
+    }
+  };
+
+  resize();
+  readScene();
+  draw();
+
+  const observer = new MutationObserver(readScene);
+  if (rootRef.current) observer.observe(rootRef.current, { attributes: true, attributeFilter: ["style"] });
+  window.addEventListener("resize", resize);
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    observer.disconnect();
+    window.cancelAnimationFrame(raf);
+    window.clearTimeout(scrollTimer);
+    window.removeEventListener("resize", resize);
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("scroll", onScroll);
+    canvas.classList.remove("webgl-stage-fallback");
+  };
+}
+
 export function PortfolioEditionsPrototype() {
   const [locale, setLocale] = useState<Locale>("zh");
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeProductModule, setActiveProductModule] = useState(0);
+  const [heroInView, setHeroInView] = useState(true);
   const rootRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -697,31 +841,81 @@ export function PortfolioEditionsPrototype() {
   }, [c.siteTitle, locale]);
 
   useEffect(() => {
+    const urls = [
+      ...works.slice(0, 6).map((work) => work.image),
+      ...videoWorks.slice(0, 5).map((work) => work.poster),
+    ];
+
+    const preloadImages = () => {
+      urls.forEach((url) => {
+        const image = new Image();
+        image.decoding = "async";
+        image.src = url;
+        image.decode().catch(() => undefined);
+      });
+    };
+
+    const requestIdle = window.requestIdleCallback?.bind(window);
+    const cancelIdle = window.cancelIdleCallback?.bind(window);
+
+    if (requestIdle && cancelIdle) {
+      const idleId = requestIdle(preloadImages, { timeout: 1800 });
+      return () => cancelIdle(idleId);
+    }
+
+    const timer = window.setTimeout(preloadImages, 900);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const hero = document.getElementById("top");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting && entry.intersectionRatio > 0.24),
+      { threshold: [0, 0.24, 0.5] },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    let timer = 0;
+    const onScroll = () => {
+      root.classList.add("is-scrolling");
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        root.classList.remove("is-scrolling");
+      }, 160);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+      root.classList.remove("is-scrolling");
+    };
+  }, []);
+
+  useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lenis = reduceMotion
-      ? null
-      : new Lenis({
-          lerp: 0.08,
-          smoothWheel: true,
-          wheelMultiplier: 0.92,
-        });
-
-    const lenisRaf = (time: number) => {
-      lenis?.raf(time * 1000);
-    };
-
-    if (lenis) {
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add(lenisRaf);
-      gsap.ticker.lagSmoothing(0);
-    }
 
     const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 900);
 
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>("[data-chapter]");
+      let currentSceneIndex = 0;
+      const activateScene = (nextIndex: number) => {
+        if (currentSceneIndex === nextIndex) return;
+        currentSceneIndex = nextIndex;
+        startTransition(() => setActiveIndex(nextIndex));
+      };
 
       sections.forEach((section, index) => {
         const sceneIndex = Number.parseInt(section.dataset.sceneIndex ?? String(index), 10);
@@ -730,40 +924,46 @@ export function PortfolioEditionsPrototype() {
           trigger: section,
           start: "top 55%",
           end: "bottom 45%",
-          onEnter: () => setActiveIndex(nextIndex),
-          onEnterBack: () => setActiveIndex(nextIndex),
+          onEnter: () => activateScene(nextIndex),
+          onEnterBack: () => activateScene(nextIndex),
         });
 
-        gsap.fromTo(
-          section.querySelectorAll("[data-reveal]"),
-          { autoAlpha: 0, y: 38 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.82,
-            stagger: 0.08,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 68%",
-              toggleActions: "play none none reverse",
+        const revealTargets = section.querySelectorAll("[data-reveal]");
+        if (revealTargets.length > 0) {
+          gsap.fromTo(
+            revealTargets,
+            { autoAlpha: 0, y: 38 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.82,
+              stagger: 0.08,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 68%",
+                toggleActions: "play none none none",
+              },
             },
-          },
-        );
+          );
+        }
       });
 
-      gsap.to(".artifact-core", {
-        rotateY: 18,
-        rotateX: -8,
-        y: -28,
-        ease: "none",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.8,
-        },
-      });
+      const artifactCore = rootRef.current?.querySelector(".artifact-core");
+      if (artifactCore) {
+        gsap.to(artifactCore, {
+          rotateY: 18,
+          rotateX: -8,
+          y: -28,
+          ease: "none",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+          },
+        });
+      }
 
       if (!reduceMotion) {
         const channels = gsap.utils.toArray<HTMLElement>("[data-evidence-channel]");
@@ -790,7 +990,8 @@ export function PortfolioEditionsPrototype() {
             },
           });
 
-          gsap.utils.toArray<HTMLElement>("[data-evidence-card]", channel).forEach((card, cardIndex) => {
+          const cards = gsap.utils.toArray<HTMLElement>("[data-evidence-card]", channel);
+          cards.forEach((card, cardIndex) => {
             gsap.fromTo(
               card,
               { y: cardIndex % 2 === 0 ? 34 : 82, rotateY: cardIndex % 2 === 0 ? -7 : 7, autoAlpha: 0.54 },
@@ -815,10 +1016,6 @@ export function PortfolioEditionsPrototype() {
     return () => {
       window.clearTimeout(refreshTimer);
       ctx.revert();
-      if (lenis) {
-        gsap.ticker.remove(lenisRaf);
-        lenis.destroy();
-      }
     };
   }, []);
 
@@ -827,13 +1024,20 @@ export function PortfolioEditionsPrototype() {
     if (!canvas) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
+    if (!canCreateWebglContext()) {
+      return startWebglStageFallback(canvas, rootRef);
+    }
+
+    const renderer = createWebglRenderer(canvas, {
       antialias: true,
       alpha: true,
       powerPreference: "high-performance",
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+    }, "Homepage background");
+    if (!renderer) {
+      return startWebglStageFallback(canvas, rootRef);
+    }
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -943,20 +1147,36 @@ export function PortfolioEditionsPrototype() {
       if (Number.isFinite(next)) targetScene.value = next;
     };
 
+    let scrolling = false;
+    let scrollTimer = 0;
+    const onScroll = () => {
+      scrolling = true;
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        scrolling = false;
+      }, 140);
+    };
+
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     let raf = 0;
+    let lastRender = 0;
     const startTime = performance.now();
-    const render = () => {
-      material.uniforms.uTime.value = (performance.now() - startTime) / 1000;
-      material.uniforms.uScene.value = THREE.MathUtils.lerp(
-        material.uniforms.uScene.value,
-        targetScene.value,
-        reduceMotion ? 0.2 : 0.055,
-      );
-      renderer.render(scene, camera);
+    const render = (now = performance.now()) => {
+      const interval = scrolling ? 120 : reduceMotion ? 100 : 33;
+      if (!rootRef.current?.classList.contains("hero-theme-light") && now - lastRender >= interval) {
+        lastRender = now;
+        material.uniforms.uTime.value = (now - startTime) / 1000;
+        material.uniforms.uScene.value = THREE.MathUtils.lerp(
+          material.uniforms.uScene.value,
+          targetScene.value,
+          reduceMotion ? 0.2 : 0.055,
+        );
+        renderer.render(scene, camera);
+      }
       raf = window.requestAnimationFrame(render);
     };
     render();
@@ -967,8 +1187,10 @@ export function PortfolioEditionsPrototype() {
     return () => {
       observer.disconnect();
       window.cancelAnimationFrame(raf);
+      window.clearTimeout(scrollTimer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("scroll", onScroll);
       mesh.geometry.dispose();
       material.dispose();
       renderer.dispose();
@@ -995,7 +1217,12 @@ export function PortfolioEditionsPrototype() {
   const progress = useMemo(() => `${((activeIndex + 1) / refinedChapters.length) * 100}%`, [activeIndex]);
 
   return (
-    <main ref={rootRef} className="portfolio-shell" data-locale={locale} data-active={activeChapter.id}>
+    <main
+      ref={rootRef}
+      className={`portfolio-shell ${heroInView ? "hero-theme-light" : ""}`}
+      data-locale={locale}
+      data-active={activeChapter.id}
+    >
       <canvas ref={canvasRef} className="webgl-stage" aria-hidden="true" />
       <div className="stage-fade" aria-hidden="true" />
 
@@ -1043,48 +1270,8 @@ export function PortfolioEditionsPrototype() {
 
       <SocialDock />
 
-      <section id="top" className="hero-scene" data-chapter data-scene-index="0">
-        <div className="hero-copy">
-          <p data-reveal>{c.role}</p>
-          <h1 data-reveal>{c.heroTitle}</h1>
-          <div className="hero-bottom" data-reveal>
-            <p>{c.heroBody}</p>
-            <div className="hero-actions">
-              <a href="#works">{c.primary}</a>
-              <a href="#direction">{c.secondary}</a>
-            </div>
-          </div>
-          <div className="proof-strip" data-reveal>
-            {proofPoints.map((point) => (
-              <span key={point.en}>{point[locale]}</span>
-            ))}
-          </div>
-        </div>
-
-        <div className="artifact-wrap" aria-label={c.stage}>
-          <div className="artifact-core">
-            <div className="artifact-ring" />
-            <div className="artifact-glass">
-              <span>{c.stage}</span>
-              <strong>{activeChapter.signal}</strong>
-              <small>{activeChapter.nav[locale]}</small>
-            </div>
-            <div className="artifact-orbit orbit-a" />
-            <div className="artifact-orbit orbit-b" />
-          </div>
-        </div>
-
-        <div className="hero-system-deck" data-reveal>
-          {heroModules.map((module) => (
-            <a className={`hero-module-card hero-module-${module.id}`} href={module.href} key={module.id}>
-              <span>{module.code}</span>
-              <strong>{locale === "zh" ? module.zh : module.en}</strong>
-              <p>{locale === "zh" ? module.lineZh : module.lineEn}</p>
-              <small>{locale === "zh" ? module.metaZh : module.metaEn}</small>
-              <i aria-hidden="true" />
-            </a>
-          ))}
-        </div>
+      <section id="top" className="hero-scene mainframe-landing-scene" data-chapter data-scene-index="0">
+        <MainframeLandingHero locale={locale} />
       </section>
 
       <section className="kinetic-manifesto" aria-label={locale === "zh" ? "作品集视觉宣言" : "Portfolio manifesto"}>
@@ -1128,7 +1315,7 @@ export function PortfolioEditionsPrototype() {
         ) : (
           <section
             id={chapter.id}
-            className={`chapter-scene ${chapter.id === "product" ? "product-scene" : ""}`}
+            className={`chapter-scene ${chapter.id === "product" ? "product-scene" : ""} ${chapter.id === "method" ? "music-chapter-scene" : ""} ${chapter.id === "contact" ? "contact-scene" : ""}`}
             data-chapter
             data-scene-index={index}
             key={chapter.id}
@@ -1137,11 +1324,13 @@ export function PortfolioEditionsPrototype() {
               <span>{chapter.code}</span>
               <b>{chapter.nav[locale]}</b>
             </div>
-            <article data-reveal>
-              <h2>{chapter.title[locale]}</h2>
-              <p className="chapter-line">{chapter.line[locale]}</p>
-              <p>{chapter.body[locale]}</p>
-            </article>
+            {chapter.id === "method" ? null : (
+              <article data-reveal>
+                <h2>{chapter.title[locale]}</h2>
+                <p className="chapter-line">{chapter.line[locale]}</p>
+                <p>{chapter.body[locale]}</p>
+              </article>
+            )}
             <ScenePanel
               locale={locale}
               chapter={chapter}
@@ -1153,6 +1342,461 @@ export function PortfolioEditionsPrototype() {
         ),
       )}
     </main>
+  );
+}
+
+function useMainframeTypewriter(text: string, speed = 38, startDelay = 360) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    let startId: number | undefined;
+    let intervalId: number | undefined;
+
+    const resetId = window.setTimeout(() => {
+      setDisplayed("");
+      setDone(false);
+
+      startId = window.setTimeout(() => {
+        intervalId = window.setInterval(() => {
+          index += 1;
+          setDisplayed(text.slice(0, index));
+
+          if (index >= text.length) {
+            if (intervalId) window.clearInterval(intervalId);
+            setDone(true);
+          }
+        }, speed);
+      }, startDelay);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(resetId);
+      if (startId) window.clearTimeout(startId);
+      if (intervalId) window.clearInterval(intervalId);
+    };
+  }, [speed, startDelay, text]);
+
+  return { displayed, done };
+}
+
+function MainframeLandingVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const ready = true;
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+    const video = videoElement;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    let previousPointerX: number | null = null;
+    let targetTime = 0;
+    let seeking = false;
+
+    function applySeek() {
+      seeking = true;
+      video.currentTime = targetTime;
+    }
+
+    const handleMouseMove = (event: MouseEvent) => {
+      if (window.innerWidth < 1024 || reduceMotion || coarsePointer) return;
+
+      const duration = video.duration;
+      if (!duration || Number.isNaN(duration) || video.readyState < 1) return;
+
+      if (previousPointerX === null) {
+        previousPointerX = event.clientX;
+        targetTime = video.currentTime || 0;
+        return;
+      }
+
+      const delta = event.clientX - previousPointerX;
+      previousPointerX = event.clientX;
+      targetTime = Math.max(0, Math.min(duration, targetTime + (delta / window.innerWidth) * duration * 0.8));
+
+      if (!seeking) applySeek();
+    };
+
+    const handleMouseLeave = () => {
+      previousPointerX = null;
+    };
+
+    const handleLoadedMetadata = () => {
+      if (window.innerWidth < 1024 || reduceMotion || coarsePointer) {
+        video.loop = true;
+        const play = video.play();
+        if (play && typeof play.catch === "function") play.catch(() => undefined);
+        return;
+      }
+
+      video.loop = false;
+      video.pause();
+      targetTime = 0;
+      try {
+        if (video.currentTime > 0.03) video.currentTime = 0;
+      } catch {
+        // Some browsers reject early seeks until the first frame is available.
+      }
+    };
+
+    const handleSeeked = () => {
+      seeking = false;
+      if (!video.duration || Math.abs(video.currentTime - targetTime) <= 0.01) return;
+      applySeek();
+    };
+
+    video.loop = false;
+    video.muted = true;
+    video.pause();
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("seeked", handleSeeked);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave);
+    if (video.readyState >= 1) handleLoadedMetadata();
+
+    return () => {
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      video.removeEventListener("seeked", handleSeeked);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      video.pause();
+    };
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      className="mainframe-landing-video"
+      src={MAINFRAME_CAT_VIDEO_URL}
+      poster={MAINFRAME_CAT_POSTER}
+      muted
+      playsInline
+      preload="auto"
+      crossOrigin="anonymous"
+      data-ready={ready ? "true" : "false"}
+      aria-hidden="true"
+    />
+  );
+}
+
+function MainframeLandingHero({ locale }: { locale: Locale }) {
+  const hero =
+    locale === "zh"
+      ? {
+          eyebrow: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
+          title: "你好，\n我是 Miao。",
+          body: "我做图像、视频、音乐，也做一些奇奇怪怪的 AI 工具。一起做点酷东西 :)",
+          enter: "进入房间",
+        }
+      : {
+          eyebrow: "AI creator / images / film / music / product",
+          title: "Hello,\nthis is Miao.",
+          body: "I make images, videos, music, and strange little tools with AI. Let's do some cool things :)",
+          enter: "Enter rooms",
+        };
+  const { displayed, done } = useMainframeTypewriter(hero.title, locale === "zh" ? 48 : 36, 260);
+
+  return (
+    <>
+      <div className="mainframe-landing-media" aria-hidden="true">
+        <MainframeLandingVideo />
+        <div className="mainframe-landing-scrim" />
+        <div className="mainframe-landing-grid" />
+        <div className="mainframe-landing-notes">
+          <span>MIAO // IMAGE // FILM</span>
+          <span>PROMPT &gt; TASTE &gt; RHYTHM</span>
+          <span>AI CAN BE WILD</span>
+          <span>MAKE IT MOVE</span>
+          <span>TOOL AS PLAY</span>
+        </div>
+      </div>
+
+      <div className="mainframe-landing-copy">
+        <p className="mainframe-landing-eyebrow">{hero.eyebrow}</p>
+        <h1 className="mainframe-landing-title" aria-label={hero.title}>
+          {displayed || "\u00A0"}
+          {!done ? <i aria-hidden="true" /> : null}
+        </h1>
+        <p className="mainframe-landing-body">{hero.body}</p>
+
+        <div className="mainframe-landing-actions">
+          <a className="mainframe-landing-primary" href="#direction">
+            {hero.enter}
+          </a>
+        </div>
+      </div>
+
+      <div className="mainframe-landing-handoff" aria-hidden="true" />
+    </>
+  );
+}
+
+function MainframeCatHeroVisual({ locale }: { locale: Locale }) {
+  const [contentOpen, setContentOpen] = useState(false);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLButtonElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const seekingRef = useRef(false);
+  const targetTimeRef = useRef(0);
+  const reduceMotionRef = useRef(false);
+  const lastScrubRef = useRef(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const playLoop = () => {
+      video.loop = true;
+      const play = video.play();
+      if (play && typeof play.catch === "function") play.catch(() => {});
+    };
+
+    const onLoadedMetadata = () => {
+      if (window.innerWidth < 900 || reduceMotionRef.current) {
+        playLoop();
+        return;
+      }
+
+      targetTimeRef.current = video.duration * 0.48;
+      try {
+        video.currentTime = targetTimeRef.current;
+      } catch {
+        playLoop();
+      }
+    };
+
+    const onSeeked = () => {
+      seekingRef.current = false;
+      if (!video.duration) return;
+
+      if (Math.abs(video.currentTime - targetTimeRef.current) > 0.05) {
+        seekingRef.current = true;
+        video.currentTime = targetTimeRef.current;
+      }
+    };
+
+    video.addEventListener("loadedmetadata", onLoadedMetadata);
+    video.addEventListener("seeked", onSeeked);
+
+    return () => {
+      video.removeEventListener("loadedmetadata", onLoadedMetadata);
+      video.removeEventListener("seeked", onSeeked);
+    };
+  }, []);
+
+  useEffect(() => {
+    setPortalRoot(document.body);
+  }, []);
+
+  useEffect(() => {
+    if (!contentOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setContentOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [contentOpen]);
+
+  const scrubVideo = (ratio: number) => {
+    const video = videoRef.current;
+    if (!video || !video.duration || window.innerWidth < 900 || reduceMotionRef.current) return;
+    const now = performance.now();
+    if (now - lastScrubRef.current < 90) return;
+
+    lastScrubRef.current = now;
+    targetTimeRef.current = Math.min(video.duration - 0.05, Math.max(0, video.duration * (0.12 + ratio * 0.76)));
+    if (seekingRef.current) return;
+
+    seekingRef.current = true;
+    video.pause();
+    video.currentTime = targetTimeRef.current;
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+
+    event.currentTarget.style.setProperty("--cat-x", `${x * 100}%`);
+    event.currentTarget.style.setProperty("--cat-y", `${y * 100}%`);
+    event.currentTarget.style.setProperty("--cat-tilt-x", `${(0.5 - y) * 8}deg`);
+    event.currentTarget.style.setProperty("--cat-tilt-y", `${(x - 0.5) * 11}deg`);
+
+    scrubVideo(x);
+  };
+
+  const handlePointerLeave = () => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    stage.style.setProperty("--cat-x", "54%");
+    stage.style.setProperty("--cat-y", "42%");
+    stage.style.setProperty("--cat-tilt-x", "0deg");
+    stage.style.setProperty("--cat-tilt-y", "0deg");
+  };
+
+  return (
+    <>
+      <button
+        className="mainframe-cat-stage"
+        type="button"
+        ref={stageRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onClick={() => setContentOpen(true)}
+        aria-label={locale === "zh" ? "打开 Miao 视觉名片" : "Open Miao visual card"}
+        data-reveal
+      >
+        <span className="mainframe-cat-orbit orbit-one" aria-hidden="true" />
+        <span className="mainframe-cat-orbit orbit-two" aria-hidden="true" />
+        <span className="mainframe-cat-card">
+          <video
+            ref={videoRef}
+            className="mainframe-cat-video"
+            src={MAINFRAME_CAT_VIDEO_URL}
+            poster={MAINFRAME_CAT_POSTER}
+            muted
+            playsInline
+            preload="metadata"
+            crossOrigin="anonymous"
+          />
+          <span className="mainframe-cat-glow" aria-hidden="true" />
+          <span className="mainframe-cat-scan" aria-hidden="true" />
+          <span className="mainframe-cat-lens" aria-hidden="true" />
+          <span className="mainframe-cat-edge" aria-hidden="true" />
+          <span className="mainframe-cat-code" aria-hidden="true">
+            <span>MIAO // IMAGE // FILM</span>
+            <span>PROMPT &gt; TASTE &gt; RHYTHM</span>
+            <span>AI CAN BE WILD</span>
+            <span>MAKE IT MOVE</span>
+            <span>TOOL AS PLAY</span>
+          </span>
+          <span className="mainframe-cat-pixels" aria-hidden="true">
+            {Array.from({ length: 18 }, (_, index) => {
+              const pixelStyle = {
+                "--pixel-index": index,
+                "--pixel-x": `${9 + ((index * 37) % 76)}%`,
+                "--pixel-y": `${13 + ((index * 29) % 70)}%`,
+              } as CSSProperties;
+
+              return <i key={index} style={pixelStyle} />;
+            })}
+          </span>
+          <span className="mainframe-cat-sparkles" aria-hidden="true">
+            {Array.from({ length: 12 }, (_, index) => (
+              <i key={index} style={{ "--spark-index": index } as CSSProperties} />
+            ))}
+          </span>
+          <span className="mainframe-cat-prompt" aria-hidden="true">
+            <b>{locale === "zh" ? "点亮" : "wake"}</b>
+            <small>{locale === "zh" ? "移动鼠标 / 点击打开" : "move cursor / open card"}</small>
+          </span>
+          <span className="mainframe-cat-caption">
+            <strong>{locale === "zh" ? "视觉先行 / 让画面动起来" : "visual first / make images move"}</strong>
+            <small>{locale === "zh" ? "工具也可以像玩具 / 审美就是信号" : "tools can be playful / taste is the signal"}</small>
+          </span>
+          <span className="mainframe-cat-enter" aria-hidden="true">
+            {locale === "zh" ? "点击进入" : "click to enter"}
+          </span>
+        </span>
+      </button>
+
+      {contentOpen && portalRoot
+        ? createPortal(
+            (
+        <div
+          className="cat-content-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={locale === "zh" ? "Miao 视觉名片" : "Miao visual card"}
+        >
+          <button
+            className="cat-content-backdrop"
+            type="button"
+            onClick={() => setContentOpen(false)}
+            aria-label={locale === "zh" ? "关闭" : "Close"}
+          />
+          <div className="cat-content-window">
+            <span className="cat-content-corners" aria-hidden="true" />
+            <button
+              className="cat-content-close"
+              type="button"
+              onClick={() => setContentOpen(false)}
+              aria-label={locale === "zh" ? "关闭" : "Close"}
+            >
+              X
+            </button>
+            <div className="cat-contact-band">
+              <div className="cat-contact-copy">
+                <span>{locale === "zh" ? "微信联系" : "WeChat contact"}</span>
+                <strong>{WECHAT_ID}</strong>
+                <p>
+                  {locale === "zh"
+                    ? "扫二维码，或直接搜索微信号。适合聊合作、视频、图像和产品 Demo。"
+                    : "Scan the code or search the ID. Best for collaborations, video, image, and product demos."}
+                </p>
+              </div>
+              <figure className="cat-contact-qr">
+                <img
+                  src={MAINFRAME_CAT_WECHAT_QR}
+                  alt={locale === "zh" ? "微信二维码" : "WeChat QR code"}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>WECHAT / {WECHAT_ID}</figcaption>
+              </figure>
+            </div>
+            <div className="cat-content-card">
+              <img className="cat-content-image" src={MAINFRAME_CAT_POSTER} alt="" loading="lazy" decoding="async" />
+              <span className="cat-content-scan" aria-hidden="true" />
+              <span className="cat-content-lens" aria-hidden="true" />
+              <span className="cat-content-pixels" aria-hidden="true">
+                {Array.from({ length: 24 }, (_, index) => {
+                  const pixelStyle = {
+                    "--pixel-index": index,
+                    "--pixel-x": `${7 + ((index * 31) % 82)}%`,
+                    "--pixel-y": `${9 + ((index * 23) % 76)}%`,
+                  } as CSSProperties;
+
+                  return <i key={index} style={pixelStyle} />;
+                })}
+              </span>
+              <span className="cat-content-sparkles" aria-hidden="true">
+                {Array.from({ length: 14 }, (_, index) => (
+                  <i key={index} style={{ "--spark-index": index } as CSSProperties} />
+                ))}
+              </span>
+              <div className="cat-content-code" aria-hidden="true">
+                <span>MIAO // IMAGE // FILM</span>
+                <span>PROMPT &gt; TASTE &gt; RHYTHM</span>
+                <span>AI CAN BE WILD</span>
+                <span>MAKE IT MOVE</span>
+                <span>TOOL AS PLAY</span>
+              </div>
+              <div className="cat-content-caption">
+                <strong>{locale === "zh" ? "视觉先行 / 让画面动起来" : "visual first / make images move"}</strong>
+                <span>
+                  {locale === "zh"
+                    ? "工具也可以像玩具，审美就是信号。"
+                    : "Tools can be playful, and taste is the signal."}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+            ),
+            portalRoot,
+          )
+        : null}
+    </>
   );
 }
 
@@ -1298,34 +1942,37 @@ function ScenePanel({
   }
 
   if (chapter.id === "method") {
-    return (
-      <div className="scene-panel method-panel method-runway" data-reveal>
-        <span>{refinedCopy[locale].methodTitle}</span>
-        <div className="method-track">
-          {methodCards.map((item, stepIndex) => (
-            <b key={item.step}>
-              <i>{String(stepIndex + 1).padStart(2, "0")}</i>
-              <strong>{locale === "zh" ? translateMethod(item.step) : item.step}</strong>
-              <small>{locale === "zh" ? item.zh : item.en}</small>
-            </b>
-          ))}
-        </div>
-      </div>
-    );
+    return <MusicParticles locale={locale} ctaHref="#method" sampleUrl={MUSIC_SAMPLE_URL} />;
   }
 
   if (chapter.id === "contact") {
     return (
       <div className="scene-panel contact-panel" data-reveal>
-        <span>{refinedCopy[locale].contactTitle}</span>
-        <strong>{chapter.signal}</strong>
-        <p>{refinedCopy[locale].contactBody}</p>
-        <div className="credential-grid">
-          {credentials.map((item) => (
-            <b key={item.en}>{locale === "zh" ? item.zh : item.en}</b>
-          ))}
+        <div className="contact-copy">
+          <span>{refinedCopy[locale].contactTitle}</span>
+          <strong>{chapter.signal}</strong>
+          <p>{refinedCopy[locale].contactBody}</p>
+          <div className="contact-channel-deck" aria-label={locale === "zh" ? "联系入口" : "Contact channels"}>
+            {contactChannels.map((item) =>
+              item.href ? (
+                <a className="contact-channel" data-channel={item.label} href={item.href} key={item.key}>
+                  <small>{item.label}</small>
+                  <b>{item.value}</b>
+                  <span>{locale === "zh" ? item.detailZh : item.detailEn}</span>
+                </a>
+              ) : (
+                <div className="contact-channel" data-channel={item.label} key={item.key}>
+                  <small>{item.label}</small>
+                  <b>{item.value}</b>
+                  <span>{locale === "zh" ? item.detailZh : item.detailEn}</span>
+                </div>
+              ),
+            )}
+          </div>
         </div>
-        <a href="mailto:Guokabunn@gmail.com">Guokabunn@gmail.com</a>
+        <div className="contact-cat-entry" aria-label={locale === "zh" ? "Miao 互动名片" : "Miao interactive card"}>
+          <MainframeCatHeroVisual locale={locale} />
+        </div>
       </div>
     );
   }
@@ -1382,7 +2029,7 @@ function VideoRoomPanel({
               onMouseEnter={() => onVideoChange(index)}
               onFocus={() => onVideoChange(index)}
             >
-              <img src={work.poster} alt="" />
+            <img src={work.poster} alt="" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
               <b>{work.code}</b>
             </Link>
           ))}
@@ -1402,7 +2049,7 @@ function VideoRoomPanel({
             <strong>{locale === "zh" ? work.titleZh : work.titleEn}</strong>
             <small>{locale === "zh" ? work.metaZh : work.metaEn}</small>
             <b>{work.date}</b>
-            <img className="home-video-row-poster" src={work.poster} alt="" />
+            <img className="home-video-row-poster" src={work.poster} alt="" loading="lazy" decoding="async" />
           </Link>
         ))}
       </div>
@@ -1440,12 +2087,27 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     gsap.registerPlugin(ScrollTrigger);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
+    if (!canCreateWebglContext()) {
+      root.classList.add("channel-ready", "channel-webgl-fallback");
+      return () => {
+        channelControlRef.current = null;
+        root.classList.remove("channel-webgl-fallback");
+      };
+    }
+
+    const renderer = createWebglRenderer(canvas, {
       antialias: true,
       alpha: true,
       powerPreference: "high-performance",
-    });
+    }, "Work time channel");
+    if (!renderer) {
+      root.classList.add("channel-ready", "channel-webgl-fallback");
+      return () => {
+        channelControlRef.current = null;
+        root.classList.remove("channel-webgl-fallback");
+      };
+    }
+
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
 
@@ -1531,6 +2193,8 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     };
     let activeRef = 0;
     let animationFrame = 0;
+    let channelVisible = false;
+    let lastChannelRender = 0;
 
     const setActive = (index: number) => {
       if (activeRef === index) return;
@@ -1570,8 +2234,21 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
       },
     });
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        channelVisible = entry.isIntersecting;
+      },
+      { rootMargin: "360px 0px", threshold: 0 },
+    );
+
     const clock = new THREE.Clock();
-    const render = () => {
+    const render = (now = performance.now()) => {
+      if (!channelVisible || (!reduceMotion && now - lastChannelRender < 33)) {
+        animationFrame = window.requestAnimationFrame(render);
+        return;
+      }
+
+      lastChannelRender = now;
       const delta = Math.min(clock.getDelta(), 0.05);
       const elapsed = clock.elapsedTime;
       const targetEase = reduceMotion ? 0.22 : 0.08;
@@ -1615,12 +2292,14 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     };
 
     resize();
+    visibilityObserver.observe(root);
     root.addEventListener("pointermove", onPointerMove);
     window.addEventListener("resize", resize);
     render();
 
     return () => {
       channelControlRef.current = null;
+      visibilityObserver.disconnect();
       scrollTrigger.kill();
       window.cancelAnimationFrame(animationFrame);
       root.removeEventListener("pointermove", onPointerMove);
@@ -1679,11 +2358,11 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
             <button
               type="button"
               className={`work-entry-card ${work.kind}`}
-              style={{ backgroundImage: `url(${work.image})` }}
               key={work.id}
               onClick={() => enterWork(index)}
               onMouseEnter={() => focusWork(index)}
             >
+              <img src={work.image} alt="" loading="eager" decoding="async" />
               <span>{work.id}</span>
               <b>{locale === "zh" ? work.zh : work.en}</b>
             </button>
@@ -1789,20 +2468,4 @@ function SocialDock() {
       ))}
     </aside>
   );
-}
-
-function translateMethod(value: string) {
-  const map: Record<string, string> = {
-    Observe: "观察",
-    Script: "编剧",
-    Generate: "生成",
-    Evaluate: "评估",
-    Review: "审核",
-    Ship: "交付",
-    Listen: "聆听",
-    Mood: "情绪",
-    Edit: "剪辑",
-    Keep: "保留",
-  };
-  return map[value] ?? value;
 }

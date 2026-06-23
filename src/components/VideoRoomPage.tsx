@@ -5,6 +5,26 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { videoWorks } from "@/lib/videoCatalog";
 
+const videoSignalItems = [
+  "SCREENING ROOM",
+  "PROJECTOR",
+  "VIDEO ROOM",
+  "MV",
+  "AI MOTION",
+  "STORY CUT",
+  "MOOD TEST",
+  "MIAO CINEMA",
+];
+
+const videoCodeRain = [
+  "0101101001011010",
+  "1010010110100101",
+  "0011010010110110",
+  "1100101001010011",
+  "0110100101101001",
+  "1001011010010110",
+];
+
 export function VideoRoomPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,6 +50,17 @@ export function VideoRoomPage() {
 
   return (
     <main className="videos-page">
+      <div className="videos-bg" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <div className="videos-code-rain">
+          {Array.from({ length: 24 }, (_, index) => (
+            <i key={index}>{videoCodeRain[index % videoCodeRain.length]}</i>
+          ))}
+        </div>
+      </div>
+
       <header className="videos-nav">
         <Link href="/" aria-label="Back to home" className="videos-mark">
           <img src="/miao-paw-brand.svg" alt="" />
@@ -48,7 +79,9 @@ export function VideoRoomPage() {
         </div>
         <div className="videos-hero-copy">
           <p>MV / experimental shorts / little moods</p>
-          <h1 id="videos-title">VIDEOS</h1>
+          <h1 id="videos-title" data-text="VIDEOS">
+            VIDEOS
+          </h1>
           <b>我喜欢做一些有趣的动态画面。</b>
         </div>
         <div className="videos-hero-strip" aria-label="Featured video covers">
@@ -67,6 +100,16 @@ export function VideoRoomPage() {
           ))}
         </div>
       </section>
+
+      <div className="videos-signal-rail" aria-hidden="true">
+        <div>
+          {Array.from({ length: 8 }, (_, groupIndex) =>
+            videoSignalItems.map((item) => (
+              <span key={`${groupIndex}-${item}`}>{item}</span>
+            )),
+          )}
+        </div>
+      </div>
 
       <section className="videos-player-shell" aria-label="Selected video player">
         <div className="videos-active-meta">
@@ -90,27 +133,35 @@ export function VideoRoomPage() {
           <p>Some are MV, some are experimental shorts, and some are just a mood I wanted to try.</p>
         </div>
 
-        <div className="videos-hover-poster" aria-hidden="true">
-          <img src={hover.poster} alt="" />
-          <b>{hover.titleEn}</b>
-        </div>
+        <div className="videos-book">
+          <div className="videos-book-spine" aria-hidden="true">
+            <span>VIDEO LOG</span>
+            <b>{hover.code}</b>
+          </div>
 
-        <div className="videos-index-list">
-          {videoWorks.map((work, index) => (
-            <button
-              type="button"
-              key={work.id}
-              className={index === activeIndex ? "active" : ""}
-              onClick={() => chooseVideo(index)}
-              onMouseEnter={() => setHoverIndex(index)}
-              onFocus={() => setHoverIndex(index)}
-            >
-              <span>{work.code}</span>
-              <strong>{work.titleEn}</strong>
-              <small>{work.titleZh} / {work.metaZh}</small>
-              <b>{work.date}</b>
-            </button>
-          ))}
+          <div className="videos-index-list">
+            {videoWorks.map((work, index) => (
+              <button
+                type="button"
+                key={work.id}
+                className={index === activeIndex ? "active" : ""}
+                onClick={() => chooseVideo(index)}
+                onMouseEnter={() => setHoverIndex(index)}
+                onFocus={() => setHoverIndex(index)}
+              >
+                <span>{work.code}</span>
+                <strong>{work.titleEn}</strong>
+                <small>{work.titleZh} / {work.metaZh}</small>
+                <b>{work.date}</b>
+                <span className="videos-row-card" aria-hidden="true">
+                  <img src={work.poster} alt="" />
+                  <span>{work.code}</span>
+                  <strong>{work.titleEn}</strong>
+                  <small>{work.titleZh} / {work.metaZh}</small>
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
     </main>
