@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import * as THREE from "three";
 import MusicParticles from "@/components/MusicParticles";
 import { PRODUCT_LIVE_URL } from "@/lib/productLinks";
+import { HOME_TITLE } from "@/lib/siteMeta";
 import { videoWorks } from "@/lib/videoCatalog";
 
 type Locale = "en" | "zh";
@@ -175,7 +176,7 @@ const refinedCopy = {
     brand: "MiaoMeowMew",
     resumeBrand: "Guo Jiawen",
     resumeRole: "AI creator / AI product & AIGC creation",
-    siteTitle: "MiaoMeowMew / AI Creator Portfolio",
+    siteTitle: HOME_TITLE,
     role: "AI creator / images / film / music / product",
     lang: "中文",
     heroTitle: "Hello,\nthis is Miao",
@@ -200,7 +201,7 @@ const refinedCopy = {
     brand: "Miao喵渺淼妙",
     resumeBrand: "郭嘉雯",
     resumeRole: "AI 创作者 / AI 产品 / AIGC 创作方向",
-    siteTitle: "Miao喵渺淼妙 / AI 创作者作品集",
+    siteTitle: HOME_TITLE,
     role: "AI 创作者 / 图像 / 影视 / 音乐 / 产品",
     lang: "EN",
     heroTitle: "你好，\n我是 Miao",

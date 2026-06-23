@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { HOME_TITLE } from "@/lib/siteMeta";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MiaoMeowMew / Miao喵渺淼妙",
+  title: HOME_TITLE,
   description: "A bilingual scroll-driven portfolio for AI images, film, music, products, and interactive creative work.",
   icons: {
     icon: [
