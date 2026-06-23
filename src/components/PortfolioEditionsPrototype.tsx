@@ -8,6 +8,7 @@ import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as THREE from "three";
 import MusicParticles from "@/components/MusicParticles";
+import { PRODUCT_LIVE_URL } from "@/lib/productLinks";
 import { videoWorks } from "@/lib/videoCatalog";
 
 type Locale = "en" | "zh";
@@ -503,7 +504,8 @@ const productEntrances = [
     zh: "AI 影视机器",
     detailEn: "Open the production tool behind the image and video workflow.",
     detailZh: "进入图像和影视流程背后的真实产品。",
-    href: "/product",
+    href: PRODUCT_LIVE_URL,
+    external: true,
   },
   {
     code: "LAB",
@@ -1537,7 +1539,7 @@ function MainframeLandingHero({ locale }: { locale: Locale }) {
 
 function MainframeCatHeroVisual({ locale }: { locale: Locale }) {
   const [contentOpen, setContentOpen] = useState(false);
-  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+  const portalRoot = typeof document === "undefined" ? null : document.body;
   const stageRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const seekingRef = useRef(false);
@@ -1588,10 +1590,6 @@ function MainframeCatHeroVisual({ locale }: { locale: Locale }) {
       video.removeEventListener("loadedmetadata", onLoadedMetadata);
       video.removeEventListener("seeked", onSeeked);
     };
-  }, []);
-
-  useEffect(() => {
-    setPortalRoot(document.body);
   }, []);
 
   useEffect(() => {
@@ -1899,11 +1897,19 @@ function ScenePanel({
 
         <div className="product-entrance-strip" aria-label={locale === "zh" ? "产品和小作品入口" : "Product and lab entrances"}>
           {productEntrances.map((entry) => (
-            <Link href={entry.href} key={entry.code}>
-              <span>{entry.code}</span>
-              <strong>{locale === "zh" ? entry.zh : entry.en}</strong>
-              <small>{locale === "zh" ? entry.detailZh : entry.detailEn}</small>
-            </Link>
+            entry.external ? (
+              <a href={entry.href} key={entry.code} target="_blank" rel="noreferrer" data-live="true">
+                <span>{entry.code}</span>
+                <strong>{locale === "zh" ? entry.zh : entry.en}</strong>
+                <small>{locale === "zh" ? entry.detailZh : entry.detailEn}</small>
+              </a>
+            ) : (
+              <Link href={entry.href} key={entry.code}>
+                <span>{entry.code}</span>
+                <strong>{locale === "zh" ? entry.zh : entry.en}</strong>
+                <small>{locale === "zh" ? entry.detailZh : entry.detailEn}</small>
+              </Link>
+            )
           ))}
         </div>
 

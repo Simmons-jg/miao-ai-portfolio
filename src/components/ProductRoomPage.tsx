@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PRODUCT_LIVE_URL } from "@/lib/productLinks";
 
 const productSteps = [
   {
@@ -44,13 +45,22 @@ export function ProductRoomPage() {
           <img src="/miao-paw-brand.svg" alt="" />
           <span>MIAO PRODUCT</span>
         </Link>
-        <Link href="/#contact" className="product-room-contact">CONTACT</Link>
+        <div className="product-room-actions">
+          <a href={PRODUCT_LIVE_URL} className="product-room-live" target="_blank" rel="noreferrer">
+            OPEN LIVE
+          </a>
+          <Link href="/#contact" className="product-room-contact">CONTACT</Link>
+        </div>
       </header>
 
       <section className="product-room-hero">
         <p>AI video machine</p>
         <h1>I am building an AI video machine.</h1>
         <b>剧本进去，人物、风格、分镜、封面和视频任务出来。</b>
+        <a href={PRODUCT_LIVE_URL} className="product-room-open" target="_blank" rel="noreferrer">
+          <span>OPEN LIVE PRODUCT</span>
+          <small>EdgeOne deployed build</small>
+        </a>
       </section>
 
       <section className="product-room-machine" aria-label="Product workflow">
