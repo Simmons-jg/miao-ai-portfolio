@@ -28,6 +28,14 @@
   overflow: hidden;
 }
 
+@media (max-width: 820px) {
+  .brand-copy {
+    min-width: 0;
+    min-height: 40px;
+    max-width: max(120px, calc(100vw - 178px));
+  }
+}
+
 .brand-copy::after {
   content: "";
   position: absolute;
@@ -6417,6 +6425,7 @@
     .chapter-scene {
       min-height: auto;
       padding: 92px 18px 106px;
+      scroll-margin-top: 68px;
     }
 
     .kinetic-manifesto {
@@ -7908,6 +7917,7 @@
   border-top: 0;
   padding: clamp(24px, 3vw, 44px);
   overflow: visible;
+  isolation: isolate;
 }
 
 .videos-index-list button {
@@ -7917,7 +7927,7 @@
   grid-template-columns: clamp(70px, 7vw, 116px) minmax(240px, 1fr) minmax(220px, 0.8fr) 96px;
   align-items: center;
   gap: 24px;
-  min-height: clamp(92px, 7.2vw, 126px);
+  min-height: clamp(112px, 8.4vw, 154px);
   border: 1px solid rgb(183 255 37 / 24%);
   padding: 0 clamp(16px, 2.4vw, 38px);
   overflow: visible;
@@ -7965,7 +7975,6 @@
 .videos-index-list button:hover,
 .videos-index-list button:focus-visible,
 .videos-index-list button.active {
-  z-index: 12;
   padding-left: clamp(28px, 4vw, 62px);
   border-color: rgb(8 9 7 / 42%);
   background:
@@ -7977,6 +7986,15 @@
   color: rgb(8 9 7);
   outline: none;
   transform: translateX(18px) rotateY(-5deg);
+}
+
+.videos-index-list button.active {
+  z-index: 0;
+}
+
+.videos-index-list button:hover,
+.videos-index-list button:focus-visible {
+  z-index: 100;
 }
 
 .videos-index-list button:hover::before,
@@ -8002,7 +8020,7 @@
 .videos-index-list button > strong {
   font-size: clamp(28px, 4.2vw, 76px);
   font-weight: 950;
-  line-height: 0.84;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
@@ -8024,7 +8042,7 @@
   position: absolute;
   right: clamp(16px, 3.8vw, 64px);
   top: 50%;
-  z-index: 40;
+  z-index: 90;
   display: block;
   width: min(34vw, 520px);
   min-width: 340px;
@@ -8051,12 +8069,21 @@
 }
 
 .videos-index-list button:first-child .videos-row-card {
-  transform: translate3d(34px, 6%, 0) rotate(-7deg) scale(0.92);
+  transform: translate3d(34px, -8%, 0) rotate(-7deg) scale(0.92);
 }
 
 .videos-index-list button:first-child:hover .videos-row-card,
 .videos-index-list button:first-child:focus-visible .videos-row-card {
-  transform: translate3d(0, 6%, 0) rotate(-4deg) scale(1);
+  transform: translate3d(0, -8%, 0) rotate(-4deg) scale(1);
+}
+
+.videos-index-list button:last-child .videos-row-card {
+  transform: translate3d(34px, -72%, 0) rotate(-7deg) scale(0.92);
+}
+
+.videos-index-list button:last-child:hover .videos-row-card,
+.videos-index-list button:last-child:focus-visible .videos-row-card {
+  transform: translate3d(0, -72%, 0) rotate(-4deg) scale(1);
 }
 
 .videos-row-card img {
@@ -9323,11 +9350,13 @@
   display: grid;
   margin-top: clamp(46px, 6vw, 88px);
   border-top: 2px solid rgb(243 239 223 / 84%);
-  contain: layout paint style;
+  contain: layout style;
+  isolation: isolate;
 }
 
 .portfolio-shell .video-chapter-scene .home-video-row {
   position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: clamp(70px, 8vw, 128px) minmax(220px, 1fr) minmax(220px, 0.75fr) 92px;
   align-items: center;
@@ -9351,6 +9380,15 @@
   outline: none;
 }
 
+.portfolio-shell .video-chapter-scene .home-video-row.active {
+  z-index: 0;
+}
+
+.portfolio-shell .video-chapter-scene .home-video-row:hover,
+.portfolio-shell .video-chapter-scene .home-video-row:focus-visible {
+  z-index: 40;
+}
+
 .portfolio-shell .video-chapter-scene .home-video-row span {
   color: var(--acid);
   font-size: clamp(52px, 7vw, 114px);
@@ -9361,7 +9399,7 @@
 .portfolio-shell .video-chapter-scene .home-video-row strong {
   font-size: clamp(34px, 5vw, 88px);
   font-weight: 950;
-  line-height: 0.82;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
@@ -9397,6 +9435,15 @@
 .portfolio-shell .video-chapter-scene .home-video-row:focus-visible .home-video-row-poster {
   opacity: 1;
   transform: translate(40px, -62%) rotate(-6deg) scale(1);
+}
+
+.portfolio-shell .video-chapter-scene .home-video-row:first-child .home-video-row-poster {
+  transform: translate(40px, -38%) rotate(-9deg) scale(0.9);
+}
+
+.portfolio-shell .video-chapter-scene .home-video-row:first-child:hover .home-video-row-poster,
+.portfolio-shell .video-chapter-scene .home-video-row:first-child:focus-visible .home-video-row-poster {
+  transform: translate(40px, -44%) rotate(-6deg) scale(1);
 }
 
 @media (max-width: 1040px) {

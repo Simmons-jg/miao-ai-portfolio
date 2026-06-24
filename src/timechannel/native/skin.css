@@ -105,13 +105,27 @@
 }
 
 @media (max-width: 640px) {
+  .timechannel-page #title {
+    top: max(14px, env(safe-area-inset-top));
+    left: 16px;
+    right: 16px;
+  }
+
   .timechannel-page #title h1 {
     font-size: 18px;
     letter-spacing: 4px;
   }
 
+  .timechannel-page #title p {
+    display: none;
+  }
+
   .timechannel-page #toolbar {
-    right: 12px;
+    top: calc(max(14px, env(safe-area-inset-top)) + 42px);
+    right: 16px;
+    left: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
   }
 
@@ -119,5 +133,50 @@
     min-height: 36px;
     padding: 7px 10px;
     font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .timechannel-page #skyPanel {
+    top: calc(max(14px, env(safe-area-inset-top)) + 86px);
+    right: 16px;
+    left: 16px;
+    justify-content: flex-end;
+  }
+
+  .timechannel-page #hint {
+    bottom: max(28px, env(safe-area-inset-bottom));
+    width: min(330px, calc(100vw - 40px));
+    white-space: normal;
+    line-height: 1.45;
+    letter-spacing: 1.4px;
+  }
+
+  .timechannel-page #hint .scroll-icon {
+    margin-bottom: 8px;
+  }
+
+  .timechannel-page #depth {
+    display: none;
+  }
+
+  .timechannel-page #focusInfo {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    justify-content: center;
+    gap: 10px;
+    transform: translateY(12px);
+  }
+
+  .timechannel-page #focusInfo.open {
+    transform: translateY(0);
+  }
+
+  .timechannel-page #focusInfo .nav {
+    width: 46px;
+    height: 36px;
+    font-size: 11px;
+    letter-spacing: 0;
   }
 }
