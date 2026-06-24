@@ -59,7 +59,7 @@ export function ProductRoomPage() {
         <b>剧本进去，人物、风格、分镜、封面和视频任务出来。</b>
         <a href={PRODUCT_LIVE_URL} className="product-room-open" target="_blank" rel="noreferrer">
           <span>OPEN LIVE PRODUCT</span>
-          <small>EdgeOne deployed build</small>
+          <small>Vercel deployed build</small>
         </a>
       </section>
 
