@@ -9,6 +9,14 @@ export type VideoWork = {
   poster: string;
 };
 
+export const videoWorkIdAliases: Record<string, string> = {
+  "who-am-i": "who-are-you",
+};
+
+export function getCanonicalVideoWorkId(id: string) {
+  return videoWorkIdAliases[id] ?? id;
+}
+
 export const videoWorks: VideoWork[] = [
   {
     id: "grand-void",
@@ -51,7 +59,7 @@ export const videoWorks: VideoWork[] = [
     poster: "/videos/cedo-amori-poster.jpg",
   },
   {
-    id: "who-am-i",
+    id: "who-are-you",
     code: "05",
     titleEn: "Who Are You",
     titleZh: "你是谁",

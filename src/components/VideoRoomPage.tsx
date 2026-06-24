@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
-import { videoWorks } from "@/lib/videoCatalog";
+import { getCanonicalVideoWorkId, videoWorks } from "@/lib/videoCatalog";
 
 const videoSignalItems = [
   "SCREENING ROOM",
@@ -28,7 +28,8 @@ const videoCodeRain = [
 export function VideoRoomPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialId = searchParams.get("work") ?? videoWorks[0]?.id;
+  const requestedId = searchParams.get("work") ?? videoWorks[0]?.id ?? "";
+  const initialId = getCanonicalVideoWorkId(requestedId);
   const initialIndex = Math.max(
     0,
     videoWorks.findIndex((work) => work.id === initialId),

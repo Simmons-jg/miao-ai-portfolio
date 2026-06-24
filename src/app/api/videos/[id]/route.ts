@@ -1,18 +1,27 @@
 import { createReadStream, statSync } from "node:fs";
 import { Readable } from "node:stream";
 import { NextRequest } from "next/server";
+import { getCanonicalVideoWorkId } from "@/lib/videoCatalog";
 import { getVideoSource } from "@/lib/videoSources";
 
 export const runtime = "nodejs";
 
 const CHUNK_SIZE = 1024 * 1024;
 
+function getPublicVideoUrl(id: string) {
+  const baseUrl = process.env.VIDEO_PUBLIC_BASE_URL;
+  if (!baseUrl) return null;
+
+  return `${baseUrl.replace(/\/+$/, "")}/${id}.mp4`;
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> },
 ) {
   const { id } = await context.params;
-  const source = getVideoSource(id);
+  const canonicalId = getCanonicalVideoWorkId(id);
+  const source = getVideoSource(canonicalId);
 
   if (!source) {
     return new Response("Video not found", { status: 404 });
@@ -22,6 +31,11 @@ export async function GET(
   try {
     size = statSync(source).size;
   } catch {
+    const publicVideoUrl = getPublicVideoUrl(canonicalId);
+    if (publicVideoUrl) {
+      return Response.redirect(publicVideoUrl, 307);
+    }
+
     return new Response("Video file is unavailable", { status: 404 });
   }
 

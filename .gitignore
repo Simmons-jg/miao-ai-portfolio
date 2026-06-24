@@ -52,3 +52,5 @@ dev-server-*.log
 .codex/
 .worktrees
 .worktrees/
+
+.env*
