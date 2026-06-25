@@ -10176,3 +10176,224 @@
     transition: none;
   }
 }
+
+/* 15-inch / short desktop pass: keep the theatrical layout, but prevent large
+   display objects from colliding when the viewport height is laptop-sized. */
+@media (min-width: 821px) and (max-height: 1080px), (min-width: 821px) and (max-width: 1680px) {
+  .portfolio-shell .hero-scene,
+  .portfolio-shell .chapter-scene {
+    padding-top: clamp(86px, 10vh, 108px);
+    padding-bottom: clamp(52px, 7vh, 76px);
+  }
+
+  .portfolio-shell .chapter-scene {
+    gap: clamp(22px, 3.6vw, 58px);
+  }
+
+  .portfolio-shell .chapter-kicker span {
+    font-size: clamp(46px, 5.6vw, 86px);
+  }
+
+  .portfolio-shell .chapter-kicker b {
+    font-size: 13px;
+  }
+
+  .portfolio-shell .chapter-scene h2 {
+    font-size: clamp(42px, 6vw, 92px);
+  }
+
+  [data-locale="zh"] .portfolio-shell .chapter-scene h2 {
+    font-size: clamp(38px, 5.2vw, 78px);
+  }
+
+  .portfolio-shell .chapter-line {
+    margin-top: clamp(18px, 2.8vh, 30px);
+    font-size: clamp(18px, 1.9vw, 28px);
+  }
+
+  .portfolio-shell .product-scene {
+    grid-template-columns: minmax(78px, 0.12fr) minmax(280px, 0.46fr) minmax(440px, 0.78fr);
+    gap: clamp(18px, 2.8vw, 42px);
+  }
+
+  .portfolio-shell .product-console {
+    width: min(100%, 620px);
+  }
+
+  .portfolio-shell .product-module-grid button {
+    min-height: 96px;
+    padding: 12px;
+  }
+
+  .portfolio-shell .product-runtime {
+    margin-top: 14px;
+    padding: 14px;
+  }
+
+  .portfolio-shell .product-entrance-strip {
+    margin-top: 14px;
+  }
+
+  .portfolio-shell .product-entrance-strip a {
+    min-height: 88px;
+    padding: 12px;
+  }
+
+  .portfolio-shell .music-chapter-scene {
+    grid-template-columns: minmax(86px, 0.14fr) minmax(0, 1fr);
+    gap: clamp(42px, 4.2vw, 76px);
+  }
+
+  .music-particle-panel.mp-root {
+    width: min(100%, 1120px);
+    min-height: clamp(430px, 54vh, 560px);
+    margin-left: clamp(-112px, -6vw, -64px);
+  }
+
+  .mp-canvas-wrap {
+    inset: 0 0 18%;
+  }
+
+  .mp-actions {
+    bottom: 3.5%;
+  }
+
+  .portfolio-shell .contact-scene {
+    grid-template-columns: minmax(78px, 0.12fr) minmax(300px, 0.58fr) minmax(430px, 0.72fr);
+    gap: clamp(18px, 3vw, 46px);
+  }
+
+  .portfolio-shell .contact-scene article h2 {
+    font-size: clamp(54px, 4.8vw, 88px);
+    line-height: 0.88;
+  }
+
+  [data-locale="zh"] .portfolio-shell .contact-scene article h2 {
+    font-size: clamp(54px, 4.8vw, 88px);
+    line-height: 0.92;
+  }
+
+  .portfolio-shell .contact-scene .chapter-line {
+    max-width: 18ch;
+    font-size: clamp(22px, 2.1vw, 32px);
+  }
+
+  .portfolio-shell .contact-panel {
+    width: min(100%, 480px);
+    padding: clamp(18px, 2.2vw, 28px);
+    padding-bottom: clamp(130px, 10vw, 168px);
+  }
+
+  .portfolio-shell .contact-copy > strong {
+    font-size: clamp(30px, 3.4vw, 58px);
+  }
+
+  .portfolio-shell .contact-channel-deck {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .portfolio-shell .contact-channel {
+    min-height: clamp(82px, 6.2vw, 104px);
+    padding: 12px;
+  }
+
+  .portfolio-shell .contact-channel::before {
+    font-size: clamp(28px, 3vw, 48px);
+  }
+
+  .portfolio-shell .contact-channel span {
+    font-size: 10.5px;
+    line-height: 1.28;
+  }
+
+  .portfolio-shell .contact-cat-entry {
+    left: auto;
+    right: clamp(-12px, -0.6vw, -4px);
+    bottom: clamp(-22px, -1.2vw, -12px);
+    width: min(64%, 390px);
+    transform: rotate(-3.2deg);
+  }
+
+  .portfolio-shell .video-chapter-scene {
+    padding-top: clamp(78px, 8vh, 96px);
+    padding-bottom: clamp(66px, 8vh, 92px);
+  }
+
+  .portfolio-shell .home-video-banner {
+    min-height: clamp(480px, 64vh, 620px);
+    gap: clamp(18px, 3vw, 42px);
+  }
+
+  .portfolio-shell .home-video-banner-stack {
+    min-height: clamp(360px, 48vh, 480px);
+  }
+
+  .portfolio-shell .home-video-banner-stack .home-video-frame {
+    width: clamp(180px, 16vw, 280px);
+  }
+
+  .portfolio-shell .video-chapter-scene .home-video-row {
+    min-height: clamp(88px, 7vw, 118px);
+  }
+
+  .portfolio-shell .video-chapter-scene .home-video-row strong {
+    font-size: clamp(26px, 4.4vw, 66px);
+  }
+}
+
+@media (min-width: 821px) and (max-height: 1080px) {
+  .videos-hero {
+    min-height: clamp(700px, 82dvh, 840px);
+    padding-top: clamp(88px, 10vh, 112px);
+    padding-bottom: clamp(120px, 15vh, 168px);
+  }
+
+  .videos-hero-copy h1 {
+    font-size: clamp(86px, 12vw, 190px);
+  }
+
+  .videos-hero-strip {
+    bottom: clamp(26px, 3.4vh, 42px);
+  }
+
+  .videos-hero-strip button {
+    width: clamp(160px, 14vw, 286px);
+  }
+
+  .videos-signal-rail {
+    margin-top: -8px;
+  }
+
+  .videos-active-meta {
+    grid-template-columns: 82px minmax(0, 1fr) auto;
+    padding: clamp(16px, 2vw, 24px);
+  }
+
+  .videos-active-meta span {
+    font-size: clamp(42px, 5vw, 78px);
+  }
+
+  .videos-active-meta h2 {
+    font-size: clamp(30px, 4.4vw, 72px);
+  }
+
+  .videos-index-list button {
+    min-height: clamp(96px, 7.2vw, 132px);
+    grid-template-columns: clamp(62px, 6vw, 96px) minmax(210px, 1fr) minmax(180px, 0.7fr) 76px;
+    gap: 18px;
+  }
+
+  .videos-index-list button > span:not(.videos-row-card) {
+    font-size: clamp(46px, 6vw, 84px);
+  }
+
+  .videos-index-list button > strong {
+    font-size: clamp(28px, 3.8vw, 62px);
+  }
+
+  .videos-row-card {
+    min-width: 280px;
+    width: min(30vw, 430px);
+  }
+}
