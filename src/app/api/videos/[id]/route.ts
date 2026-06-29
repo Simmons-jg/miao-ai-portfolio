@@ -7,12 +7,17 @@ import { getVideoSource } from "@/lib/videoSources";
 export const runtime = "nodejs";
 
 const CHUNK_SIZE = 1024 * 1024;
+const RELEASE_VIDEO_BASE_URL =
+  "https://github.com/Simmons-jg/miao-ai-portfolio/releases/download/video-assets-1080p-v1";
 
 function getPublicVideoUrl(id: string) {
-  const baseUrl = process.env.VIDEO_PUBLIC_BASE_URL;
-  if (!baseUrl) return null;
+  const configuredBaseUrl = process.env.VIDEO_PUBLIC_BASE_URL?.replace(/\/+$/, "");
+  const baseUrl =
+    configuredBaseUrl && !configuredBaseUrl.includes("blob.vercel-storage.com")
+      ? configuredBaseUrl
+      : RELEASE_VIDEO_BASE_URL;
 
-  return `${baseUrl.replace(/\/+$/, "")}/${id}.mp4`;
+  return `${baseUrl}/${id}.mp4`;
 }
 
 export async function GET(
