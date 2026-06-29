@@ -4194,6 +4194,7 @@
 
   .product-console {
     width: min(100%, 680px);
+    contain: layout style;
     overflow: hidden;
     padding: 0;
   }
@@ -4288,6 +4289,9 @@
     color: rgb(243 239 223 / 82%);
     text-align: left;
     cursor: pointer;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
     transition:
       border-color 180ms ease,
       background 180ms ease,
@@ -4303,6 +4307,7 @@
     transform-origin: left;
     background: linear-gradient(90deg, var(--acid), transparent);
     opacity: 0;
+    will-change: transform, opacity;
   }
 
   .product-module-grid button:hover,
@@ -4358,6 +4363,7 @@
     margin: 18px clamp(18px, 2.6vw, 28px) 0;
     border: 1px solid rgb(183 255 37 / 18%);
     border-radius: 8px;
+    contain: layout style paint;
     padding: 18px;
     background:
       radial-gradient(circle at 14% 0%, rgb(183 255 37 / 14%), transparent 34%),
@@ -4419,6 +4425,9 @@
     text-align: left;
     text-decoration: none;
     cursor: pointer;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
     transition:
       border-color 180ms ease,
       background 180ms ease,
@@ -4494,10 +4503,14 @@
 
   .product-livebar i {
     display: block;
+    width: 100%;
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(90deg, var(--acid), rgb(243 239 223 / 72%));
-    transition: width 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -7003,6 +7016,8 @@
   width: min(94vw, 1160px);
   height: clamp(460px, 48vw, 620px);
   margin-top: clamp(60px, 10vh, 108px);
+  contain: layout style;
+  transform-style: preserve-3d;
   transform: translateY(-74px);
 }
 
@@ -7023,7 +7038,10 @@
   background-size: cover;
   color: var(--ivory);
   cursor: pointer;
+  backface-visibility: hidden;
   transform-origin: 50% 82%;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
   transition:
     border-color 220ms ease,
     box-shadow 220ms ease,
@@ -7064,6 +7082,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .portfolio-shell .work-card-fan > .work-entry-card.person img {
@@ -7231,6 +7252,7 @@
   top: 43%;
   width: 112%;
   aspect-ratio: 1.08;
+  will-change: transform;
   filter:
     drop-shadow(0 0 18px rgb(204 220 255 / 56%))
     drop-shadow(0 0 40px rgb(104 137 255 / 36%));
@@ -7248,6 +7270,8 @@
   inset: 30% 2%;
   border: 0;
   border-radius: 72% 28% 70% 30% / 74% 42% 74% 42%;
+  backface-visibility: hidden;
+  will-change: transform;
   background:
     radial-gradient(ellipse at 50% 50%, rgb(220 229 255 / 35%) 0 16%, transparent 28%),
     linear-gradient(112deg, transparent 0 16%, rgb(232 238 255 / 94%) 42%, rgb(160 182 255 / 58%) 50%, rgb(232 238 255 / 90%) 61%, transparent 84%);
@@ -7265,6 +7289,8 @@
 
 .portfolio-shell .work-card-fan .eye-iris {
   width: 48%;
+  backface-visibility: hidden;
+  will-change: transform;
   background:
     radial-gradient(circle at 50% 50%, transparent 0 19%, rgb(210 226 255 / 48%) 20% 32%, transparent 33%),
     repeating-conic-gradient(from 0deg, rgb(232 240 255 / 90%) 0 4deg, rgb(84 115 211 / 46%) 4deg 8deg, rgb(14 22 54 / 26%) 8deg 12deg),
@@ -7276,6 +7302,8 @@
 
 .portfolio-shell .work-card-fan .eye-pupil {
   width: 25%;
+  backface-visibility: hidden;
+  will-change: transform;
   box-shadow:
     0 0 0 1px rgb(232 240 255 / 72%),
     0 0 24px rgb(0 0 0 / 94%),
@@ -9726,13 +9754,14 @@
   inset: 2% -2vw 16% 0;
   z-index: 3;
   cursor: crosshair;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .mp-canvas {
   display: block;
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 0 12px rgb(183 255 37 / 18%));
 }
 
 .mp-wave-wrap {

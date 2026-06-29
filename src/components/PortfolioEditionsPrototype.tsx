@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
-import { startTransition, useEffect, useMemo, useRef, useState } from "react";
+import { startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as THREE from "three";
 import MusicParticles from "@/components/MusicParticles";
@@ -388,7 +388,7 @@ const works = [
     roleZh: "动态情绪 / 视觉质检",
     detailEn: "Scale, rhythm, contrast, texture, and screen-ready visual tension.",
     detailZh: "尺度、节奏、对比、质感和适配大屏的视觉张力。",
-    image: "/portfolio-assets/optimized/miao-work-02-fairy-study-room.webp",
+    image: "/portfolio-assets/optimized/miao-work-05-desert-stage.webp",
     kind: "scene",
     tagsEn: ["scale", "motion", "QC"],
     tagsZh: ["尺度", "动态", "质检"],
@@ -427,7 +427,7 @@ const works = [
     roleZh: "世界观 / 视觉导演",
     detailEn: "Character systems, surreal scenes, horror texture, and cinematic mood boards.",
     detailZh: "人物系统、超现实场景、恐怖质感和电影化 moodboard。",
-    image: "/portfolio-assets/optimized/miao-work-05-desert-stage.webp",
+    image: "/portfolio-assets/optimized/miao-work-02-fairy-study-room.webp",
     kind: "scene",
     tagsEn: ["world", "mood", "cinema"],
     tagsZh: ["世界", "情绪", "电影感"],
@@ -829,7 +829,6 @@ function startWebglStageFallback(canvas: HTMLCanvasElement, rootRef: { current: 
 export function PortfolioEditionsPrototype() {
   const [locale, setLocale] = useState<Locale>("zh");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeProductModule, setActiveProductModule] = useState(0);
   const [heroInView, setHeroInView] = useState(true);
   const rootRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -1204,19 +1203,6 @@ export function PortfolioEditionsPrototype() {
     rootRef.current?.style.setProperty("--scene-index", String(activeIndex));
   }, [activeIndex]);
 
-  useEffect(() => {
-    if (activeChapter.id !== "product") return;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
-
-    const timer = window.setInterval(() => {
-      setActiveProductModule((current) => (current + 1) % productModules.length);
-    }, 2600);
-
-    return () => window.clearInterval(timer);
-  }, [activeChapter.id]);
-
   const progress = useMemo(() => `${((activeIndex + 1) / refinedChapters.length) * 100}%`, [activeIndex]);
 
   return (
@@ -1338,8 +1324,7 @@ export function PortfolioEditionsPrototype() {
               locale={locale}
               chapter={chapter}
               index={index}
-              activeProductModule={activeProductModule}
-              onProductModuleChange={setActiveProductModule}
+              isActive={index === activeIndex}
             />
           </section>
         ),
@@ -1803,17 +1788,32 @@ function ScenePanel({
   locale,
   chapter,
   index,
-  activeProductModule,
-  onProductModuleChange,
+  isActive,
 }: {
   locale: Locale;
   chapter: Chapter;
   index: number;
-  activeProductModule: number;
-  onProductModuleChange: (index: number) => void;
+  isActive: boolean;
 }) {
   const [activeSkill, setActiveSkill] = useState(0);
+  const [activeProductModule, setActiveProductModule] = useState(0);
   const activeSignal = refinedTasteSignals[activeSkill] ?? refinedTasteSignals[0];
+  const onProductModuleChange = useCallback((moduleIndex: number) => {
+    setActiveProductModule((current) => (current === moduleIndex ? current : moduleIndex));
+  }, []);
+
+  useEffect(() => {
+    if (chapter.id !== "product" || !isActive) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      setActiveProductModule((current) => (current + 1) % productModules.length);
+    }, 2600);
+
+    return () => window.clearInterval(timer);
+  }, [chapter.id, isActive]);
 
   if (chapter.id === "direction") {
     return (
@@ -1915,7 +1915,7 @@ function ScenePanel({
         </div>
 
         <div className="product-livebar" aria-hidden="true">
-          <i style={{ width: `${((activeProductModule + 1) / productModules.length) * 100}%` }} />
+          <i style={{ transform: `scaleX(${(activeProductModule + 1) / productModules.length})` }} />
         </div>
         <p>{refinedCopy[locale].productHint}</p>
       </div>
@@ -2069,6 +2069,8 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const channelControlRef = useRef<null | ((index: number) => void)>(null);
   const portalTimerRef = useRef<number | null>(null);
+  const activeWorkIndexRef = useRef(0);
+  const eyePortalRectRef = useRef<DOMRect | null>(null);
   const [activeWorkIndex, setActiveWorkIndex] = useState(0);
   const [portalArmed, setPortalArmed] = useState(false);
   const activeWork = works[activeWorkIndex] ?? works[0];
@@ -2078,6 +2080,11 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
     "--eye-dx": "0px",
     "--eye-dy": "0px",
   } as CSSProperties;
+  const setActiveWork = useCallback((index: number) => {
+    const next = Math.max(0, Math.min(works.length - 1, index));
+    activeWorkIndexRef.current = next;
+    setActiveWorkIndex((current) => (current === next ? current : next));
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -2198,15 +2205,17 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
       smoothX: 0,
       smoothY: 0,
     };
-    let activeRef = 0;
+    let activeRef = activeWorkIndexRef.current;
     let animationFrame = 0;
     let channelVisible = false;
     let lastChannelRender = 0;
+    let pointerRect = root.getBoundingClientRect();
+    let lastPointerRectRead = 0;
 
     const setActive = (index: number) => {
       if (activeRef === index) return;
       activeRef = index;
-      setActiveWorkIndex(index);
+      setActiveWork(index);
     };
 
     channelControlRef.current = (index: number) => {
@@ -2219,13 +2228,20 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
       const box = root.querySelector<HTMLElement>(".time-channel-stage");
       const width = Math.max(320, box?.clientWidth ?? root.clientWidth);
       const height = Math.max(420, box?.clientHeight ?? 560);
+      pointerRect = root.getBoundingClientRect();
+      lastPointerRectRead = performance.now();
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      const rect = root.getBoundingClientRect();
+      const now = performance.now();
+      if (now - lastPointerRectRead > 140) {
+        pointerRect = root.getBoundingClientRect();
+        lastPointerRectRead = now;
+      }
+      const rect = pointerRect;
       motion.pointerX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
       motion.pointerY = -(((event.clientY - rect.top) / rect.height - 0.5) * 2);
     };
@@ -2322,39 +2338,53 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
       });
       renderer.dispose();
     };
-  }, []);
+  }, [setActiveWork]);
 
-  const focusWork = (index: number) => {
-    channelControlRef.current?.(index);
-    setActiveWorkIndex(index);
-  };
+  const focusWork = useCallback((index: number) => {
+    const next = Math.max(0, Math.min(works.length - 1, index));
+    if (activeWorkIndexRef.current === next) return;
 
-  const enterWork = (index: number) => {
+    const controlChannel = channelControlRef.current;
+    if (controlChannel) {
+      controlChannel(next);
+      return;
+    }
+
+    setActiveWork(next);
+  }, [setActiveWork]);
+
+  const enterWork = useCallback((index: number) => {
     focusWork(index);
     window.location.assign("/photos");
-  };
+  }, [focusWork]);
 
-  const moveEyePortal = (event: ReactPointerEvent<HTMLButtonElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
+  const cacheEyePortalRect = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+    eyePortalRectRef.current = event.currentTarget.getBoundingClientRect();
+  }, []);
+
+  const moveEyePortal = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+    const rect = eyePortalRectRef.current ?? event.currentTarget.getBoundingClientRect();
+    eyePortalRectRef.current = rect;
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
     event.currentTarget.style.setProperty("--eye-dx", `${Math.max(-1, Math.min(1, x)) * 18}px`);
     event.currentTarget.style.setProperty("--eye-dy", `${Math.max(-1, Math.min(1, y)) * 12}px`);
-  };
+  }, []);
 
-  const resetEyePortal = (event: ReactPointerEvent<HTMLButtonElement>) => {
+  const resetEyePortal = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+    eyePortalRectRef.current = null;
     event.currentTarget.style.setProperty("--eye-dx", "0px");
     event.currentTarget.style.setProperty("--eye-dy", "0px");
     setPortalArmed(false);
-  };
+  }, []);
 
-  const triggerEyePortal = () => {
+  const triggerEyePortal = useCallback(() => {
     setPortalArmed(true);
     if (portalTimerRef.current) window.clearTimeout(portalTimerRef.current);
     portalTimerRef.current = window.setTimeout(() => {
-      enterWork(activeWorkIndex);
+      enterWork(activeWorkIndexRef.current);
     }, 320);
-  };
+  }, [enterWork]);
 
   return (
     <div className="works-panel time-channel-panel" ref={rootRef} data-reveal>
@@ -2378,6 +2408,7 @@ function WorkTimeChannel({ locale }: { locale: Locale }) {
             type="button"
             className={`work-eye-portal ${portalArmed ? "is-entering" : ""}`}
             style={eyePortalStyle}
+            onPointerEnter={cacheEyePortalRect}
             onPointerMove={moveEyePortal}
             onPointerLeave={resetEyePortal}
             onPointerDown={() => setPortalArmed(true)}
