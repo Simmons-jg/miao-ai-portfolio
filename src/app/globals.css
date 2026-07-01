@@ -7836,6 +7836,19 @@
   background: rgb(0 0 0 / 72%);
   box-shadow: 0 14px 34px rgb(0 0 0 / 34%);
   backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.videos-video-stage[data-overlay-visible="true"] .videos-quality-switch,
+.videos-video-stage:focus-within .videos-quality-switch {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .videos-quality-switch button {
@@ -8531,6 +8544,19 @@
     text-transform: uppercase;
     box-shadow: 0 14px 34px rgb(0 0 0 / 34%);
     backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .videos-video-stage[data-overlay-visible="true"] .videos-landscape-button,
+  .videos-video-stage:focus-within .videos-landscape-button {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .videos-landscape-button:hover,

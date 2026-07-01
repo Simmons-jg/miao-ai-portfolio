@@ -61,6 +61,7 @@ export function VideoRoomPage() {
   const resumeTimeRef = useRef(0);
   const resumePlaybackRef = useRef(false);
   const landscapeHintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const videoOverlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestedId = searchParams.get("work") ?? videoWorks[0]?.id ?? "";
   const initialId = getCanonicalVideoWorkId(requestedId);
   const initialIndex = Math.max(
@@ -71,6 +72,7 @@ export function VideoRoomPage() {
   const [hoverIndex, setHoverIndex] = useState(initialIndex);
   const [videoQuality, setVideoQuality] = useState<VideoQuality>("1080p");
   const [landscapeHint, setLandscapeHint] = useState("");
+  const [videoOverlayVisible, setVideoOverlayVisible] = useState(true);
   const active = videoWorks[activeIndex] ?? videoWorks[0];
   const hover = videoWorks[hoverIndex] ?? active;
 
@@ -78,6 +80,9 @@ export function VideoRoomPage() {
     return () => {
       if (landscapeHintTimerRef.current) {
         clearTimeout(landscapeHintTimerRef.current);
+      }
+      if (videoOverlayTimerRef.current) {
+        clearTimeout(videoOverlayTimerRef.current);
       }
     };
   }, []);
@@ -95,9 +100,40 @@ export function VideoRoomPage() {
     if (!next) return;
     resumeTimeRef.current = 0;
     resumePlaybackRef.current = false;
+    clearVideoOverlayTimer();
+    setVideoOverlayVisible(true);
     setActiveIndex(index);
     setHoverIndex(index);
     router.replace(`/videos?work=${next.id}`, { scroll: false });
+  };
+
+  const clearVideoOverlayTimer = () => {
+    if (videoOverlayTimerRef.current) {
+      clearTimeout(videoOverlayTimerRef.current);
+      videoOverlayTimerRef.current = null;
+    }
+  };
+
+  const scheduleVideoOverlayHide = () => {
+    clearVideoOverlayTimer();
+
+    const video = videoRef.current;
+    if (!video || video.paused || video.ended) return;
+
+    videoOverlayTimerRef.current = setTimeout(() => {
+      setVideoOverlayVisible(false);
+      videoOverlayTimerRef.current = null;
+    }, 2400);
+  };
+
+  const revealVideoOverlay = () => {
+    setVideoOverlayVisible(true);
+    scheduleVideoOverlayHide();
+  };
+
+  const keepVideoOverlayVisible = () => {
+    clearVideoOverlayTimer();
+    setVideoOverlayVisible(true);
   };
 
   const chooseQuality = (quality: VideoQuality) => {
@@ -109,6 +145,7 @@ export function VideoRoomPage() {
       resumePlaybackRef.current = !video.paused && !video.ended;
     }
 
+    keepVideoOverlayVisible();
     setVideoQuality(quality);
   };
 
@@ -267,7 +304,17 @@ export function VideoRoomPage() {
           <h2>{active.titleEn}</h2>
           <p>{active.titleZh} / {active.metaZh}</p>
         </div>
-        <div className="videos-video-stage" ref={videoStageRef}>
+        <div
+          className="videos-video-stage"
+          ref={videoStageRef}
+          data-overlay-visible={videoOverlayVisible ? "true" : "false"}
+          onFocusCapture={revealVideoOverlay}
+          onMouseLeave={scheduleVideoOverlayHide}
+          onMouseMove={revealVideoOverlay}
+          onPointerDown={revealVideoOverlay}
+          onPointerMove={revealVideoOverlay}
+          onTouchStart={revealVideoOverlay}
+        >
           <video
             ref={videoRef}
             key={active.id}
@@ -278,6 +325,14 @@ export function VideoRoomPage() {
             playsInline
             preload="auto"
             onLoadedMetadata={handleVideoMetadata}
+            onEnded={keepVideoOverlayVisible}
+            onMouseMove={revealVideoOverlay}
+            onPause={keepVideoOverlayVisible}
+            onPlay={revealVideoOverlay}
+            onPlaying={scheduleVideoOverlayHide}
+            onPointerDown={revealVideoOverlay}
+            onPointerMove={revealVideoOverlay}
+            onTouchStart={revealVideoOverlay}
           />
           <button
             type="button"
