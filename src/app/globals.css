@@ -8415,30 +8415,66 @@
 
 @media (max-width: 820px) {
   .videos-nav {
-    padding: 16px;
+    position: absolute;
+    padding: 14px;
   }
 
   .videos-mark span {
     display: none;
   }
 
+  .videos-mark img {
+    width: 34px;
+    height: 34px;
+  }
+
   .videos-contact {
-    font-size: 16px;
+    padding: 8px 14px;
+    border-width: 1px;
+    font-size: 13px;
   }
 
   .videos-hero {
-    min-height: 56dvh;
-    padding-top: 86px;
-    padding-bottom: 132px;
+    min-height: 228px;
+    padding: 64px 12px 80px;
+    place-items: end center;
+  }
+
+  .videos-marquee,
+  .videos-hero-copy {
+    display: none;
   }
 
   .videos-hero-strip button {
-    width: 168px;
+    width: 132px;
+    margin-left: -18px;
+    border-width: 1px;
+  }
+
+  .videos-hero-strip {
+    bottom: 18px;
+  }
+
+  .videos-hero-strip span {
+    left: 8px;
+    bottom: 7px;
+    font-size: 24px;
   }
 
   .videos-signal-rail {
     width: calc(100vw - 24px);
-    margin-top: -12px;
+    margin: -4px auto 18px;
+    border-block-width: 1px;
+    transform: rotate(-0.45deg);
+  }
+
+  .videos-signal-rail div {
+    gap: 28px;
+    padding: 8px 0 7px;
+  }
+
+  .videos-signal-rail span {
+    font-size: 11px;
   }
 
   .videos-player-shell,
@@ -8446,14 +8482,38 @@
     width: calc(100vw - 24px);
   }
 
+  .videos-player-shell {
+    margin-bottom: 48px;
+    border-width: 1px;
+  }
+
   .videos-active-meta {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 12px;
+    padding: 14px 14px 12px;
+    border-bottom-width: 1px;
+  }
+
+  .videos-active-meta span {
+    font-size: 48px;
+  }
+
+  .videos-active-meta h2 {
+    font-size: clamp(28px, 9vw, 42px);
+    line-height: 0.92;
+  }
+
+  .videos-active-meta p {
+    grid-column: 1 / -1;
+    font-size: 10px;
+    line-height: 1.35;
   }
 
   .videos-quality-switch {
     top: 10px;
     right: 10px;
+    padding: 3px;
   }
 
   .videos-quality-switch button {
@@ -8483,10 +8543,19 @@
 
   .videos-index-heading {
     display: block;
+    margin-bottom: 14px;
+  }
+
+  .videos-index-heading span {
+    font-size: clamp(54px, 15vw, 72px);
+    line-height: 0.86;
   }
 
   .videos-index-heading p {
     margin-top: 10px;
+    max-width: 30ch;
+    font-size: 12px;
+    line-height: 1.45;
     text-align: left;
   }
 
