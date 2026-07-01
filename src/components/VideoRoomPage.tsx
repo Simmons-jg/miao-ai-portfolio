@@ -31,6 +31,12 @@ const qualityOptions = [
   { id: "720p", label: "720P" },
 ] as const;
 
+const mobileVideoFullscreenAttributes = {
+  "x5-video-orientation": "landscape",
+  "x5-video-player-fullscreen": "true",
+  "x5-video-player-type": "h5",
+};
+
 type VideoQuality = (typeof qualityOptions)[number]["id"];
 
 type FullscreenElement = HTMLElement & {
@@ -267,6 +273,7 @@ export function VideoRoomPage() {
             key={active.id}
             src={playerSrc}
             poster={active.poster}
+            {...mobileVideoFullscreenAttributes}
             controls
             playsInline
             preload="auto"
