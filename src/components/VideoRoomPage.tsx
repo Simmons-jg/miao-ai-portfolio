@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { getCanonicalVideoWorkId, videoWorks } from "@/lib/videoCatalog";
 
 const videoSignalItems = [
@@ -25,9 +25,19 @@ const videoCodeRain = [
   "1001011010010110",
 ];
 
+const qualityOptions = [
+  { id: "1080p", label: "1080P" },
+  { id: "720p", label: "720P" },
+] as const;
+
+type VideoQuality = (typeof qualityOptions)[number]["id"];
+
 export function VideoRoomPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const resumeTimeRef = useRef(0);
+  const resumePlaybackRef = useRef(false);
   const requestedId = searchParams.get("work") ?? videoWorks[0]?.id ?? "";
   const initialId = getCanonicalVideoWorkId(requestedId);
   const initialIndex = Math.max(
@@ -36,17 +46,57 @@ export function VideoRoomPage() {
   );
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [hoverIndex, setHoverIndex] = useState(initialIndex);
+  const [videoQuality, setVideoQuality] = useState<VideoQuality>("1080p");
   const active = videoWorks[activeIndex] ?? videoWorks[0];
   const hover = videoWorks[hoverIndex] ?? active;
 
-  const playerSrc = useMemo(() => `/api/videos/${active.id}`, [active.id]);
+  const playerSrc = useMemo(() => {
+    if (videoQuality === "1080p") {
+      return `/api/videos/${active.id}`;
+    }
+
+    return `/api/videos/${active.id}?quality=${videoQuality}`;
+  }, [active.id, videoQuality]);
 
   const chooseVideo = (index: number) => {
     const next = videoWorks[index];
     if (!next) return;
+    resumeTimeRef.current = 0;
+    resumePlaybackRef.current = false;
     setActiveIndex(index);
     setHoverIndex(index);
     router.replace(`/videos?work=${next.id}`, { scroll: false });
+  };
+
+  const chooseQuality = (quality: VideoQuality) => {
+    if (quality === videoQuality) return;
+
+    const video = videoRef.current;
+    if (video) {
+      resumeTimeRef.current = video.currentTime;
+      resumePlaybackRef.current = !video.paused && !video.ended;
+    }
+
+    setVideoQuality(quality);
+  };
+
+  const handleVideoMetadata = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const resumeAt = resumeTimeRef.current;
+    if (resumeAt > 0 && Number.isFinite(video.duration) && resumeAt < video.duration - 0.5) {
+      video.currentTime = resumeAt;
+    }
+
+    if (resumePlaybackRef.current) {
+      void video.play().catch(() => {
+        resumePlaybackRef.current = false;
+      });
+    }
+
+    resumeTimeRef.current = 0;
+    resumePlaybackRef.current = false;
   };
 
   return (
@@ -118,14 +168,32 @@ export function VideoRoomPage() {
           <h2>{active.titleEn}</h2>
           <p>{active.titleZh} / {active.metaZh}</p>
         </div>
-        <video
-          key={active.id}
-          src={playerSrc}
-          poster={active.poster}
-          controls
-          playsInline
-          preload="auto"
-        />
+        <div className="videos-video-stage">
+          <video
+            ref={videoRef}
+            key={active.id}
+            src={playerSrc}
+            poster={active.poster}
+            controls
+            playsInline
+            preload="auto"
+            onLoadedMetadata={handleVideoMetadata}
+          />
+          <div className="videos-quality-switch" aria-label="Video quality">
+            {qualityOptions.map((option) => (
+              <button
+                type="button"
+                key={option.id}
+                className={videoQuality === option.id ? "active" : ""}
+                aria-pressed={videoQuality === option.id}
+                onClick={() => chooseQuality(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+            <span>卡顿时切 720P</span>
+          </div>
+        </div>
       </section>
 
       <section className="videos-index-section" aria-label="Video index">

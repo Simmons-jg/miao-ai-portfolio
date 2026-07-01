@@ -12,23 +12,13 @@ const RELEASE_1080P_VIDEO_BASE_URL =
 const RELEASE_720P_VIDEO_BASE_URL =
   "https://github.com/Simmons-jg/miao-ai-portfolio/releases/download/video-assets-720p-v1";
 
-function isMobileVideoRequest(request: NextRequest) {
-  const userAgent = request.headers.get("user-agent") ?? "";
-  const saveData = request.headers.get("save-data")?.toLowerCase() === "on";
-  const quality = request.nextUrl.searchParams.get("quality");
-
-  if (quality === "1080p") return false;
-  if (quality === "720p") return true;
-
-  return saveData || /Android|iPhone|iPad|iPod|Mobile|Mobi/i.test(userAgent);
-}
-
 function getPublicVideoUrl(id: string, request: NextRequest) {
   const configuredBaseUrl = process.env.VIDEO_PUBLIC_BASE_URL?.replace(/\/+$/, "");
+  const quality = request.nextUrl.searchParams.get("quality");
   const baseUrl =
     configuredBaseUrl && !configuredBaseUrl.includes("blob.vercel-storage.com")
       ? configuredBaseUrl
-      : isMobileVideoRequest(request)
+      : quality === "720p"
         ? RELEASE_720P_VIDEO_BASE_URL
         : RELEASE_1080P_VIDEO_BASE_URL;
 
