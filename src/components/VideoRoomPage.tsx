@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { Maximize2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getCanonicalVideoWorkId, videoWorks } from "@/lib/videoCatalog";
 
 const videoSignalItems = [
@@ -32,12 +33,28 @@ const qualityOptions = [
 
 type VideoQuality = (typeof qualityOptions)[number]["id"];
 
+type FullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+  msRequestFullscreen?: () => Promise<void> | void;
+};
+
+type NativeFullscreenVideo = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+  webkitEnterFullScreen?: () => void;
+};
+
+type LockableScreenOrientation = ScreenOrientation & {
+  lock?: (orientation: "landscape") => Promise<void>;
+};
+
 export function VideoRoomPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const videoStageRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const resumeTimeRef = useRef(0);
   const resumePlaybackRef = useRef(false);
+  const landscapeHintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestedId = searchParams.get("work") ?? videoWorks[0]?.id ?? "";
   const initialId = getCanonicalVideoWorkId(requestedId);
   const initialIndex = Math.max(
@@ -47,8 +64,17 @@ export function VideoRoomPage() {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [hoverIndex, setHoverIndex] = useState(initialIndex);
   const [videoQuality, setVideoQuality] = useState<VideoQuality>("1080p");
+  const [landscapeHint, setLandscapeHint] = useState("");
   const active = videoWorks[activeIndex] ?? videoWorks[0];
   const hover = videoWorks[hoverIndex] ?? active;
+
+  useEffect(() => {
+    return () => {
+      if (landscapeHintTimerRef.current) {
+        clearTimeout(landscapeHintTimerRef.current);
+      }
+    };
+  }, []);
 
   const playerSrc = useMemo(() => {
     if (videoQuality === "1080p") {
@@ -78,6 +104,73 @@ export function VideoRoomPage() {
     }
 
     setVideoQuality(quality);
+  };
+
+  const showLandscapeHint = (message: string) => {
+    if (landscapeHintTimerRef.current) {
+      clearTimeout(landscapeHintTimerRef.current);
+    }
+
+    setLandscapeHint(message);
+    landscapeHintTimerRef.current = setTimeout(() => {
+      setLandscapeHint("");
+      landscapeHintTimerRef.current = null;
+    }, 3200);
+  };
+
+  const enterLandscapePlayback = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const stage = videoStageRef.current;
+    let requestedFullscreen = false;
+    let lockedLandscape = false;
+
+    void video.play().catch(() => undefined);
+
+    const fullscreenTarget = (stage ?? video) as FullscreenElement;
+    const requestFullscreen =
+      fullscreenTarget.requestFullscreen ??
+      fullscreenTarget.webkitRequestFullscreen ??
+      fullscreenTarget.msRequestFullscreen;
+
+    if (requestFullscreen) {
+      try {
+        await requestFullscreen.call(fullscreenTarget);
+        requestedFullscreen = true;
+      } catch {
+        requestedFullscreen = false;
+      }
+    }
+
+    const orientation = screen.orientation as LockableScreenOrientation | undefined;
+    if (orientation?.lock) {
+      try {
+        await orientation.lock("landscape");
+        lockedLandscape = true;
+      } catch {
+        lockedLandscape = false;
+      }
+    }
+
+    if (!requestedFullscreen) {
+      const nativeVideo = video as NativeFullscreenVideo;
+      const enterNativeFullscreen =
+        nativeVideo.webkitEnterFullscreen ?? nativeVideo.webkitEnterFullScreen;
+
+      if (enterNativeFullscreen) {
+        try {
+          enterNativeFullscreen.call(nativeVideo);
+          requestedFullscreen = true;
+        } catch {
+          requestedFullscreen = false;
+        }
+      }
+    }
+
+    if (!lockedLandscape) {
+      showLandscapeHint("Rotate phone");
+    }
   };
 
   const handleVideoMetadata = () => {
@@ -168,7 +261,7 @@ export function VideoRoomPage() {
           <h2>{active.titleEn}</h2>
           <p>{active.titleZh} / {active.metaZh}</p>
         </div>
-        <div className="videos-video-stage">
+        <div className="videos-video-stage" ref={videoStageRef}>
           <video
             ref={videoRef}
             key={active.id}
@@ -179,6 +272,20 @@ export function VideoRoomPage() {
             preload="auto"
             onLoadedMetadata={handleVideoMetadata}
           />
+          <button
+            type="button"
+            className="videos-landscape-button"
+            onClick={enterLandscapePlayback}
+            aria-label="Landscape fullscreen"
+          >
+            <Maximize2 aria-hidden="true" />
+            <span>Landscape</span>
+          </button>
+          {landscapeHint ? (
+            <span className="videos-landscape-hint" role="status">
+              {landscapeHint}
+            </span>
+          ) : null}
           <div className="videos-quality-switch" aria-label="Video quality">
             {qualityOptions.map((option) => (
               <button

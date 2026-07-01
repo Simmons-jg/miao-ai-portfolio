@@ -7801,6 +7801,28 @@
   position: relative;
 }
 
+.videos-video-stage:fullscreen,
+.videos-video-stage:-webkit-full-screen {
+  display: grid;
+  width: 100vw;
+  height: 100dvh;
+  place-items: center;
+  background: #000;
+}
+
+.videos-video-stage:fullscreen video,
+.videos-video-stage:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+}
+
+.videos-landscape-button,
+.videos-landscape-hint {
+  display: none;
+}
+
 .videos-quality-switch {
   position: absolute;
   top: 16px;
@@ -8485,6 +8507,61 @@
   .videos-player-shell {
     margin-bottom: 48px;
     border-width: 1px;
+  }
+
+  .videos-landscape-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 35px;
+    border: 1px solid rgb(243 239 223 / 34%);
+    background: rgb(0 0 0 / 72%);
+    color: rgb(243 239 223 / 92%);
+    cursor: pointer;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    padding: 0 10px;
+    text-transform: uppercase;
+    box-shadow: 0 14px 34px rgb(0 0 0 / 34%);
+    backdrop-filter: blur(10px);
+  }
+
+  .videos-landscape-button:hover,
+  .videos-landscape-button:focus-visible {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .videos-landscape-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .videos-landscape-hint {
+    position: absolute;
+    top: 52px;
+    left: 10px;
+    z-index: 3;
+    display: block;
+    max-width: calc(100% - 20px);
+    border: 1px solid rgb(174 255 37 / 42%);
+    background: rgb(0 0 0 / 74%);
+    color: var(--acid);
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 9px 10px;
+    text-transform: uppercase;
+    box-shadow: 0 14px 34px rgb(0 0 0 / 34%);
+    backdrop-filter: blur(10px);
   }
 
   .videos-active-meta {
