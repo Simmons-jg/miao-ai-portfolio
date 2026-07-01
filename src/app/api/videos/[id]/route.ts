@@ -20,6 +20,77 @@ function getPublicVideoUrl(id: string) {
   return `${baseUrl}/${id}.mp4`;
 }
 
+function getBoundedRange(range: string | null) {
+  const fallbackEnd = CHUNK_SIZE - 1;
+
+  if (!range) {
+    return `bytes=0-${fallbackEnd}`;
+  }
+
+  const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+  if (!match) {
+    return `bytes=0-${fallbackEnd}`;
+  }
+
+  const [, startText, endText] = match;
+  if (!startText) {
+    return range;
+  }
+
+  const start = Number.parseInt(startText, 10);
+  const requestedEnd = endText ? Number.parseInt(endText, 10) : start + fallbackEnd;
+  const end = Math.min(
+    Number.isNaN(requestedEnd) ? start + fallbackEnd : requestedEnd,
+    start + fallbackEnd,
+  );
+
+  if (Number.isNaN(start) || Number.isNaN(end) || start > end) {
+    return `bytes=0-${fallbackEnd}`;
+  }
+
+  return `bytes=${start}-${end}`;
+}
+
+async function proxyPublicVideo(publicVideoUrl: string, range: string | null) {
+  const upstreamRange = getBoundedRange(range);
+  const upstream = await fetch(publicVideoUrl, {
+    headers: {
+      Range: upstreamRange,
+    },
+    cache: "no-store",
+    redirect: "follow",
+  });
+
+  const headers = new Headers({
+    "Accept-Ranges": "bytes",
+    "Cache-Control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400",
+    "Content-Type": "video/mp4",
+  });
+
+  const contentLength = upstream.headers.get("content-length");
+  const contentRange = upstream.headers.get("content-range");
+
+  if (contentLength) {
+    headers.set("Content-Length", contentLength);
+  }
+
+  if (contentRange) {
+    headers.set("Content-Range", contentRange);
+  }
+
+  if (!upstream.ok) {
+    return new Response("Video source is unavailable", {
+      status: upstream.status,
+      headers,
+    });
+  }
+
+  return new Response(upstream.body, {
+    status: contentRange ? 206 : upstream.status,
+    headers,
+  });
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> },
@@ -38,7 +109,7 @@ export async function GET(
   } catch {
     const publicVideoUrl = getPublicVideoUrl(canonicalId);
     if (publicVideoUrl) {
-      return Response.redirect(publicVideoUrl, 307);
+      return proxyPublicVideo(publicVideoUrl, request.headers.get("range"));
     }
 
     return new Response("Video file is unavailable", { status: 404 });
