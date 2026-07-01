@@ -6,16 +6,31 @@ import { getVideoSource } from "@/lib/videoSources";
 
 export const runtime = "nodejs";
 
-const CHUNK_SIZE = 1024 * 1024;
-const RELEASE_VIDEO_BASE_URL =
+const CHUNK_SIZE = 4 * 1024 * 1024;
+const RELEASE_1080P_VIDEO_BASE_URL =
   "https://github.com/Simmons-jg/miao-ai-portfolio/releases/download/video-assets-1080p-v1";
+const RELEASE_720P_VIDEO_BASE_URL =
+  "https://github.com/Simmons-jg/miao-ai-portfolio/releases/download/video-assets-720p-v1";
 
-function getPublicVideoUrl(id: string) {
+function isMobileVideoRequest(request: NextRequest) {
+  const userAgent = request.headers.get("user-agent") ?? "";
+  const saveData = request.headers.get("save-data")?.toLowerCase() === "on";
+  const quality = request.nextUrl.searchParams.get("quality");
+
+  if (quality === "1080p") return false;
+  if (quality === "720p") return true;
+
+  return saveData || /Android|iPhone|iPad|iPod|Mobile|Mobi/i.test(userAgent);
+}
+
+function getPublicVideoUrl(id: string, request: NextRequest) {
   const configuredBaseUrl = process.env.VIDEO_PUBLIC_BASE_URL?.replace(/\/+$/, "");
   const baseUrl =
     configuredBaseUrl && !configuredBaseUrl.includes("blob.vercel-storage.com")
       ? configuredBaseUrl
-      : RELEASE_VIDEO_BASE_URL;
+      : isMobileVideoRequest(request)
+        ? RELEASE_720P_VIDEO_BASE_URL
+        : RELEASE_1080P_VIDEO_BASE_URL;
 
   return `${baseUrl}/${id}.mp4`;
 }
@@ -107,7 +122,7 @@ export async function GET(
   try {
     size = statSync(source).size;
   } catch {
-    const publicVideoUrl = getPublicVideoUrl(canonicalId);
+    const publicVideoUrl = getPublicVideoUrl(canonicalId, request);
     if (publicVideoUrl) {
       return proxyPublicVideo(publicVideoUrl, request.headers.get("range"));
     }

@@ -124,7 +124,7 @@ export function VideoRoomPage() {
           poster={active.poster}
           controls
           playsInline
-          preload="metadata"
+          preload="auto"
         />
       </section>
 
