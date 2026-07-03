@@ -99,7 +99,7 @@ const skyTarget = [new THREE.Color(), new THREE.Color(), new THREE.Color()];
 
 export function setSky(name) {
   skyName = name;
-  try { localStorage.setItem('tc-sky', name); } catch (_) {}
+  try { localStorage.setItem('tc-sky', name); } catch {}
   const pal = SKY_PALETTES[name];
   if (pal) pal.forEach((c, i) => skyTarget[i].setRGB(c[0], c[1], c[2]));
   document.querySelectorAll('#skyPanel .swatch').forEach((el) => {
@@ -108,7 +108,7 @@ export function setSky(name) {
 }
 
 // 恢复上次的配色
-const savedSky = (() => { try { return localStorage.getItem('tc-sky'); } catch (_) { return null; } })();
+const savedSky = (() => { try { return localStorage.getItem('tc-sky'); } catch { return null; } })();
 setSky(savedSky && (SKY_PALETTES[savedSky] || savedSky === 'rainbow') ? savedSky : 'aurora');
 
 /* ---------- 每帧：跟随相机 + 配色平滑过渡 + 尽头的光 ---------- */

@@ -55,7 +55,7 @@ async function makeHeicMicroBlob(file) {
     cv.getContext('2d').drawImage(bitmap, 0, 0, cv.width, cv.height);
     bitmap.close();
     return await new Promise((resolve) => cv.toBlob(resolve, 'image/jpeg', 0.66));
-  } catch (_) {
+  } catch {
     return null;
   }
 }

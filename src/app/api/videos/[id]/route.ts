@@ -134,11 +134,27 @@ export async function GET(
     });
   }
 
-  const [startText, endText] = range.replace(/bytes=/, "").split("-");
-  const start = Number.parseInt(startText, 10);
-  const end = endText ? Number.parseInt(endText, 10) : Math.min(start + CHUNK_SIZE, size - 1);
+  const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+  const [, startText, endText] = match ?? [];
+  let start: number;
+  let end: number;
 
-  if (Number.isNaN(start) || Number.isNaN(end) || start >= size || end >= size || start > end) {
+  if (startText) {
+    start = Number.parseInt(startText, 10);
+    end = endText
+      ? Math.min(Number.parseInt(endText, 10), size - 1)
+      : Math.min(start + CHUNK_SIZE, size - 1);
+  } else if (endText) {
+    // Suffix range: last N bytes (e.g. "bytes=-500").
+    const suffixLength = Math.min(Number.parseInt(endText, 10), size);
+    start = size - suffixLength;
+    end = size - 1;
+  } else {
+    start = Number.NaN;
+    end = Number.NaN;
+  }
+
+  if (Number.isNaN(start) || Number.isNaN(end) || start >= size || start > end) {
     return new Response("Invalid range", {
       status: 416,
       headers: {

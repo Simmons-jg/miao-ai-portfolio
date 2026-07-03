@@ -42,7 +42,7 @@ export function ProductRoomPage() {
     <main className="product-room-page">
       <header className="product-room-nav">
         <Link href="/" className="product-room-mark">
-          <img src="/miao-paw-brand.svg" alt="" />
+          <img src="/miao-paw-brand.svg" alt="" decoding="async" />
           <span>MIAO PRODUCT</span>
         </Link>
         <div className="product-room-actions">

@@ -38,7 +38,7 @@ function failWorker(worker, message) {
   if (idx >= 0) workers.splice(idx, 1);
   const idleIdx = idle.indexOf(worker);
   if (idleIdx >= 0) idle.splice(idleIdx, 1);
-  try { worker.terminate(); } catch (_) {}
+  try { worker.terminate(); } catch {}
   ensureWorkers();
   pump();
 }

@@ -250,7 +250,7 @@ export function VideoRoomPage() {
 
       <header className="videos-nav">
         <Link href="/" aria-label="Back to home" className="videos-mark">
-          <img src="/miao-paw-brand.svg" alt="" />
+          <img src="/miao-paw-brand.svg" alt="" decoding="async" />
           <span>MIAO</span>
         </Link>
         <Link href="/#contact" className="videos-contact">
@@ -281,7 +281,7 @@ export function VideoRoomPage() {
               onMouseEnter={() => setHoverIndex(index)}
               onFocus={() => setHoverIndex(index)}
             >
-              <img src={work.poster} alt="" />
+              <img src={work.poster} alt="" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
               <span>{work.code}</span>
             </button>
           ))}
@@ -392,7 +392,7 @@ export function VideoRoomPage() {
                 <small>{work.titleZh} / {work.metaZh}</small>
                 <b>{work.date}</b>
                 <span className="videos-row-card" aria-hidden="true">
-                  <img src={work.poster} alt="" />
+                  <img src={work.poster} alt="" loading="lazy" decoding="async" />
                   <span>{work.code}</span>
                   <strong>{work.titleEn}</strong>
                   <small>{work.titleZh} / {work.metaZh}</small>

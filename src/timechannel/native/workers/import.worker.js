@@ -35,7 +35,7 @@ async function readDateMs(file) {
     const meta = await exifr.parse(file, DEFAULT_DATE_KEYS);
     const date = meta?.DateTimeOriginal || meta?.CreateDate || meta?.ModifyDate;
     if (date) return new Date(date).getTime();
-  } catch (_) {}
+  } catch {}
   return file.lastModified || Date.now();
 }
 

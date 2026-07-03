@@ -110,10 +110,10 @@ export async function saveStoryList(id, items) {
 
 export async function migrateLocalStories() {
   let raw = null;
-  try { raw = localStorage.getItem('tc-stories'); } catch (_) {}
+  try { raw = localStorage.getItem('tc-stories'); } catch {}
   if (!raw) return {};
   let parsed;
-  try { parsed = JSON.parse(raw) || {}; } catch (_) { return {}; }
+  try { parsed = JSON.parse(raw) || {}; } catch { return {}; }
   const db = await openDB();
   const tx = db.transaction(STORIES, 'readwrite');
   const done = txDone(tx);
@@ -122,6 +122,6 @@ export async function migrateLocalStories() {
     if (Array.isArray(items)) store.put({ id, items });
   }
   await done;
-  try { localStorage.removeItem('tc-stories'); } catch (_) {}
+  try { localStorage.removeItem('tc-stories'); } catch {}
   return parsed;
 }

@@ -55,7 +55,7 @@ function tlFraction(e) {
 }
 tlTrack.addEventListener('pointerdown', (e) => {
   tlActive = true;
-  try { tlTrack.setPointerCapture(e.pointerId); } catch (_) {}
+  try { tlTrack.setPointerCapture(e.pointerId); } catch {}
   seekToFraction(tlFraction(e));
 });
 tlTrack.addEventListener('pointermove', (e) => { if (tlActive) seekToFraction(tlFraction(e)); });

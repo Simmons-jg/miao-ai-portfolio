@@ -67,7 +67,7 @@ canvas.addEventListener('pointerdown', (e) => {
   lastPointerY = e.clientY; lastPointerX = e.clientX;
   dragStartX = e.clientX;
   canvas.classList.add('dragging');
-  try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+  try { canvas.setPointerCapture(e.pointerId); } catch {}
 });
 canvas.addEventListener('pointermove', (e) => {
   pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
