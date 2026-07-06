@@ -10,6 +10,7 @@ export const videoSourceMap: Record<string, string> = {
   "grand-void": "E:/作品/作品/视频/MV/盛大的虚无表演v2 HEVC_prob3.mp4",
   "style-audition": "E:/作品/作品/视频/风格试镜/4月29日.mp4",
   "overseas-test": "E:/作品/作品/视频/出海短剧/8c6b2b541a92882fc2288d62048f5555.mp4",
+  menshen: "E:/作品/作品/视频/实验短片/门神.mp4",
 };
 
 export function getVideoSource(id: string) {

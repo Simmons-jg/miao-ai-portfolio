@@ -108,4 +108,14 @@ export const videoWorks: VideoWork[] = [
     date: "2026",
     poster: "/videos/overseas-test-poster.jpg",
   },
+  {
+    id: "menshen",
+    code: "10",
+    titleEn: "Door Guardians",
+    titleZh: "门神",
+    metaEn: "experimental film / image narrative",
+    metaZh: "实验影像 / 图像叙事",
+    date: "2026",
+    poster: "/videos/menshen-poster.jpg",
+  },
 ];
