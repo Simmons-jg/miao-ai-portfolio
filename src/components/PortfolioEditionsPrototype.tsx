@@ -832,6 +832,7 @@ export function PortfolioEditionsPrototype() {
   const [heroInView, setHeroInView] = useState(true);
   const rootRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const manifestoRef = useRef<HTMLElement>(null);
 
   const [activeVideo, setActiveVideo] = useState(0);
   const activeChapter = refinedChapters[activeIndex] ?? refinedChapters[0];
@@ -841,6 +842,57 @@ export function PortfolioEditionsPrototype() {
     document.documentElement.lang = locale === "zh" ? "zh-Hans" : "en";
     document.title = c.siteTitle;
   }, [c.siteTitle, locale]);
+
+  useEffect(() => {
+    const section = manifestoRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let running = false;
+    let lastY = window.scrollY;
+    let velocity = 0;
+
+    const tick = () => {
+      const y = window.scrollY;
+      velocity += (y - lastY - velocity) * 0.1;
+      lastY = y;
+
+      const rate = 1 + Math.min(Math.abs(velocity) / 10, 3.2);
+      const skew = Math.max(-3.4, Math.min(3.4, velocity / 26));
+
+      section.style.setProperty("--manifesto-skew", `${skew.toFixed(2)}deg`);
+      for (const lane of section.querySelectorAll<HTMLElement>(".manifesto-lane")) {
+        for (const animation of lane.getAnimations()) {
+          animation.playbackRate = rate;
+        }
+      }
+
+      if (running) {
+        raf = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !running) {
+        running = true;
+        lastY = window.scrollY;
+        raf = window.requestAnimationFrame(tick);
+      } else if (!entry.isIntersecting && running) {
+        running = false;
+        window.cancelAnimationFrame(raf);
+        section.style.setProperty("--manifesto-skew", "0deg");
+      }
+    });
+
+    observer.observe(section);
+
+    return () => {
+      running = false;
+      window.cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const urls = [
@@ -1263,13 +1315,26 @@ export function PortfolioEditionsPrototype() {
         <MainframeLandingHero locale={locale} />
       </section>
 
-      <section className="kinetic-manifesto" aria-label={locale === "zh" ? "作品集视觉宣言" : "Portfolio manifesto"}>
-        <div className="manifesto-core">
+      <section
+        className="kinetic-manifesto"
+        ref={manifestoRef}
+        aria-label={locale === "zh" ? "作品集视觉宣言" : "Portfolio manifesto"}
+      >
+        <div className="manifesto-core" aria-hidden="true">
           {refinedKineticTracks.map((track, index) => (
             <div className="manifesto-track" data-direction={index % 2 === 0 ? "left" : "right"} key={track.en}>
-              <span>{locale === "zh" ? track.zh : track.en}</span>
-              <span>{locale === "zh" ? track.zh : track.en}</span>
-              <span>{locale === "zh" ? track.zh : track.en}</span>
+              <div className="manifesto-lane">
+                {[0, 1].map((copy) => (
+                  <div className="manifesto-group" key={copy}>
+                    {Array.from({ length: 4 }, (_, repeat) => (
+                      <span key={repeat}>
+                        {locale === "zh" ? track.zh : track.en}
+                        <i>✦</i>
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

@@ -3355,44 +3355,20 @@
   }
 
   .kinetic-manifesto {
+    --manifesto-skew: 0deg;
     position: relative;
     z-index: 2;
     margin-top: clamp(-150px, -12vh, -82px);
-    min-height: clamp(700px, 86dvh, 900px);
+    min-height: clamp(560px, 76dvh, 820px);
     overflow: hidden;
-    border-top: 1px solid rgb(243 239 223 / 10%);
-    border-bottom: 1px solid rgb(243 239 223 / 10%);
     contain: paint;
     content-visibility: auto;
-    contain-intrinsic-size: 840px;
+    contain-intrinsic-size: 760px;
     background:
-      linear-gradient(180deg, rgb(8 9 7 / 0%), rgb(8 9 7 / 30%) 14%, rgb(8 9 7 / 74%) 36%, rgb(8 9 7 / 88%)),
-      radial-gradient(circle at 10% 20%, rgb(183 255 37 / 11%), transparent 24%),
-      radial-gradient(circle at 86% 80%, rgb(255 74 36 / 13%), transparent 22%);
-  }
-
-  .kinetic-manifesto::before,
-  .kinetic-manifesto::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .kinetic-manifesto::before {
-    background:
-      linear-gradient(90deg, rgb(8 9 7 / 88%), transparent 16% 84%, rgb(8 9 7 / 88%)),
-      linear-gradient(180deg, rgb(8 9 7 / 70%), transparent 20% 78%, rgb(8 9 7 / 82%));
-  }
-
-  .kinetic-manifesto::after {
-    background:
-      linear-gradient(90deg, rgb(243 239 223 / 6%) 1px, transparent 1px),
-      linear-gradient(0deg, rgb(243 239 223 / 4%) 1px, transparent 1px);
-    background-size: 72px 72px;
-    opacity: 0.48;
-    mask-image: radial-gradient(circle at 50% 50%, black 0 42%, transparent 74%);
+      radial-gradient(circle at 12% 26%, rgb(183 255 37 / 8%), transparent 30%),
+      radial-gradient(circle at 86% 76%, rgb(255 74 36 / 7%), transparent 26%);
+    mask-image: linear-gradient(180deg, transparent, black 14% 86%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, transparent, black 14% 86%, transparent);
   }
 
   .manifesto-core {
@@ -3400,57 +3376,112 @@
     inset: 50% auto auto 50%;
     z-index: 2;
     display: grid;
-    width: min(1440px, 100vw);
-    gap: clamp(12px, 1.8vh, 24px);
-    transform: translate(-50%, -50%) rotate(-3deg);
+    width: 116vw;
+    gap: clamp(14px, 2.2vh, 30px);
+    transform: translate(-50%, -50%) rotate(-3deg) skewX(var(--manifesto-skew));
   }
 
   .manifesto-track {
-    display: flex;
     width: 100%;
-    justify-content: center;
-    gap: clamp(24px, 4vw, 58px);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 10% 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10% 90%, transparent);
+  }
+
+  .manifesto-lane {
+    display: flex;
+    width: max-content;
     will-change: transform;
-    animation: manifestoDrift 24s linear infinite;
-    transform: translate3d(-2.2%, 0, 0);
+    animation: manifestoMarquee var(--manifesto-duration, 40s) linear infinite;
   }
 
-  .manifesto-track[data-direction="right"] {
-    margin-left: 0;
+  .manifesto-track[data-direction="right"] .manifesto-lane {
     animation-direction: reverse;
-    animation-duration: 30s;
-    transform: translate3d(2.2%, 0, 0);
   }
 
-  .manifesto-track span {
+  .manifesto-track:nth-child(1) .manifesto-lane {
+    --manifesto-duration: 46s;
+  }
+
+  .manifesto-track:nth-child(2) .manifesto-lane {
+    --manifesto-duration: 58s;
+  }
+
+  .manifesto-track:nth-child(3) .manifesto-lane {
+    --manifesto-duration: 36s;
+  }
+
+  .manifesto-track:nth-child(4) .manifesto-lane {
+    --manifesto-duration: 62s;
+  }
+
+  .manifesto-track:nth-child(5) .manifesto-lane {
+    --manifesto-duration: 50s;
+  }
+
+  .manifesto-track:nth-child(6) .manifesto-lane {
+    --manifesto-duration: 54s;
+  }
+
+  .manifesto-group {
+    display: flex;
+    flex: none;
+    align-items: baseline;
+  }
+
+  .manifesto-group span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: clamp(20px, 2.4vw, 46px);
+    padding-right: clamp(20px, 2.4vw, 46px);
     color: var(--ivory);
     font-family: var(--font-display);
-    font-size: clamp(58px, 8.2vw, 136px);
+    font-size: clamp(44px, 6.6vw, 108px);
     font-weight: 900;
     letter-spacing: 0;
-    line-height: 0.96;
+    line-height: 1.06;
     white-space: nowrap;
     text-transform: uppercase;
   }
 
-  [data-locale="zh"] .manifesto-track span {
+  [data-locale="zh"] .manifesto-group span {
     font-family: var(--font-zh-display);
-    font-size: clamp(62px, 8.6vw, 146px);
+    font-size: clamp(46px, 7vw, 116px);
   }
 
-  .manifesto-track span:nth-child(3) {
-    display: none;
+  .manifesto-group i {
+    align-self: center;
+    color: rgb(243 239 223 / 34%);
+    font-size: 0.26em;
+    font-style: normal;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
   }
 
-  .manifesto-track:nth-child(2) span,
-  .manifesto-track:nth-child(4) span {
+  .manifesto-track:nth-child(2) .manifesto-group span,
+  .manifesto-track:nth-child(4) .manifesto-group span {
     color: transparent;
-    -webkit-text-stroke: 1px rgb(243 239 223 / 72%);
+    -webkit-text-stroke: 1px rgb(243 239 223 / 66%);
   }
 
-  .manifesto-track:nth-child(3) span {
+  .manifesto-track:nth-child(3) .manifesto-group span {
     color: var(--acid);
     text-shadow: 0 0 34px rgb(183 255 37 / 18%);
+  }
+
+  .manifesto-track:nth-child(6) .manifesto-group span {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(183 255 37 / 52%);
+  }
+
+  .manifesto-track:nth-child(2) .manifesto-group i,
+  .manifesto-track:nth-child(4) .manifesto-group i,
+  .manifesto-track:nth-child(6) .manifesto-group i {
+    color: rgb(243 239 223 / 24%);
+  }
+
+  .manifesto-track:nth-child(3) .manifesto-group i {
+    color: rgb(183 255 37 / 46%);
   }
 
   .chapter-scene {
@@ -6100,13 +6131,13 @@
     }
   }
 
-  @keyframes manifestoDrift {
+  @keyframes manifestoMarquee {
     from {
       transform: translateX(0);
     }
 
     to {
-      transform: translateX(-5%);
+      transform: translateX(-50%);
     }
   }
 
@@ -6193,7 +6224,7 @@
       transform: none !important;
     }
 
-    .manifesto-track {
+    .manifesto-lane {
       animation: none;
     }
   }
@@ -6442,21 +6473,22 @@
     }
 
     .kinetic-manifesto {
-      min-height: 470px;
+      min-height: 440px;
     }
 
     .manifesto-core {
-      width: 136vw;
-      transform: translate(-50%, -50%) rotate(-4deg);
+      width: 132vw;
+      gap: clamp(10px, 1.6vh, 18px);
+      transform: translate(-50%, -50%) rotate(-4deg) skewX(var(--manifesto-skew));
     }
 
-    .manifesto-track {
-      gap: 28px;
+    .manifesto-group span {
+      font-size: clamp(38px, 11.5vw, 72px);
+      line-height: 1.06;
     }
 
-    .manifesto-track span {
-      font-size: clamp(42px, 14vw, 82px);
-      line-height: 0.98;
+    [data-locale="zh"] .manifesto-group span {
+      font-size: clamp(40px, 12vw, 76px);
     }
 
     .hero-copy h1 {
@@ -9342,7 +9374,7 @@
   transition-duration: 0ms !important;
 }
 
-.portfolio-shell.is-scrolling .manifesto-track {
+.portfolio-shell.is-scrolling .manifesto-lane {
   animation-play-state: running !important;
 }
 
