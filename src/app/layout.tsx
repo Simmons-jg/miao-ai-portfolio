@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PixelCursor from "@/components/PixelCursor";
 import { HOME_TITLE } from "@/lib/siteMeta";
 import "./globals.css";
 
@@ -22,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <PixelCursor />
+      </body>
     </html>
   );
 }
