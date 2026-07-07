@@ -3,12 +3,16 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-type Pixel = {
+type Kind = "pixel" | "note" | "glitch";
+
+type Particle = {
+  kind: Kind;
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
+  seed: number;
   life: number;
   maxLife: number;
   color: string;
@@ -16,7 +20,7 @@ type Pixel = {
 
 const BASE_PALETTE = ["#111111", "#b7ff25", "#4f5bff", "#f3efdf"];
 const MUSIC_PALETTE = ["#b7ff25", "#f3efdf", "#e0b45f", "#8fdc2c"];
-const VIDEO_PALETTE = ["#b7ff25", "#111111", "#f3efdf", "#8fdc2c"];
+const VIDEO_PALETTE = ["#b7ff25", "#f3efdf", "#8fdc2c"];
 const LIGHT_HERO_PALETTE = ["#111111", "#4f5bff", "#b7ff25", "#555555"];
 
 // 与首页 WebGL 背景同一套章节强调色(绿 → 橙 → 红)
@@ -39,10 +43,10 @@ function homeAccentAt(sceneIndex: number) {
   return base.map((value, index) => Math.round(value + (next[index] - value) * mix));
 }
 
-function paletteFor(pathname: string) {
-  if (pathname.startsWith("/music")) return MUSIC_PALETTE;
-  if (pathname.startsWith("/video") || pathname.startsWith("/vedio")) return VIDEO_PALETTE;
-  return BASE_PALETTE;
+function modeFor(pathname: string): Kind {
+  if (pathname.startsWith("/music")) return "note";
+  if (pathname.startsWith("/video") || pathname.startsWith("/vedio")) return "glitch";
+  return "pixel";
 }
 
 export default function PixelCursor() {
@@ -59,13 +63,19 @@ export default function PixelCursor() {
     const context = canvas?.getContext("2d");
     if (!canvas || !context) return;
 
-    const palette = paletteFor(pathname);
+    const mode = modeFor(pathname);
     const isHome = pathname === "/" || pathname.startsWith("/home");
     let shell: HTMLElement | null = null;
 
     const pickColor = () => {
+      if (mode === "note") {
+        return MUSIC_PALETTE[Math.floor(Math.random() * MUSIC_PALETTE.length)];
+      }
+      if (mode === "glitch") {
+        return VIDEO_PALETTE[Math.floor(Math.random() * VIDEO_PALETTE.length)];
+      }
       if (!isHome) {
-        return palette[Math.floor(Math.random() * palette.length)];
+        return BASE_PALETTE[Math.floor(Math.random() * BASE_PALETTE.length)];
       }
 
       if (!shell || !shell.isConnected) {
@@ -90,8 +100,8 @@ export default function PixelCursor() {
       return "#111111";
     };
 
-    const pixels: Pixel[] = [];
-    const MAX_PIXELS = 140;
+    const particles: Particle[] = [];
+    const MAX_PARTICLES = 150;
     let raf = 0;
     let running = false;
     let lastX = -1;
@@ -108,56 +118,118 @@ export default function PixelCursor() {
 
     const spawn = (x: number, y: number, count: number, spread: number, speed: number) => {
       for (let i = 0; i < count; i += 1) {
-        if (pixels.length >= MAX_PIXELS) pixels.shift();
+        if (particles.length >= MAX_PARTICLES) particles.shift();
         const angle = Math.random() * Math.PI * 2;
         const velocity = (0.2 + Math.random() * 0.8) * speed;
-        pixels.push({
+        const particle: Particle = {
+          kind: mode,
           x: x + (Math.random() - 0.5) * spread,
           y: y + (Math.random() - 0.5) * spread,
           vx: Math.cos(angle) * velocity,
           vy: Math.sin(angle) * velocity - 0.2,
           size: 3 + Math.random() * 6,
+          seed: Math.random() * Math.PI * 2,
           life: 0,
           maxLife: 34 + Math.random() * 46,
           color: pickColor(),
-        });
+        };
+
+        if (mode === "note") {
+          // 音符:向上漂,左右摇摆,竖条形
+          particle.vx = (Math.random() - 0.5) * 0.5;
+          particle.vy = -(0.5 + Math.random() * 1.1) * speed * 0.7;
+          particle.size = 5 + Math.random() * 10;
+          particle.maxLife = 46 + Math.random() * 50;
+        } else if (mode === "glitch") {
+          // 故障切片:横向抖动,扁平矩形
+          particle.vx = (Math.random() < 0.5 ? -1 : 1) * (0.8 + Math.random() * 1.6) * speed * 0.6;
+          particle.vy = (Math.random() - 0.5) * 0.3;
+          particle.size = 8 + Math.random() * 18;
+          particle.maxLife = 22 + Math.random() * 30;
+        }
+
+        particles.push(particle);
       }
       wake();
+    };
+
+    const draw = (particle: Particle, alpha: number) => {
+      const progress = particle.life / particle.maxLife;
+
+      if (particle.kind === "note") {
+        // 均衡器竖条:高度随生命周期呼吸
+        const sway = Math.sin(particle.life * 0.18 + particle.seed) * 0.9;
+        particle.x += sway * 0.6;
+        const barWidth = 3 * dpr;
+        const barHeight =
+          particle.size * (0.8 + 0.4 * Math.sin(particle.life * 0.3 + particle.seed)) * dpr;
+        context.globalAlpha = alpha;
+        context.fillStyle = particle.color;
+        context.fillRect(
+          Math.round(particle.x * dpr - barWidth / 2),
+          Math.round(particle.y * dpr - barHeight),
+          Math.round(barWidth),
+          Math.round(barHeight),
+        );
+        return;
+      }
+
+      if (particle.kind === "glitch") {
+        // 胶片故障切片:红/青色散 + 随机闪烁
+        const flicker = 0.55 + Math.random() * 0.45;
+        const sliceWidth = particle.size * dpr;
+        const sliceHeight = Math.max(2, particle.size * 0.16) * dpr;
+        const px = Math.round(particle.x * dpr - sliceWidth / 2);
+        const py = Math.round(particle.y * dpr - sliceHeight / 2);
+        const offset = Math.max(1, Math.round(2 * dpr));
+
+        context.globalAlpha = alpha * flicker * 0.55;
+        context.fillStyle = "#ff4a24";
+        context.fillRect(px - offset, py, Math.round(sliceWidth), Math.round(sliceHeight));
+        context.fillStyle = "#3ee6ff";
+        context.fillRect(px + offset, py, Math.round(sliceWidth), Math.round(sliceHeight));
+
+        context.globalAlpha = alpha * flicker;
+        context.fillStyle = particle.color;
+        context.fillRect(px, py, Math.round(sliceWidth), Math.round(sliceHeight));
+        return;
+      }
+
+      const size = particle.size * (1 - progress * 0.4) * dpr;
+      context.globalAlpha = alpha;
+      context.fillStyle = particle.color;
+      context.fillRect(
+        Math.round(particle.x * dpr - size / 2),
+        Math.round(particle.y * dpr - size / 2),
+        Math.round(size),
+        Math.round(size),
+      );
     };
 
     const step = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (let i = pixels.length - 1; i >= 0; i -= 1) {
-        const pixel = pixels[i];
-        pixel.life += 1;
-        if (pixel.life >= pixel.maxLife) {
-          pixels.splice(i, 1);
+      for (let i = particles.length - 1; i >= 0; i -= 1) {
+        const particle = particles[i];
+        particle.life += 1;
+        if (particle.life >= particle.maxLife) {
+          particles.splice(i, 1);
           continue;
         }
 
-        pixel.x += pixel.vx;
-        pixel.y += pixel.vy;
-        pixel.vx *= 0.96;
-        pixel.vy *= 0.96;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.vx *= particle.kind === "glitch" ? 0.9 : 0.96;
+        particle.vy *= particle.kind === "note" ? 0.995 : 0.96;
 
-        const progress = pixel.life / pixel.maxLife;
+        const progress = particle.life / particle.maxLife;
         const alpha = progress < 0.7 ? 1 : 1 - (progress - 0.7) / 0.3;
-        const size = pixel.size * (1 - progress * 0.4) * dpr;
-
-        context.globalAlpha = alpha;
-        context.fillStyle = pixel.color;
-        context.fillRect(
-          Math.round(pixel.x * dpr - size / 2),
-          Math.round(pixel.y * dpr - size / 2),
-          Math.round(size),
-          Math.round(size),
-        );
+        draw(particle, alpha);
       }
 
       context.globalAlpha = 1;
 
-      if (pixels.length > 0) {
+      if (particles.length > 0) {
         raf = window.requestAnimationFrame(step);
       } else {
         running = false;
