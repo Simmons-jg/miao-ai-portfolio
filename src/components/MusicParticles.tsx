@@ -671,8 +671,8 @@ export default function MusicParticles({
         ? "暂停触发"
         : "Paused"
     : locale === "zh"
-      ? "点一下开启声场"
-      : "Click to arm sound";
+      ? "点页面任意处开声,再划过标题"
+      : "Click anywhere once, then glide";
 
   return (
     <div ref={panelRef} className="music-particle-panel mp-root" data-reveal>

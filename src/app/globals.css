@@ -7416,6 +7416,9 @@
 }
 
 .videos-bg {
+  --videos-glow-x: 50%;
+  --videos-glow-y: 40%;
+  --videos-glow-a: 0;
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -7428,6 +7431,20 @@
     radial-gradient(ellipse at 50% 110%, rgb(0 0 0 / 90%), transparent 44vw),
     linear-gradient(180deg, #10130d 0%, #080a07 48%, #040503 100%);
   animation: videosBgPulse 10s ease-in-out infinite alternate;
+}
+
+/* 鼠标附近环境光:属于背景的一部分,缓慢显隐 */
+.videos-bg .videos-pointer-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    34vw at var(--videos-glow-x) var(--videos-glow-y),
+    rgb(183 255 37 / 5.5%),
+    rgb(243 239 223 / 2.5%) 40%,
+    transparent 72%
+  );
+  opacity: var(--videos-glow-a);
+  transition: opacity 900ms ease;
 }
 
 .videos-bg::before,
@@ -7523,6 +7540,7 @@
   text-orientation: upright;
   transform: translate3d(0, 0, 0);
   writing-mode: vertical-rl;
+  filter: brightness(calc(1 + var(--rain-boost, 0) * 2.1));
   animation: videosCodeRainFall var(--rain-speed) linear infinite;
   animation-delay: var(--rain-delay);
 }
@@ -11009,12 +11027,6 @@
   border-radius: 2px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
 @media (hover: hover) {
   :where(.videos-page, .product-room-page) a,
   :where(.videos-page, .product-room-page) button {
@@ -11028,4 +11040,97 @@
   z-index: 240;
   pointer-events: none;
   mix-blend-mode: normal;
+}
+
+/* ---- 手机端补充(本轮新增元素) ---- */
+
+@media (max-width: 520px) {
+  .product-room-hero {
+    min-height: 62dvh;
+    padding: 96px 18px 40px;
+  }
+
+  .product-room-hero h1 {
+    font-size: clamp(56px, 19vw, 84px);
+  }
+
+  .product-room-open {
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .product-room-machine-shell {
+    width: calc(100vw - 32px);
+    margin-block: 44px;
+  }
+
+  .product-room-readout {
+    padding: 16px;
+  }
+
+  .product-room-lab li {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 8px 12px;
+    padding: 16px 6px;
+  }
+
+  .product-room-lab li small {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .product-room-lab li::after {
+    display: none;
+  }
+
+  .product-room-ticker-group span {
+    font-size: 10px;
+  }
+
+  .product-room-foot {
+    width: calc(100vw - 32px);
+  }
+}
+
+/* ---- 大屏增强(27 寸 / 2560px 级) ---- */
+
+@media (min-width: 1920px) {
+  .manifesto-core {
+    width: 110vw;
+    gap: clamp(18px, 2.4vh, 36px);
+  }
+
+  .manifesto-group span {
+    font-size: clamp(64px, 6.2vw, 148px);
+  }
+
+  [data-locale="zh"] .manifesto-group span {
+    font-size: clamp(68px, 6.6vw, 156px);
+  }
+
+  .kinetic-manifesto {
+    min-height: clamp(720px, 78dvh, 1080px);
+    contain-intrinsic-size: 980px;
+  }
+
+  .product-room-hero h1 {
+    font-size: clamp(120px, 10vw, 236px);
+  }
+
+  .product-room-hero::before {
+    font-size: clamp(180px, 16vw, 360px);
+  }
+
+  .product-room-machine-shell {
+    width: min(1920px, calc(100vw - 96px));
+  }
+
+  .product-room-lab li strong {
+    font-size: clamp(36px, 2.8vw, 64px);
+  }
+
+  .portfolio-shell .product-console {
+    width: min(100%, 760px);
+  }
 }

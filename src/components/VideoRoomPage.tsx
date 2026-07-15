@@ -87,6 +87,83 @@ export function VideoRoomPage() {
     };
   }, []);
 
+  // 背景互动:鼠标附近的代码雨列被"激活"变亮,离开后缓慢暗回;背景光晕轻微跟随
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const backdrop = document.querySelector<HTMLElement>(".videos-bg");
+    const columns = Array.from(
+      document.querySelectorAll<HTMLElement>(".videos-code-rain i"),
+    );
+    if (!backdrop || columns.length === 0) return;
+
+    const boosts = new Float32Array(columns.length);
+    const centers = new Float32Array(columns.length);
+    let pointerX = -1;
+    let pointerY = -1;
+    let lastMove = 0;
+    let raf = 0;
+    let running = false;
+
+    const measure = () => {
+      for (let i = 0; i < columns.length; i += 1) {
+        centers[i] = columns[i].getBoundingClientRect().left + columns[i].offsetWidth / 2;
+      }
+    };
+
+    const tick = () => {
+      const idle = performance.now() - lastMove > 1400;
+      let alive = false;
+
+      for (let i = 0; i < columns.length; i += 1) {
+        const distance = Math.abs(centers[i] - pointerX);
+        const target = idle || pointerX < 0 ? 0 : Math.exp(-((distance / 190) ** 2));
+        boosts[i] += (target - boosts[i]) * 0.07;
+        if (boosts[i] > 0.004) alive = true;
+        columns[i].style.setProperty("--rain-boost", boosts[i].toFixed(3));
+      }
+
+      if (!idle && pointerX >= 0) {
+        backdrop.style.setProperty("--videos-glow-x", `${((pointerX / window.innerWidth) * 100).toFixed(2)}%`);
+        backdrop.style.setProperty("--videos-glow-y", `${((pointerY / window.innerHeight) * 100).toFixed(2)}%`);
+        backdrop.style.setProperty("--videos-glow-a", "1");
+      } else {
+        backdrop.style.setProperty("--videos-glow-a", "0");
+      }
+
+      if (alive || !idle) {
+        raf = window.requestAnimationFrame(tick);
+      } else {
+        running = false;
+      }
+    };
+
+    const wake = () => {
+      if (!running) {
+        running = true;
+        raf = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      lastMove = performance.now();
+      wake();
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("pointermove", onPointerMove);
+    };
+  }, []);
+
   const playerSrc = useMemo(() => {
     if (videoQuality === "1080p") {
       return `/api/videos/${active.id}`;
@@ -241,6 +318,7 @@ export function VideoRoomPage() {
         <span />
         <span />
         <span />
+        <i className="videos-pointer-glow" />
         <div className="videos-code-rain">
           {Array.from({ length: 24 }, (_, index) => (
             <i key={index}>{videoCodeRain[index % videoCodeRain.length]}</i>

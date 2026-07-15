@@ -6,7 +6,7 @@ Use a hybrid presentation:
 
 - The site remains a scroll-driven portfolio narrative.
 - The works section becomes a cinematic evidence channel, not a static wall.
-- Original works from `E:\作品\作品` are used as-is. They are selected, cropped, sequenced, and animated, but not style-transferred.
+- Original works from `D:\作品\作品` are used as-is. They are selected, cropped, sequenced, and animated, but not style-transferred.
 
 ## Why Not A Plain Feed
 
